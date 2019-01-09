@@ -1,4 +1,4 @@
-create table test
+create table user
 (
   id             int(11) unsigned auto_increment comment 'ID' primary key,
   name varchar(16)  default ''                not null comment '名称',

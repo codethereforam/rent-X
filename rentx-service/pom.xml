@@ -10,13 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rentx-service</artifactId>
-    <version>${project.version}</version>
 
     <dependencies>
         <dependency>
             <groupId>priv.thinkam</groupId>
             <artifactId>rentx-dao</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

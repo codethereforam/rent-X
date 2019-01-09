@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>rentx-web</artifactId>
-    <version>${project.version}</version>
 
     <parent>
         <artifactId>rent-X</artifactId>
@@ -16,7 +15,7 @@
         <dependency>
             <groupId>priv.thinkam</groupId>
             <artifactId>rentx-service</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

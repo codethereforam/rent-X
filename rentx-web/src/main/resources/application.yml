@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: rentx
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+server:
+  servlet:
+    context-path: /${spring.application.name}
+  port: 9999

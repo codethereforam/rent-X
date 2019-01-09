@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.common.tool;
+package priv.thinkam.rentx.generator;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;

@@ -15,6 +15,7 @@
         <module>rentx-service</module>
         <module>rentx-web</module>
         <module>rentx-admin</module>
+        <module>rentx-generator</module>
     </modules>
 
     <properties>

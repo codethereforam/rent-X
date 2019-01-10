@@ -2,14 +2,12 @@ package ${package.ServiceImpl};
 
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
-import ${package.Service}.${table.serviceName};
+import com.baomidou.mybatisplus.extension.service.IService;
 import ${superServiceImplClassPackage};
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- * ${table.comment!} 服务实现类
- * </p>
+ * ${table.comment!} service
  *
  * @author ${author}
  * @date ${date}
@@ -20,7 +18,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 <#else>
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements IService<User> {
 
 }
 </#if>

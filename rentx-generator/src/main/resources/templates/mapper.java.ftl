@@ -4,9 +4,7 @@ import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
 
 /**
- * <p>
- * ${table.comment!} Mapper 接口
- * </p>
+ * ${table.comment!} Mapper
  *
  * @author ${author}
  * @date ${date}

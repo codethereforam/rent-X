@@ -1,3 +1,4 @@
+- banner
 - architecture
 - redis util
 - log

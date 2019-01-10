@@ -1,7 +1,6 @@
 package priv.thinkam.rentx.generator;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
@@ -17,60 +16,64 @@ public class CodeGeneratorTool {
 
 	public static void main(String[] args) {
 		// 代码生成器
-		AutoGenerator mpg = new AutoGenerator();
+		AutoGenerator autoGenerator = new AutoGenerator();
 		// 全局配置
-		GlobalConfig gc = new GlobalConfig();
-		gc.setOutputDir(StringUtil.format("{}/generate/rent-X", System.getProperty("user.home")));
-		gc.setAuthor("yanganyu");
-		gc.setOpen(false);
-		gc.setFileOverride(true);
-		gc.setServiceImplName("%sService");
-		mpg.setGlobalConfig(gc);
+		GlobalConfig globalConfig = new GlobalConfig();
+		globalConfig.setOutputDir(StringUtil.format("{}/generate/rent-X", System.getProperty("user.home")));
+		globalConfig.setAuthor("yanganyu");
+		globalConfig.setFileOverride(true);
+		globalConfig.setServiceImplName("%sService");
+		globalConfig.setBaseResultMap(true);
+		globalConfig.setBaseColumnList(true);
+		autoGenerator.setGlobalConfig(globalConfig);
 
 		// 数据源配置
-		DataSourceConfig dsc = new DataSourceConfig();
-		dsc.setUrl("jdbc:mysql://localhost:3306/test?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
-		dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-		dsc.setUsername("root");
-		dsc.setPassword("root");
-		mpg.setDataSource(dsc);
+		DataSourceConfig dataSourceConfig = new DataSourceConfig();
+		dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/rentx?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
+		dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
+		dataSourceConfig.setUsername("root");
+		dataSourceConfig.setPassword("root");
+		autoGenerator.setDataSource(dataSourceConfig);
 
 		// 包配置
-		PackageConfig pc = new PackageConfig();
-		pc.setParent("priv.thinkam.rentx");
-		mpg.setPackageInfo(pc);
+		PackageConfig packageConfig = new PackageConfig();
+		packageConfig.setParent("priv.thinkam.rentx");
+		packageConfig.setEntity("dao.entity");
+		packageConfig.setMapper("dao.mapper");
+		packageConfig.setXml("dao.mapper");
+		packageConfig.setServiceImpl("service");
+		packageConfig.setController("web.controller");
+		autoGenerator.setPackageInfo(packageConfig);
 
-		// 自定义配置
-		InjectionConfig cfg = new InjectionConfig() {
-			@Override
-			public void initMap() {
-				// to do nothing
-			}
-		};
-		mpg.setCfg(cfg);
+		/// 自定义配置
+		// InjectionConfig injectionConfig = new InjectionConfig() {
+		// 	@Override
+		// 	public void initMap() {
+		// 	}
+		// };
+		// autoGenerator.setCfg(injectionConfig);
 
 		// 配置模板
 		TemplateConfig templateConfig = new TemplateConfig();
+		// 不生成service接口
 		templateConfig.setService(null);
-		mpg.setTemplate(templateConfig);
+		autoGenerator.setTemplate(templateConfig);
 
 		// 策略配置
-		StrategyConfig strategy = new StrategyConfig();
-		strategy.setNaming(NamingStrategy.underline_to_camel);
-		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-		strategy.setSuperEntityClass("priv.thinkam.rentx.common.BaseEntity");
-		strategy.setEntityLombokModel(true);
-		strategy.setRestControllerStyle(true);
-		strategy.setSuperControllerClass("priv.thinkam.rentx.common.BaseController");
+		StrategyConfig strategyConfig = new StrategyConfig();
+		strategyConfig.setNaming(NamingStrategy.underline_to_camel);
+		strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
+		strategyConfig.setSuperEntityClass("priv.thinkam.rentx.common.base.BaseEntity");
+		strategyConfig.setSuperEntityColumns("id", "add_user_id", "add_time", "update_user_id", "update_time", "mark");
+		strategyConfig.setEntityLombokModel(true);
+		strategyConfig.setSuperControllerClass("priv.thinkam.rentx.common.base.BaseController");
 		/// 包括哪几张表
-		/// strategy.setInclude("aa", "bb");
+		// strategyConfig.setInclude("aa", "bb");
 		/// 不包括哪几张表
-		/// strategy.setExclude("cc", "dd");
-		strategy.setSuperEntityColumns("id");
-		strategy.setControllerMappingHyphenStyle(true);
-		strategy.setTablePrefix(pc.getModuleName() + "_");
-		mpg.setStrategy(strategy);
-		mpg.setTemplateEngine(new FreemarkerTemplateEngine());
-		mpg.execute();
+		// strategyConfig.setExclude("cc", "dd");
+		autoGenerator.setStrategy(strategyConfig);
+
+		autoGenerator.setTemplateEngine(new FreemarkerTemplateEngine());
+		autoGenerator.execute();
 	}
 }

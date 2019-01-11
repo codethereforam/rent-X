@@ -32,7 +32,7 @@ public class CodeGeneratorTool {
 		dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/rentx?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
 		dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
 		dataSourceConfig.setUsername("root");
-		dataSourceConfig.setPassword("root");
+		dataSourceConfig.setPassword(System.getenv("MYSQL_PASSWD"));
 		autoGenerator.setDataSource(dataSourceConfig);
 
 		// 包配置
@@ -44,14 +44,6 @@ public class CodeGeneratorTool {
 		packageConfig.setServiceImpl("service");
 		packageConfig.setController("web.controller");
 		autoGenerator.setPackageInfo(packageConfig);
-
-		/// 自定义配置
-		// InjectionConfig injectionConfig = new InjectionConfig() {
-		// 	@Override
-		// 	public void initMap() {
-		// 	}
-		// };
-		// autoGenerator.setCfg(injectionConfig);
 
 		// 配置模板
 		TemplateConfig templateConfig = new TemplateConfig();

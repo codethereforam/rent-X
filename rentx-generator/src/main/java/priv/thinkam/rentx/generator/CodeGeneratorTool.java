@@ -15,57 +15,55 @@ import priv.thinkam.rentx.common.util.StringUtil;
 public class CodeGeneratorTool {
 
 	public static void main(String[] args) {
-		// 代码生成器
-		AutoGenerator autoGenerator = new AutoGenerator();
 		// 全局配置
 		GlobalConfig globalConfig = new GlobalConfig();
-		globalConfig.setOutputDir(StringUtil.format("{}/generate/rent-X", System.getProperty("user.home")));
-		globalConfig.setAuthor("yanganyu");
-		globalConfig.setFileOverride(true);
-		globalConfig.setServiceImplName("%sService");
-		globalConfig.setBaseResultMap(true);
-		globalConfig.setBaseColumnList(true);
-		autoGenerator.setGlobalConfig(globalConfig);
+		globalConfig.setOutputDir(StringUtil.format("{}/generate/rent-X", System.getProperty("user.home")))
+				.setAuthor("yanganyu")
+				.setFileOverride(true)
+				.setServiceImplName("%sService")
+				.setBaseResultMap(true)
+				.setBaseColumnList(true);
 
 		// 数据源配置
 		DataSourceConfig dataSourceConfig = new DataSourceConfig();
-		dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/rentx?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
-		dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
-		dataSourceConfig.setUsername("root");
-		dataSourceConfig.setPassword(System.getenv("MYSQL_PASSWD"));
-		autoGenerator.setDataSource(dataSourceConfig);
+		dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/rentx?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8")
+				.setDriverName("com.mysql.cj.jdbc.Driver")
+				.setUsername("root")
+				.setPassword(System.getenv("MYSQL_PASSWD"));
 
 		// 包配置
 		PackageConfig packageConfig = new PackageConfig();
-		packageConfig.setParent("priv.thinkam.rentx");
-		packageConfig.setEntity("dao.entity");
-		packageConfig.setMapper("dao.mapper");
-		packageConfig.setXml("dao.mapper");
-		packageConfig.setServiceImpl("service");
-		packageConfig.setController("web.controller");
-		autoGenerator.setPackageInfo(packageConfig);
+		packageConfig.setParent("priv.thinkam.rentx")
+				.setEntity("dao.entity")
+				.setMapper("dao.mapper")
+				.setXml("dao.mapper")
+				.setServiceImpl("service")
+				.setController("web.controller");
 
 		// 配置模板
 		TemplateConfig templateConfig = new TemplateConfig();
 		// 不生成service接口
 		templateConfig.setService(null);
-		autoGenerator.setTemplate(templateConfig);
 
 		// 策略配置
 		StrategyConfig strategyConfig = new StrategyConfig();
-		strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-		strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
-		strategyConfig.setSuperEntityClass("priv.thinkam.rentx.common.base.BaseEntity");
-		strategyConfig.setSuperEntityColumns("id", "add_user_id", "add_time", "update_user_id", "update_time", "mark");
-		strategyConfig.setEntityLombokModel(true);
-		strategyConfig.setSuperControllerClass("priv.thinkam.rentx.common.base.BaseController");
-		/// 包括哪几张表
-		// strategyConfig.setInclude("aa", "bb");
-		/// 不包括哪几张表
-		// strategyConfig.setExclude("cc", "dd");
-		autoGenerator.setStrategy(strategyConfig);
+		strategyConfig.setNaming(NamingStrategy.underline_to_camel)
+				.setColumnNaming(NamingStrategy.underline_to_camel)
+				.setSuperEntityClass("priv.thinkam.rentx.common.base.BaseEntity")
+				.setSuperEntityColumns("id", "add_user_id", "add_time", "update_user_id", "update_time", "mark")
+				.setEntityLombokModel(true)
+				/// 包括哪几张表
+				//.setInclude("aa", "bb")
+				/// 不包括哪几张表
+				//.setExclude("cc", "dd")
+				.setSuperControllerClass("priv.thinkam.rentx.common.base.BaseController");
 
-		autoGenerator.setTemplateEngine(new FreemarkerTemplateEngine());
-		autoGenerator.execute();
+		new AutoGenerator().setGlobalConfig(globalConfig)
+				.setDataSource(dataSourceConfig)
+				.setPackageInfo(packageConfig)
+				.setTemplate(templateConfig)
+				.setStrategy(strategyConfig)
+				.setTemplateEngine(new FreemarkerTemplateEngine())
+				.execute();
 	}
 }

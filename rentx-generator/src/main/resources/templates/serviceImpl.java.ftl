@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
  * @author ${author}
  * @date ${date}
  */
+@Slf4j
 @Service
 <#if kotlin>
 open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {

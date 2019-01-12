@@ -18,12 +18,14 @@ import ${superControllerClassPackage};
  * @author ${author}
  * @date ${date}
  */
+@Slf4j
 <#if restControllerStyle>
 @RestController
 <#else>
 @Controller
 </#if>
-@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
+@RequestMapping("<#if package.ModuleName??>/${package.ModuleName}</#if>/<#if
+controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}s</#if>")
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>

@@ -2,6 +2,7 @@ package priv.thinkam.rentx.web.controller;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,12 @@ public class UserController extends BaseController {
 	public List<User> list() {
 		log.info("UserController list called...");
 		return userService.list();
+	}
+
+	@GetMapping("/index")
+	public String index(Model model) {
+		model.addAttribute("userList", userService.list());
+		return "index";
 	}
 
 	@GetMapping("/count")

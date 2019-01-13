@@ -1,4 +1,4 @@
-${AnsiColor.BRIGHT_YELLOW}
+${AnsiColor.BRIGHT_CYAN}
                                       ___
                                     ,--.'|_
   __  ,-.                  ,---,    |  | :,'
@@ -12,7 +12,7 @@ ${AnsiColor.BRIGHT_YELLOW}
  ---'     |   :    | |   |/         |  ,   /  |   :/\  \ ;
            \   \  /  '---'           ---`-'   `---'  `--`
             `----'
-${AnsiColor.BRIGHT_GREEN}
+${AnsiColor.RED}
 ======================================
 :: application name :: ${spring.application.name}
 :: spring-boot version :: ${spring-boot.version}

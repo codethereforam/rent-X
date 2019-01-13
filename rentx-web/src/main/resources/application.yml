@@ -12,3 +12,12 @@ server:
   servlet:
     context-path: /${spring.application.name}
   port: 9999
+
+logging:
+  level:
+    priv:
+      thinkam:
+        rentx:
+          dao:
+            mapper:
+              UserMapper: debug

@@ -1,6 +1,7 @@
 # todo
 
 ## technology
+- 修改ResponseBody序列化配置
 - architecture
 - redis util
 - unit test

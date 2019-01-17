@@ -1,6 +1,5 @@
 package priv.thinkam.rentx.common.util;
 
-import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.BooleanUtils;
@@ -38,26 +37,37 @@ public class RedisTemplateTest {
 		final String value = "bar";
 		stringRedisTemplate.opsForValue().set(key, value);
 		assertEquals(value, stringRedisTemplate.opsForValue().get(key));
-		Boolean result = stringRedisTemplate.delete(key);
-		assertTrue(BooleanUtils.toBoolean(result));
+		delete(key);
 	}
 
 	@Test
 	public void test2() {
 		Tuser tuser = new Tuser().setId(1).setName("用户1").setAge(18);
-		String uuid = UUID.randomUUID().toString();
-		redisTemplate.opsForValue().set(uuid, tuser);
-		System.out.println(uuid);
-		System.out.println(redisTemplate.opsForValue().get(uuid));
+		String key = UUID.randomUUID().toString();
+		redisTemplate.opsForValue().set(key, tuser);
+		assertEquals(tuser, redisTemplate.opsForValue().get(key));
+		delete(key);
 	}
 
 	@Test
 	public void test3() {
 		Tuser tuser = new Tuser().setId(1).setName("用户1").setAge(18);
-		String uuid = UUID.randomUUID().toString();
-		stringRedisTemplate.opsForValue().set(uuid, JSONObject.toJSONString(tuser));
-		System.out.println(uuid);
-		System.out.println(stringRedisTemplate.opsForValue().get(uuid));
+		String key = UUID.randomUUID().toString();
+		final String hashKeyId = "id";
+		final String hashKeyName = "name";
+		final String hashKeyAge = "age";
+		redisTemplate.opsForHash().put(key, hashKeyId, tuser.getId());
+		redisTemplate.opsForHash().put(key, hashKeyName, tuser.getName());
+		redisTemplate.opsForHash().put(key, hashKeyAge, tuser.getAge());
+		assertEquals(tuser.getId(), redisTemplate.opsForHash().get(key, hashKeyId));
+		assertEquals(tuser.getName(), redisTemplate.opsForHash().get(key, hashKeyName));
+		assertEquals(tuser.getAge(), redisTemplate.opsForHash().get(key, hashKeyAge));
+		delete(key);
+	}
+
+	private void delete(String key) {
+		Boolean result = redisTemplate.delete(key);
+		assertTrue(BooleanUtils.toBoolean(result));
 	}
 
 	@Data

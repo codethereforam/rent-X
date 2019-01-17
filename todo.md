@@ -1,7 +1,6 @@
 # todo
 
 ## technology
-- 修改ResponseBody序列化配置
 - architecture
 - 统一异常处理
 - 事务配置

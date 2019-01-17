@@ -89,7 +89,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * Configure View resolver to provide JSON output using JACKSON library to
+	 * Configure View (url+'.json' view) resolver to provide JSON output using fastjson library to
 	 * convert object in JSON format.
 	 *
 	 * @return org.springframework.web.servlet.ViewResolver
@@ -151,7 +151,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 配置@Repsonsebody使用fastjson
+	 * 配置@RestController、@ResponseBody、@RequestBody使用fastjson
 	 *
 	 * @param converters converters
 	 * @return void

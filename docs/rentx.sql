@@ -1,6 +1,6 @@
 create database rentx;
 use rentx;
-create table user
+create table tuser
 (
   id             int(11) unsigned auto_increment comment 'ID'
     primary key,
@@ -14,5 +14,5 @@ create table user
 )
   comment '用户表';
 
-INSERT INTO user (id, name, age, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 'u1', 11, 0, '2019-01-10 11:00:57', 0, '2019-01-10 11:00:57', 0);
-INSERT INTO user (id, name, age, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'u2', 21, 0, '2019-01-10 11:00:57', 0, '2019-01-10 11:00:57', 0);
+INSERT INTO tuser (id, name, age, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 'u1', 11, 0, '2019-01-10 11:00:57', 0, '2019-01-10 11:00:57', 0);
+INSERT INTO tuser (id, name, age, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'u2', 21, 0, '2019-01-10 11:00:57', 0, '2019-01-10 11:00:57', 0);

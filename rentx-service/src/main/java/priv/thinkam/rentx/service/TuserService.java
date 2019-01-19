@@ -1,8 +1,8 @@
 package priv.thinkam.rentx.service;
 
 import lombok.extern.slf4j.Slf4j;
-import priv.thinkam.rentx.dao.entity.User;
-import priv.thinkam.rentx.dao.mapper.UserMapper;
+import priv.thinkam.rentx.dao.entity.Tuser;
+import priv.thinkam.rentx.dao.mapper.TuserMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -10,18 +10,18 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * 用户表 service
+ * 测试用户表 service
  *
  * @author yanganyu
- * @date 2019-01-10
+ * @date 2019-01-19
  */
 @Slf4j
 @Service
-public class UserService extends ServiceImpl<UserMapper, User> implements IService<User> {
+public class TuserService extends ServiceImpl<TuserMapper, Tuser> implements IService<Tuser> {
 	@Resource
-	private UserMapper userMapper;
+	private TuserMapper tuserMapper;
 
 	public int testCount() {
-		return userMapper.testCount();
+		return tuserMapper.testCount();
 	}
 }

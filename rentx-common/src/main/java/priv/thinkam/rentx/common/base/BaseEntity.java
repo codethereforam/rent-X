@@ -3,6 +3,7 @@ package priv.thinkam.rentx.common.base;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode
-public class BaseEntity {
+public class BaseEntity implements Serializable {
 	/**
 	 * ID
 	 */

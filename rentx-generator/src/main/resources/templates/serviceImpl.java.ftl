@@ -1,5 +1,6 @@
 package ${package.ServiceImpl};
 
+import lombok.extern.slf4j.Slf4j;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -19,7 +20,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 <#else>
-public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements IService<User> {
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements IService<${entity}> {
 
 }
 </#if>

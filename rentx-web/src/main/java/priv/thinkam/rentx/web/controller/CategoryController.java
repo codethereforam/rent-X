@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.dao.entity.Category;
 import priv.thinkam.rentx.service.CategoryService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 类别 controller
@@ -28,7 +30,7 @@ public class CategoryController extends BaseController {
 	@ResponseBody
 	@GetMapping
 	public Response list() {
-		return new Response()
+		return new Response<List<Category>>()
 				.setCode(Response.CodeEnum.SUCCESS)
 				.setData(categoryService.list());
 	}

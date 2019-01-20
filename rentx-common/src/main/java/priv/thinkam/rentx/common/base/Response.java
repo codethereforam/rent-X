@@ -1,10 +1,14 @@
 package priv.thinkam.rentx.common.base;
 
+import com.alibaba.fastjson.serializer.JSONSerializable;
+import com.alibaba.fastjson.serializer.JSONSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Type;
 
 /**
  * 响应
@@ -16,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Response {
+public class Response<T> {
 	/**
 	 * 错误码，0:成功，-1:失败，其他失败
 	 */
@@ -28,7 +32,7 @@ public class Response {
 	/**
 	 * 数据
 	 */
-	private Object data;
+	private T data;
 
 	/**
 	 * code enum
@@ -36,7 +40,7 @@ public class Response {
 	 * @author yanganyu
 	 * @date 1/19/19 9:08 PM
 	 */
-	public enum CodeEnum {
+	public enum CodeEnum implements JSONSerializable {
 		SUCCESS(0), FAIL(-1);
 		private int value;
 
@@ -46,6 +50,11 @@ public class Response {
 
 		public int getValue() {
 			return value;
+		}
+
+		@Override
+		public void write(JSONSerializer serializer, Object fieldName, Type fieldType, int features) {
+			serializer.write(this.getValue());
 		}
 	}
 }

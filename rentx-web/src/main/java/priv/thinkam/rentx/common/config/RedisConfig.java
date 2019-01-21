@@ -1,10 +1,10 @@
 package priv.thinkam.rentx.common.config;
 
-import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
@@ -22,8 +22,8 @@ public class RedisConfig {
 		redisTemplate.setConnectionFactory(redisConnectionFactory);
 		redisTemplate.setKeySerializer(RedisSerializer.string());
 		redisTemplate.setHashKeySerializer(RedisSerializer.string());
-		redisTemplate.setValueSerializer(new GenericFastJsonRedisSerializer());
-		redisTemplate.setHashValueSerializer(new GenericFastJsonRedisSerializer());
+		redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+		redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
 		return redisTemplate;
 	}
 

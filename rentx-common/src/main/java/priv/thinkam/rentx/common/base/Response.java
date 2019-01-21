@@ -1,14 +1,10 @@
 package priv.thinkam.rentx.common.base;
 
-import com.alibaba.fastjson.serializer.JSONSerializable;
-import com.alibaba.fastjson.serializer.JSONSerializer;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.StringUtils;
-
-import java.lang.reflect.Type;
 
 /**
  * 响应
@@ -28,7 +24,7 @@ public class Response<T> {
 	/**
 	 * 错误信息
 	 */
-	private String message = StringUtils.EMPTY;
+	private String message;
 	/**
 	 * 数据
 	 */
@@ -40,21 +36,24 @@ public class Response<T> {
 	 * @author yanganyu
 	 * @date 1/19/19 9:08 PM
 	 */
-	public enum CodeEnum implements JSONSerializable {
-		SUCCESS(0), FAIL(-1);
+	public enum CodeEnum {
+		/**
+		 * 成功
+		 */
+		SUCCESS(0),
+		/**
+		 * 失败
+		 */
+		FAIL(-1);
 		private int value;
 
 		CodeEnum(int value) {
 			this.value = value;
 		}
 
+		@JsonValue
 		public int getValue() {
 			return value;
-		}
-
-		@Override
-		public void write(JSONSerializer serializer, Object fieldName, Type fieldType, int features) {
-			serializer.write(this.getValue());
 		}
 	}
 }

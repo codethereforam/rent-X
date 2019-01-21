@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>priv.thinkam</groupId>
-            <artifactId>rentx-service</artifactId>
+            <artifactId>rentx-admin-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

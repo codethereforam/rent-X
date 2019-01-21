@@ -11,11 +11,13 @@
 
     <modules>
         <module>rentx-common</module>
-        <module>rentx-dao</module>
-        <module>rentx-service</module>
+        <module>rentx-web-dao</module>
+        <module>rentx-web-service</module>
         <module>rentx-web</module>
         <module>rentx-admin</module>
         <module>rentx-generator</module>
+        <module>rentx-web-api</module>
+        <module>rentx-admin-service</module>
     </modules>
 
     <properties>
@@ -120,6 +122,23 @@
             <artifactId>jmh-generator-annprocess</artifactId>
             <version>${jmh.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+        <!-- Dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <!-- Spring Context Extras -->
+        <dependency>
+            <groupId>com.alibaba.spring</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>1.0.2</version>
         </dependency>
     </dependencies>
 </project>

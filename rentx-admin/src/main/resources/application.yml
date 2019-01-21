@@ -13,7 +13,7 @@ spring:
 server:
   servlet:
     context-path: /${spring.application.name}
-  port: 9999
+  port: 9988
 
 logging:
   level:
@@ -31,19 +31,13 @@ rentx-web:
 
 # Base packages to scan Dubbo Components (e.g @Service , @Reference)
 dubbo:
-  scan:
-    basePackages: priv.thinkam.rentx.service.impl
-    # Dubbo Config properties
-    ## ApplicationConfig Bean
+  # Dubbo Config properties
+  ## ApplicationConfig Bean
   application:
-    id: dubbo-provider-demo
-    name: dubbo-provider-demo
+    id:  dubbo-consumer-demo
+    name: dubbo-consumer-demo
   ## ProtocolConfig Bean
   protocol:
     id: dubbo
     name: dubbo
     port: 12345
-  ## RegistryConfig Bean
-  registry:
-    id: my-registry
-    address: N/A

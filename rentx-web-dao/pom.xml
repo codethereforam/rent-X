@@ -9,13 +9,24 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rentx-service</artifactId>
+    <artifactId>rentx-web-dao</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>priv.thinkam</groupId>
-            <artifactId>rentx-dao</artifactId>
+            <artifactId>rentx-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

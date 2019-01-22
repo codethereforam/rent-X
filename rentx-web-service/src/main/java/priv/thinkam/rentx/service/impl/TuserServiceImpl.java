@@ -16,12 +16,7 @@ import java.util.stream.Collectors;
  * @author thinkam
  * @date 2019/01/21
  */
-@Service(
-		version = "${rentx.web.service.version}",
-		application = "${dubbo.application.id}",
-		protocol = "${dubbo.protocol.id}",
-		registry = "${dubbo.registry.id}"
-)
+@Service(version = "${rentx.web.service.version}")
 public class TuserServiceImpl implements TuserServiceApi {
 	@Resource
 	private TuserService tuserService;

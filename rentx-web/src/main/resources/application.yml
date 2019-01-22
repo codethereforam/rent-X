@@ -1,6 +1,6 @@
 spring:
   application:
-    name: rentx
+    name: rentx-web
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -14,8 +14,6 @@ spring:
       cluster-nodes: localhost:9300
 
 server:
-  servlet:
-    context-path: /${spring.application.name}
   port: 9999
 
 logging:
@@ -35,12 +33,9 @@ dubbo:
   scan:
     basePackages: priv.thinkam.rentx.service.impl
   application:
-    id: dubbo-provider-web
     name: dubbo-provider-web
   protocol:
-    id: dubbo
     name: dubbo
     port: 12345
   registry:
-    id: my-registry
     address: N/A

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: rentx
+    name: rentx-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -11,8 +11,6 @@ spring:
     timeout: 3000
 
 server:
-  servlet:
-    context-path: /${spring.application.name}
   port: 9988
 
 logging:
@@ -27,12 +25,8 @@ rentx:
   web:
     service:
       version: 1.0.0
+      url: dubbo://localhost:12345
 
 dubbo:
   application:
-    id:  dubbo-consumer-admin
     name: dubbo-consumer-admin
-  protocol:
-    id: dubbo
-    name: dubbo
-    port: 12345

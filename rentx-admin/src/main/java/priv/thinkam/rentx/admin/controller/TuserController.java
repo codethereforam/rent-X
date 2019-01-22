@@ -22,9 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/tusers")
 public class TuserController extends BaseController {
-	@Reference(version = "${rentx.web.service.version}",
-			application = "${dubbo.application.id}",
-			url = "dubbo://localhost:12345")
+	@Reference(version = "${rentx.web.service.version}", url = "${rentx.web.service.url}")
 	private TuserServiceApi tuserService;
 
 	@GetMapping

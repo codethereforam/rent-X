@@ -21,8 +21,9 @@ logging:
     priv:
       thinkam:
         rentx:
-          dao:
-            mapper: debug
+          web:
+            dao:
+              mapper: debug
 
 rentx:
   web:
@@ -31,7 +32,7 @@ rentx:
 
 dubbo:
   scan:
-    basePackages: priv.thinkam.rentx.service.impl
+    basePackages: priv.thinkam.rentx.web.service.impl
   application:
     name: dubbo-provider-web
   protocol:

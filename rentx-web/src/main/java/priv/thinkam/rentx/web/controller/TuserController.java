@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import priv.thinkam.rentx.common.base.BaseController;
-import priv.thinkam.rentx.dao.entity.Tuser;
-import priv.thinkam.rentx.service.TuserService;
+import priv.thinkam.rentx.web.dao.entity.Tuser;
+import priv.thinkam.rentx.web.service.TuserService;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
-import priv.thinkam.rentx.dao.entity.Category;
-import priv.thinkam.rentx.service.CategoryService;
+import priv.thinkam.rentx.web.dao.entity.Category;
+import priv.thinkam.rentx.web.service.CategoryService;
 
 import javax.annotation.Resource;
 import java.util.List;

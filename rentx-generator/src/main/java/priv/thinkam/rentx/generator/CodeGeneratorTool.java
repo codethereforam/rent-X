@@ -33,12 +33,12 @@ public class CodeGeneratorTool {
 
 		// 包配置
 		PackageConfig packageConfig = new PackageConfig();
-		packageConfig.setParent("priv.thinkam.rentx")
+		packageConfig.setParent("priv.thinkam.rentx.web")
 				.setEntity("dao.entity")
 				.setMapper("dao.mapper")
 				.setXml("dao.mapper")
 				.setServiceImpl("service")
-				.setController("web.controller");
+				.setController("controller");
 
 		// 配置模板
 		TemplateConfig templateConfig = new TemplateConfig();

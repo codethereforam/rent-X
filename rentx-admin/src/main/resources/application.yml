@@ -18,8 +18,9 @@ logging:
     priv:
       thinkam:
         rentx:
-          dao:
-            mapper: debug
+          admin:
+            dao:
+              mapper: debug
 
 rentx:
   web:

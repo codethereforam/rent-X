@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import priv.thinkam.rentx.api.bo.TuserBo;
-import priv.thinkam.rentx.api.TuserServiceApi;
-import priv.thinkam.rentx.api.query.TuserQuery;
+import priv.thinkam.rentx.web.api.bo.TuserBo;
+import priv.thinkam.rentx.web.api.TuserServiceApi;
+import priv.thinkam.rentx.web.api.query.TuserQuery;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
 

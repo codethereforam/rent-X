@@ -24,29 +24,23 @@ logging:
       thinkam:
         rentx:
           dao:
-            mapper:
-              UserMapper: debug
+            mapper: debug
 
-# Service version
-rentx-web:
-  service:
-    version: 1.0.0
+rentx:
+  web:
+    service:
+      version: 1.0.0
 
-# Base packages to scan Dubbo Components (e.g @Service , @Reference)
 dubbo:
   scan:
     basePackages: priv.thinkam.rentx.service.impl
-    # Dubbo Config properties
-    ## ApplicationConfig Bean
   application:
-    id: dubbo-provider-demo
-    name: dubbo-provider-demo
-  ## ProtocolConfig Bean
+    id: dubbo-provider-web
+    name: dubbo-provider-web
   protocol:
     id: dubbo
     name: dubbo
     port: 12345
-  ## RegistryConfig Bean
   registry:
     id: my-registry
     address: N/A

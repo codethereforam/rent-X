@@ -6,8 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import priv.thinkam.rentx.api.TuserResult;
+import priv.thinkam.rentx.api.bo.TuserBo;
 import priv.thinkam.rentx.api.TuserServiceApi;
+import priv.thinkam.rentx.api.query.TuserQuery;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
 
@@ -21,7 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/tusers")
 public class TuserController extends BaseController {
-	@Reference(version = "${rentx-web.service.version}",
+	@Reference(version = "${rentx.web.service.version}",
 			application = "${dubbo.application.id}",
 			url = "dubbo://localhost:12345")
 	private TuserServiceApi tuserService;
@@ -29,9 +30,9 @@ public class TuserController extends BaseController {
 	@GetMapping
 	@ResponseBody
 	public Response list() {
-		return new Response<List<TuserResult>>()
+		return new Response<List<TuserBo>>()
 				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(tuserService.list());
+				.setData(tuserService.list(new TuserQuery().setNameLike("u")));
 	}
 
 }

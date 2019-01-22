@@ -1,8 +1,11 @@
 package priv.thinkam.rentx.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import priv.thinkam.rentx.api.TuserResult;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import priv.thinkam.rentx.api.TuserServiceApi;
+import priv.thinkam.rentx.api.bo.TuserBo;
+import priv.thinkam.rentx.api.query.TuserQuery;
+import priv.thinkam.rentx.dao.entity.Tuser;
 import priv.thinkam.rentx.service.TuserService;
 
 import javax.annotation.Resource;
@@ -14,7 +17,7 @@ import java.util.stream.Collectors;
  * @date 2019/01/21
  */
 @Service(
-		version = "${rentx-web.service.version}",
+		version = "${rentx.web.service.version}",
 		application = "${dubbo.application.id}",
 		protocol = "${dubbo.protocol.id}",
 		registry = "${dubbo.registry.id}"
@@ -24,9 +27,9 @@ public class TuserServiceImpl implements TuserServiceApi {
 	private TuserService tuserService;
 
 	@Override
-	public List<TuserResult> list() {
-		return tuserService.list().stream()
-				.map(tuser -> new TuserResult(tuser.getName(), tuser.getAge()))
+	public List<TuserBo> list(TuserQuery tuserQuery) {
+		return tuserService.list(new QueryWrapper<Tuser>().lambda().likeRight(Tuser::getName, tuserQuery.nameLike)).stream()
+				.map(tuser -> new TuserBo().setName(tuser.getName()).setAge(tuser.getAge()))
 				.collect(Collectors.toList());
 	}
 }

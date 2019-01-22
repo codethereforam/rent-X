@@ -1,5 +1,8 @@
 package priv.thinkam.rentx.api;
 
+import priv.thinkam.rentx.api.bo.TuserBo;
+import priv.thinkam.rentx.api.query.TuserQuery;
+
 import java.util.List;
 
 /**
@@ -7,5 +10,5 @@ import java.util.List;
  * @date 2019/01/21
  */
 public interface TuserServiceApi {
-	List<TuserResult> list();
+	List<TuserBo> list(TuserQuery tuserQuery);
 }

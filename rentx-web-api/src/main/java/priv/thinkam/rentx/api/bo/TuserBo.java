@@ -1,8 +1,7 @@
-package priv.thinkam.rentx.api;
+package priv.thinkam.rentx.api.bo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -11,9 +10,8 @@ import java.io.Serializable;
  * @date 2019/01/21
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class TuserResult implements Serializable {
+@Accessors(chain = true)
+public class TuserBo implements Serializable {
 	/**
 	 * 名称
 	 */

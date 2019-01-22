@@ -9,6 +9,9 @@ spring:
     password: ${MYSQL_PASSWD}
   redis:
     timeout: 3000
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
 
 server:
   servlet:

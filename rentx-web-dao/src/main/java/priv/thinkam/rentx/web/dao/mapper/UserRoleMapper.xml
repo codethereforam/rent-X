@@ -25,4 +25,13 @@
         user_id, role_id
     </sql>
 
+    <select id="listUserRoleDTO" resultType="priv.thinkam.rentx.web.dao.dto.UserRoleDTO">
+        select u.username,
+               u.password,
+               r.identifier roleIdentifier
+        from user_role ur
+                 inner join user u on ur.user_id = u.id and u.mark = 1
+                 inner join role r on ur.role_id = r.id and r.mark = 1
+        where ur.mark = 1
+    </select>
 </mapper>

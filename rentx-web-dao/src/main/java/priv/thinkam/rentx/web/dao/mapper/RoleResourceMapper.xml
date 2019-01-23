@@ -25,4 +25,13 @@
         role_id, resource_id
     </sql>
 
+    <select id="listRoleResourceDTO" resultType="priv.thinkam.rentx.web.dao.dto.RoleResourceDTO">
+        select r.identifier roleIdentifier,
+               re.url       resourceURL,
+               re.method    resourceMethod
+        from role_resource rr
+                 inner join role r on rr.role_id = r.id and r.mark = 1
+                 inner join resource re on rr.resource_id = re.id and re.mark = 1
+        where rr.mark = 1
+    </select>
 </mapper>

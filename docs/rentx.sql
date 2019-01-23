@@ -1,11 +1,8 @@
-create database rentx;
-use rentx;
-
--- MySQL dump 10.13  Distrib 5.7.24, for Linux (i686)
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: rentx
 -- ------------------------------------------------------
--- Server version	5.7.24-0ubuntu0.18.04.1
+-- Server version	5.7.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,13 +32,15 @@ CREATE TABLE `category` (
                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
                           `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='类别';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='类别';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `category`
 --
 
+INSERT INTO `category` VALUES (1,'n1','d1',0,'2019-01-23 12:33:48',0,'2019-01-23 12:33:48',1);
+INSERT INTO `category` VALUES (2,'n2','d2',0,'2019-01-23 12:33:56',0,'2019-01-23 12:33:56',1);
 
 --
 -- Table structure for table `item`
@@ -74,6 +73,98 @@ CREATE TABLE `item` (
 -- Dumping data for table `item`
 --
 
+
+--
+-- Table structure for table `resource`
+--
+
+DROP TABLE IF EXISTS `resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resource` (
+                          `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '资源编号',
+                          `name` varchar(32) NOT NULL DEFAULT '' COMMENT '资源名称',
+                          `description` varchar(50) NOT NULL DEFAULT '' COMMENT '资源描述',
+                          `url` varchar(100) NOT NULL DEFAULT '' COMMENT '资源URL',
+                          `method` varchar(50) NOT NULL DEFAULT '' COMMENT 'HTTP方法',
+                          `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
+                          `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+                          `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
+                          `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+                          `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='资源';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resource`
+--
+
+INSERT INTO `resource` VALUES (6,'','','/tusers','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
+INSERT INTO `resource` VALUES (7,'','','/tusers/index','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
+INSERT INTO `resource` VALUES (8,'','','/tusers/count','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
+INSERT INTO `resource` VALUES (9,'','','/tusers/(\\d+)','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 15:06:56',1);
+
+--
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
+                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色编号',
+                      `identifier` varchar(32) NOT NULL DEFAULT '' COMMENT '角色标识符',
+                      `name` varchar(32) NOT NULL DEFAULT '' COMMENT '角色名称',
+                      `description` varchar(100) NOT NULL DEFAULT '' COMMENT '角色描述',
+                      `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
+                      `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+                      `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
+                      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+                      `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='角色';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` VALUES (1,'ROOT','ROOT用户','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
+INSERT INTO `role` VALUES (2,'LESSOR','出租人','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
+INSERT INTO `role` VALUES (3,'LESSEE','承租人','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
+INSERT INTO `role` VALUES (4,'GUEST','游客用户','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
+
+--
+-- Table structure for table `role_resource`
+--
+
+DROP TABLE IF EXISTS `role_resource`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_resource` (
+                               `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色资源关系编号',
+                               `role_id` int(10) unsigned NOT NULL COMMENT '角色ID',
+                               `resource_id` int(10) unsigned NOT NULL COMMENT '资源ID',
+                               `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
+                               `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+                               `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
+                               `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+                               `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+                               PRIMARY KEY (`id`),
+                               KEY `idx_role_id` (`role_id`),
+                               KEY `idx_resource_id` (`resource_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='角色资源关系';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role_resource`
+--
+
+INSERT INTO `role_resource` VALUES (6,2,6,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
+INSERT INTO `role_resource` VALUES (7,2,7,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
+INSERT INTO `role_resource` VALUES (8,3,8,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
+INSERT INTO `role_resource` VALUES (9,3,9,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 
 --
 -- Table structure for table `stuff`
@@ -131,8 +222,8 @@ CREATE TABLE `tuser` (
 -- Dumping data for table `tuser`
 --
 
-INSERT INTO `tuser` (`id`, `name`, `age`, `add_user_id`, `add_time`, `update_user_id`, `update_time`, `mark`) VALUES (1,'u1',11,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
-INSERT INTO `tuser` (`id`, `name`, `age`, `add_user_id`, `add_time`, `update_user_id`, `update_time`, `mark`) VALUES (2,'u2',21,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
+INSERT INTO `tuser` VALUES (1,'u1',11,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
+INSERT INTO `tuser` VALUES (2,'u2',21,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
 
 --
 -- Table structure for table `user`
@@ -155,13 +246,52 @@ CREATE TABLE `user` (
                       `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
                       `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
                       PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
+INSERT INTO `user` VALUES (1,'u1','{noop}p1','','',2,0,0,'2019-01-23 12:42:08',0,'2019-01-23 12:42:08',1);
+INSERT INTO `user` VALUES (2,'u2','{noop}p2','','',2,0,0,'2019-01-23 12:42:29',0,'2019-01-23 12:48:00',1);
+INSERT INTO `user` VALUES (3,'u3','{noop}p3','','',2,0,0,'2019-01-23 12:43:09',0,'2019-01-23 12:48:04',1);
+INSERT INTO `user` VALUES (4,'u4','{noop}p4','','',2,0,0,'2019-01-23 12:43:09',0,'2019-01-23 12:48:07',1);
+INSERT INTO `user` VALUES (5,'root','{noop}root','','',2,0,0,'2019-01-23 12:46:41',0,'2019-01-23 12:48:10',1);
+INSERT INTO `user` VALUES (6,'guest','{noop}guest','','',2,0,0,'2019-01-23 12:46:41',0,'2019-01-23 12:48:13',1);
+
+--
+-- Table structure for table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_role` (
+                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户角色关系编号',
+                           `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
+                           `role_id` int(10) unsigned NOT NULL COMMENT '角色ID',
+                           `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
+                           `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+                           `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
+                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+                           `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+                           PRIMARY KEY (`id`),
+                           KEY `idx_user_id` (`user_id`),
+                           KEY `idx_role_id` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户角色关系';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` VALUES (1,1,2,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
+INSERT INTO `user_role` VALUES (2,2,2,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
+INSERT INTO `user_role` VALUES (3,3,3,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
+INSERT INTO `user_role` VALUES (4,4,3,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
+INSERT INTO `user_role` VALUES (5,5,1,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
+INSERT INTO `user_role` VALUES (6,6,4,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -172,67 +302,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-19 20:56:16
-
-CREATE TABLE `role`
-(
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色编号',
-  `identifier`     varchar(32)        NOT NULL DEFAULT '' COMMENT '角色标识符',
-  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '角色名称',
-  `description`    varchar(100)         NOT NULL DEFAULT '' COMMENT '角色描述',
-  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='角色';
-
-CREATE TABLE `resource`
-(
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '资源编号',
-  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '资源名称',
-  `description`    varchar(50)         NOT NULL DEFAULT '' COMMENT '资源描述',
-  `url`            varchar(100)        NOT NULL DEFAULT '' COMMENT '资源URL',
-  `method`         varchar(50)         NOT NULL DEFAULT '' COMMENT 'HTTP方法',
-  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='资源';
-
-CREATE TABLE `user_role`
-(
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '用户角色关系编号',
-  `user_id`        int(10) unsigned    NOT NULL COMMENT '用户ID',
-  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
-  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`),
-  KEY `idx_user_id` (`user_id`),
-  KEY `idx_role_id` (`role_id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='用户角色关系';
-
-CREATE TABLE `role_resource`
-(
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色资源关系编号',
-  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
-  `resource_id`    int(10) unsigned    NOT NULL COMMENT '资源ID',
-  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`),
-  KEY `idx_role_id` (`role_id`),
-  KEY `idx_resource_id` (`resource_id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='角色资源关系';
+-- Dump completed on 2019-01-23 23:35:06

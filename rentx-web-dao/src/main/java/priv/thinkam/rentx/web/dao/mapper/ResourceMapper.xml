@@ -14,7 +14,6 @@
         <result column="description" property="description" />
         <result column="url" property="url" />
         <result column="method" property="method" />
-        <result column="access" property="access" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -25,7 +24,7 @@
         update_user_id,
         update_time,
         mark,
-        name, description, url, method, access
+        name, description, url, method
     </sql>
 
 </mapper>

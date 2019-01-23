@@ -36,10 +36,5 @@ public class Resource extends BaseEntity {
      */
     private String method;
 
-    /**
-     * 访问限制描述
-     */
-    private String access;
-
 
 }

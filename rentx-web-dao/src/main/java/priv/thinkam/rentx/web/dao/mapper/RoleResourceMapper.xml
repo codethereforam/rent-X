@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.thinkam.rentx.web.dao.mapper.RoleResourceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="priv.thinkam.rentx.web.dao.entity.RoleResource">
+    <result column="id" property="id" />
+    <result column="add_user_id" property="addUserId" />
+    <result column="add_time" property="addTime" />
+    <result column="update_user_id" property="updateUserId" />
+    <result column="update_time" property="updateTime" />
+    <result column="mark" property="mark" />
+        <result column="role_id" property="roleId" />
+        <result column="resource_id" property="resourceId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        add_user_id,
+        add_time,
+        update_user_id,
+        update_time,
+        mark,
+        role_id, resource_id
+    </sql>
+
+</mapper>

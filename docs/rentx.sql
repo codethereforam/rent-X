@@ -173,3 +173,67 @@ CREATE TABLE `user` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-01-19 20:56:16
+
+CREATE TABLE `role`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色编号',
+  `identifier`     varchar(32)        NOT NULL DEFAULT '' COMMENT '角色标识符',
+  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '角色名称',
+  `description`    varchar(50)         NOT NULL DEFAULT '' COMMENT '角色描述',
+  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='角色';
+
+CREATE TABLE `resource`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '资源编号',
+  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '资源名称',
+  `description`    varchar(50)         NOT NULL DEFAULT '' COMMENT '资源描述',
+  `url`            varchar(100)        NOT NULL DEFAULT '' COMMENT '资源URL',
+  `method`         varchar(50)         NOT NULL DEFAULT '' COMMENT 'HTTP方法',
+  `access`         varchar(100)        NOT NULL DEFAULT '' COMMENT '访问限制描述',
+  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='资源';
+
+CREATE TABLE `user_role`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '用户角色关系编号',
+  `user_id`        int(10) unsigned    NOT NULL COMMENT '用户ID',
+  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
+  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_role_id` (`role_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='用户角色关系';
+
+CREATE TABLE `role_resource`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色资源关系编号',
+  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
+  `resource_id`    int(10) unsigned    NOT NULL COMMENT '资源ID',
+  `add_user_id`    int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    timestamp           NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`),
+  KEY `idx_role_id` (`role_id`),
+  KEY `idx_resource_id` (`resource_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='角色资源关系';

@@ -1,16 +1,22 @@
 # todo
 
 ## technology
-- architecture
+### primary
+- 基础业务
+- 登录注册
+- XSS防御和敏感词过滤
+- 告警
+- 支付
+- 搜索
+- 统计报表
+- 实时通信
+- 集群部署
+### secondary
 - 统一异常处理
 - 事务配置
-- 表设计
 - 角色权限: PasswordEncoder
 - session
-- rpc
-- 告警
 - 设计root用户权限
-- 无需登录
 
 ## knowledge
 - mbp CRUD原理

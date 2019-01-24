@@ -48,7 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		for (RoleResourceDTO dto : roleResourceDTOList) {
 			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL()).hasRole(dto.getRoleIdentifier());
 		}
-		registry.and().formLogin().loginPage("/login").permitAll()
+		registry.anyRequest().denyAll()
+				.and().formLogin().loginPage("/login").permitAll()
 				.and().logout().permitAll();
 	}
 

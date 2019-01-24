@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import priv.thinkam.rentx.web.dao.dto.RoleResourceDTO;
 import priv.thinkam.rentx.web.dao.dto.UserRoleDTO;
-import priv.thinkam.rentx.web.dao.mapper.RoleResourceMapper;
 import priv.thinkam.rentx.web.dao.mapper.UserRoleMapper;
+import priv.thinkam.rentx.web.service.RoleResourceService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Resource
 	private UserRoleMapper userRoleMapper;
 	@Resource
-	private RoleResourceMapper roleResourceMapper;
+	private RoleResourceService roleResourceService;
 	@Value("${spring.security.ignore.paths}")
 	private String[] ignorePath;
 
@@ -42,13 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		List<RoleResourceDTO> roleResourceDTOList = roleResourceMapper.listRoleResourceDTO();
+		List<RoleResourceDTO> roleResourceDTOList = roleResourceService.listRoleResourceDTOPlusRoot();
 		log.info("RoleResourceDTO list: {}", roleResourceDTOList);
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
 		for (RoleResourceDTO dto : roleResourceDTOList) {
 			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL()).hasRole(dto.getRoleIdentifier());
 		}
-		registry.anyRequest().denyAll()
+		registry.anyRequest().hasRole("ROOT")
 				.and().formLogin().loginPage("/login").permitAll()
 				.and().logout().permitAll();
 	}

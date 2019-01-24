@@ -43,3 +43,6 @@ dubbo:
     port: 12345
   registry:
     address: N/A
+
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/**/*.xml

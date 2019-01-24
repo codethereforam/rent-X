@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="priv.thinkam.rentx.web.dao.mapper.UserRoleMapper">
+<mapper namespace="priv.thinkam.rentx.web.dao.mapper.RoleResourceMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="priv.thinkam.rentx.web.dao.entity.UserRole">
+    <resultMap id="BaseResultMap" type="priv.thinkam.rentx.web.dao.entity.RoleResource">
     <result column="id" property="id" />
     <result column="add_user_id" property="addUserId" />
     <result column="add_time" property="addTime" />
     <result column="update_user_id" property="updateUserId" />
     <result column="update_time" property="updateTime" />
     <result column="mark" property="mark" />
-        <result column="user_id" property="userId" />
         <result column="role_id" property="roleId" />
+        <result column="resource_id" property="resourceId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -22,16 +22,7 @@
         update_user_id,
         update_time,
         mark,
-        user_id, role_id
+        role_id, resource_id
     </sql>
 
-    <select id="listUserRoleDTO" resultType="priv.thinkam.rentx.web.dao.dto.UserRoleDTO">
-        select u.username,
-               u.password,
-               r.identifier roleIdentifier
-        from user_role ur
-                 inner join user u on ur.user_id = u.id and u.mark = 1
-                 inner join role r on ur.role_id = r.id and r.mark = 1
-        where ur.mark = 1
-    </select>
 </mapper>

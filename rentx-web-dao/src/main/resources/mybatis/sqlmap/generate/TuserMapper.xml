@@ -25,7 +25,4 @@
         name, age
     </sql>
 
-    <select id="testCount" resultType="int">
-        select count(*) from tuser;
-    </select>
 </mapper>

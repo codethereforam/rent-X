@@ -36,7 +36,7 @@ public class CodeGeneratorTool {
 		packageConfig.setParent("priv.thinkam.rentx.web")
 				.setEntity("dao.entity")
 				.setMapper("dao.mapper")
-				.setXml("dao.mapper")
+				.setXml("dao.mapper.sqlmap")
 				.setServiceImpl("service")
 				.setController("controller");
 

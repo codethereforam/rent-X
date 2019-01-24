@@ -1,6 +1,7 @@
 package priv.thinkam.rentx.web.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,14 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserRoleMapper userRoleMapper;
 	@Resource
 	private RoleResourceMapper roleResourceMapper;
+	@Value("${spring.security.ignore.paths}")
+	private String[] ignorePath;
 
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring()
-				.antMatchers("/plugins/**")
-				.antMatchers("/css/**")
-				.antMatchers("/js/**")
-				.antMatchers("/favicon.ico");
+		web.ignoring().antMatchers(ignorePath);
 	}
 
 	@Override

@@ -12,6 +12,9 @@ spring:
   data:
     elasticsearch:
       cluster-nodes: localhost:9300
+  security:
+    ignore:
+      paths: /plugins/**, /css/**, /js/**, /favicon.ico
 
 server:
   port: 9999

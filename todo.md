@@ -9,7 +9,6 @@
 - session
 - rpc
 - 告警
-- ignore url with @value
 - sql mapper自动生成和自定义分离
 - 设计root用户权限
 

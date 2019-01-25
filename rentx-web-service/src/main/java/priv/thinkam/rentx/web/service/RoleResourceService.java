@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import priv.thinkam.rentx.common.base.Constant;
+import priv.thinkam.rentx.web.common.base.WebConstant;
 import priv.thinkam.rentx.web.dao.dto.RoleResourceDTO;
 import priv.thinkam.rentx.web.dao.entity.RoleResource;
 import priv.thinkam.rentx.web.dao.mapper.RoleResourceMapper;
@@ -34,7 +36,8 @@ public class RoleResourceService extends ServiceImpl<RoleResourceMapper, RoleRes
 		List<RoleResourceDTO> roleResourceDTOList = roleResourceMapper.listRoleResourceDTO();
 		for (RoleResourceDTO roleResourceDTO : roleResourceDTOList) {
 			if(StringUtils.isNotBlank(roleResourceDTO.getRoleIdentifierConcat())) {
-				roleResourceDTO.setRoleIdentifierConcat(roleResourceDTO.getRoleIdentifierConcat() + ",ROOT");
+				roleResourceDTO.setRoleIdentifierConcat(roleResourceDTO.getRoleIdentifierConcat()
+						+ Constant.Separator.COMMA + WebConstant.RoleIdentifier.ROOT);
 			}
 		}
 		return roleResourceDTOList;

@@ -18,6 +18,7 @@
         <module>rentx-generator</module>
         <module>rentx-web-api</module>
         <module>rentx-admin-service</module>
+        <module>rentx-web-common</module>
     </modules>
 
     <properties>

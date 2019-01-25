@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import priv.thinkam.rentx.common.base.Constant;
+import priv.thinkam.rentx.web.common.base.WebConstant;
 import priv.thinkam.rentx.web.dao.dto.RoleResourceDTO;
 import priv.thinkam.rentx.web.dao.dto.UserRoleDTO;
 import priv.thinkam.rentx.web.dao.mapper.UserRoleMapper;
@@ -46,9 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		log.info("RoleResourceDTO list: {}", roleResourceDTOList);
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
 		for (RoleResourceDTO dto : roleResourceDTOList) {
-			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL()).hasAnyRole(dto.getRoleIdentifierConcat().split(","));
+			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL())
+					.hasAnyRole(dto.getRoleIdentifierConcat().split(Constant.Separator.COMMA));
 		}
-		registry.anyRequest().hasRole("ROOT")
+		registry.anyRequest().hasRole(WebConstant.RoleIdentifier.ROOT)
 				.and().formLogin().loginPage("/login").permitAll()
 				.and().logout().permitAll();
 	}

@@ -9,14 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rentx-web-dao</artifactId>
+    <artifactId>rentx-web-common</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>priv.thinkam</groupId>
-            <artifactId>rentx-web-common</artifactId>
+            <artifactId>rentx-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
-
 </project>

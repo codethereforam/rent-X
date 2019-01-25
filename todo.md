@@ -16,7 +16,6 @@
 - 事务配置
 - 角色权限: PasswordEncoder
 - session
-- 设计root用户权限
 
 ## knowledge
 - mbp CRUD原理

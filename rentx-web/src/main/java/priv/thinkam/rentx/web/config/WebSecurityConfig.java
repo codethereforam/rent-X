@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		log.info("RoleResourceDTO list: {}", roleResourceDTOList);
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
 		for (RoleResourceDTO dto : roleResourceDTOList) {
-			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL()).hasRole(dto.getRoleIdentifier());
+			registry.regexMatchers(HttpMethod.resolve(dto.getResourceMethod()), dto.getResourceURL()).hasAnyRole(dto.getRoleIdentifierConcat().split(","));
 		}
 		registry.anyRequest().hasRole("ROOT")
 				.and().formLogin().loginPage("/login").permitAll()

@@ -165,6 +165,7 @@ INSERT INTO `role_resource` VALUES (6,2,6,0,'2019-01-23 13:05:46',0,'2019-01-23 
 INSERT INTO `role_resource` VALUES (7,2,7,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 INSERT INTO `role_resource` VALUES (8,3,8,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 INSERT INTO `role_resource` VALUES (9,3,9,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
+INSERT INTO `role_resource` VALUES (10,3,6,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 
 --
 -- Table structure for table `stuff`

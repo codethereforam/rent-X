@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class RoleResourceDTO {
-	private String roleIdentifier;
+	private String roleIdentifierConcat;
 	private String resourceURL;
 	private String resourceMethod;
 }

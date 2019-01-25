@@ -15,3 +15,6 @@ create table user
   mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
 )
   comment '用户表' charset = utf8mb4;
+
+INSERT INTO rentx_admin.user (id, username, password, salt, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 'u1', 'p1', '', 0, '2019-01-26 00:01:23', 0, '2019-01-26 00:01:23', 1);
+INSERT INTO rentx_admin.user (id, username, password, salt, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'u2', 'p2', '', 0, '2019-01-26 00:01:23', 0, '2019-01-26 00:01:23', 1);

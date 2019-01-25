@@ -31,3 +31,6 @@ rentx:
 dubbo:
   application:
     name: dubbo-consumer-admin
+
+mybatis-plus:
+  mapper-locations: classpath*:mybatis/**/*.xml

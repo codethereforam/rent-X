@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/rentx?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/rentx_admin?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: ${MYSQL_PASSWD}
   redis:

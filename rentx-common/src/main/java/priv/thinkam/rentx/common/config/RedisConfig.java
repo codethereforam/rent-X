@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.web.config;
+package priv.thinkam.rentx.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

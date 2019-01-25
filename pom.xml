@@ -19,6 +19,8 @@
         <module>rentx-web-api</module>
         <module>rentx-admin-service</module>
         <module>rentx-web-common</module>
+        <module>rentx-admin-common</module>
+        <module>rentx-admin-dao</module>
     </modules>
 
     <properties>

@@ -9,17 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rentx-admin-service</artifactId>
+    <artifactId>rentx-admin-dao</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>priv.thinkam</groupId>
-            <artifactId>rentx-web-api</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>priv.thinkam</groupId>
-            <artifactId>rentx-admin-dao</artifactId>
+            <artifactId>rentx-admin-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

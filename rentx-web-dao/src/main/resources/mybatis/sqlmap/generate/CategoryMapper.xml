@@ -4,14 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="priv.thinkam.rentx.web.dao.entity.Category">
-    <result column="id" property="id" />
-    <result column="add_user_id" property="addUserId" />
-    <result column="add_time" property="addTime" />
-    <result column="update_user_id" property="updateUserId" />
-    <result column="update_time" property="updateTime" />
-    <result column="mark" property="mark" />
+        <result column="id" property="id" />
+        <result column="add_user_id" property="addUserId" />
+        <result column="add_time" property="addTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+        <result column="mark" property="mark" />
         <result column="name" property="name" />
         <result column="description" property="description" />
+        <result column="parent_id" property="parentId" />
+        <result column="level" property="level" />
+        <result column="status" property="status" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -22,7 +25,7 @@
         update_user_id,
         update_time,
         mark,
-        name, description
+        name, description, parent_id, level, status
     </sql>
 
 </mapper>

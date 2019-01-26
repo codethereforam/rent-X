@@ -3,6 +3,8 @@
 create database rentx;
 use rentx;
 
+######################################################
+
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: rentx
@@ -31,21 +33,36 @@ CREATE TABLE `category` (
                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '类别编号',
                           `name` varchar(32) NOT NULL DEFAULT '' COMMENT '类别名称',
                           `description` varchar(255) NOT NULL DEFAULT '' COMMENT '类别描述',
+                          `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父类别编号（0代表是根类别）',
+                          `level` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT ' 类别层次（只能为1或2或3）',
+                          `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1:启用, 0:禁用)',
                           `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
                           `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
                           `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
                           `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='类别';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='类别';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` VALUES (1,'n1','d1',0,'2019-01-23 12:33:48',0,'2019-01-23 12:33:48',1);
-INSERT INTO `category` VALUES (2,'n2','d2',0,'2019-01-23 12:33:56',0,'2019-01-23 12:33:56',1);
+INSERT INTO `category` VALUES (1,'服装','涵盖所有服装',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (2,'男装','涵盖所有男装',1,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (3,'女装','涵盖所有女装',1,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (4,'T恤','涵盖所有女士T恤',3,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (5,'毛衣','涵盖所有男士毛衣',2,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (6,'短裙','涵盖所有女士短裙',3,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (7,'家用电器','涵盖所有家用电器',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (8,'电脑办公','涵盖所有电脑办公',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (9,'大家电','涵盖所有大家电',7,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (10,'厨房电器','涵盖所有厨房电器',7,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (11,'音乐','涵盖所有音乐相关',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (12,'aaa','aaa',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (13,'bbb','bbb',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
+INSERT INTO `category` VALUES (14,'ccc','ccc',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
 
 --
 -- Table structure for table `item`
@@ -159,7 +176,7 @@ CREATE TABLE `role_resource` (
                                PRIMARY KEY (`id`),
                                KEY `idx_role_id` (`role_id`),
                                KEY `idx_resource_id` (`resource_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='角色资源关系';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='角色资源关系';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +187,7 @@ INSERT INTO `role_resource` VALUES (6,2,6,0,'2019-01-23 13:05:46',0,'2019-01-23 
 INSERT INTO `role_resource` VALUES (7,2,7,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 INSERT INTO `role_resource` VALUES (8,3,8,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
 INSERT INTO `role_resource` VALUES (9,3,9,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
-INSERT INTO `role_resource` VALUES (10,3,6,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
+INSERT INTO `role_resource` VALUES (10,3,6,0,'2019-01-23 05:05:46',0,'2019-01-23 05:05:46',1);
 
 --
 -- Table structure for table `stuff`
@@ -245,14 +262,14 @@ CREATE TABLE `user` (
                       `salt` char(32) NOT NULL COMMENT '盐',
                       `email` varchar(50) NOT NULL COMMENT '邮箱',
                       `sex` tinyint(2) unsigned DEFAULT '2' COMMENT '性别(0:女，1:男，2:不愿透露)',
-                      `status` tinyint(1) unsigned DEFAULT '0' COMMENT '状态(1:正常,0:锁定)',
+                      `status` tinyint(1) unsigned DEFAULT '1' COMMENT '状态(1:正常,0:锁定)',
                       `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
                       `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
                       `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
                       `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
                       `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
                       PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,4 +325,4 @@ INSERT INTO `user_role` VALUES (6,6,4,0,'2019-01-23 12:49:16',0,'2019-01-23 12:4
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-23 23:35:06
+-- Dump completed on 2019-01-26 13:40:58

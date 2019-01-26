@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.web.api.bo;
+package priv.thinkam.rentx.web.api.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class CategoryBO implements Serializable {
+public class CategoryApiDTO implements Serializable {
 	/**
 	 * ID
 	 */

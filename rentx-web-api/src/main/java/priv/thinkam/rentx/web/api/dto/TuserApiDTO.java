@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.web.api.bo;
+package priv.thinkam.rentx.web.api.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class TuserBO implements Serializable {
+public class TuserApiDTO implements Serializable {
 	/**
 	 * 名称
 	 */

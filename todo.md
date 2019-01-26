@@ -19,6 +19,8 @@
 ### knowledge
 - mbp CRUD原理
 - datetime和timestamp
+- devtool
+- Actuator
 
 ## learnt
 - log

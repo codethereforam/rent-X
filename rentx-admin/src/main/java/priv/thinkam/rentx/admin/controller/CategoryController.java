@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
-import priv.thinkam.rentx.web.api.bo.CategoryBO;
+import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 
 import java.util.List;
 
@@ -34,8 +34,8 @@ public class CategoryController extends BaseController {
 	@GetMapping
 	@ResponseBody
 	public Response list() {
-		return new Response<List<CategoryBO>>()
+		return new Response<List<CategoryApiDTO>>()
 				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(categoryService.listCategoryBO());
+				.setData(categoryService.listCategoryApiDTO());
 	}
 }

@@ -2,7 +2,7 @@ package priv.thinkam.rentx.web.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
-import priv.thinkam.rentx.web.api.bo.CategoryBO;
+import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 import priv.thinkam.rentx.web.service.CategoryService;
 
 import javax.annotation.Resource;
@@ -23,14 +23,14 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	/**
 	 * 获取所有类别信息
 	 *
-	 * @return CategoryBO list
+	 * @return CategoryApiDTO list
 	 * @author yanganyu
 	 * @date 1/26/19 4:58 PM
 	 */
 	@Override
-	public List<CategoryBO> listCategoryBO() {
+	public List<CategoryApiDTO> listCategoryApiDTO() {
 		return categoryService.list().stream()
-				.map(c -> new CategoryBO()
+				.map(c -> new CategoryApiDTO()
 						.setId(c.getId())
 						.setName(c.getName())
 						.setDescription(c.getDescription())

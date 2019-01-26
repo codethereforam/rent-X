@@ -1,6 +1,6 @@
 package priv.thinkam.rentx.web.api;
 
-import priv.thinkam.rentx.web.api.bo.CategoryBO;
+import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ public interface CategoryServiceApi {
 	/**
 	 * 获取所有类别信息
 	 *
-	 * @return CategoryBO list
+	 * @return CategoryApiDTO list
 	 * @author yanganyu
 	 * @date 1/26/19 4:58 PM
 	 */
-	List<CategoryBO> listCategoryBO();
+	List<CategoryApiDTO> listCategoryApiDTO();
 }

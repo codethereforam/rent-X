@@ -1,3 +1,5 @@
+# 后台管理系统库表
+
 create database rentx_admin;
 use rentx_admin;
 

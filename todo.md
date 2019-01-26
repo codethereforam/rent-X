@@ -16,11 +16,22 @@
 - 事务配置
 - 角色权限: PasswordEncoder
 - session
-
-## knowledge
+### knowledge
 - mbp CRUD原理
+- datetime和timestamp
 
-## resolved
+## learnt
 - log
 - mbp generator
 - thymeleaf
+- logback
+- redis template
+- jmh
+- jackson
+- dubbo
+- Spring Boot
+- elasticsearch
+- spring security
+- 角色权限设计
+
+## experience

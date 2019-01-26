@@ -1,3 +1,5 @@
+# 用户租赁系统库表
+
 create database rentx;
 use rentx;
 

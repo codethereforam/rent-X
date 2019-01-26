@@ -46,3 +46,6 @@ dubbo:
 
 mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto

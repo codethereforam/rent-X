@@ -41,7 +41,8 @@ CREATE TABLE `category` (
                           `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',
                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
                           `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                          PRIMARY KEY (`id`)
+                          PRIMARY KEY (`id`),
+                          KEY `idx_parent_id` (`parent_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='类别';
 /*!40101 SET character_set_client = @saved_cs_client */;
 

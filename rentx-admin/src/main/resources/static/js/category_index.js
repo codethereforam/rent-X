@@ -57,7 +57,7 @@ jQuery(function ($) {
         inputName.val(treeNode.name);
         inputDescription.html(treeNode.description);
         inputParentName.val(parentNode === null ? '无' : parentNode.name);
-        inputParentId.val(parentNode === null ? -1 : parentNode.categoryId);
+        inputParentId.val(parentNode === null ? -1 : parentNode.id);
         inputLevel.val(treeNode.level);
         originalLevel = treeNode.level;
         if (treeNode.status) {
@@ -92,7 +92,7 @@ jQuery(function ($) {
             return;
         }
         inputParentName.val(treeNode.name);
-        inputParentId.val(treeNode.categoryId);
+        inputParentId.val(treeNode.id);
         inputLevel.val(treeNode.level + 1);
         parentSelectModal.modal('hide');
     }
@@ -103,7 +103,7 @@ jQuery(function ($) {
             return;
         }
         inputAddParentName.val(treeNode.name);
-        inputAddParentId.val(treeNode.categoryId);
+        inputAddParentId.val(treeNode.id);
         inputAddLevel.val(treeNode.level + 1);
         parentSelectAddModal.modal('hide');
     }
@@ -237,21 +237,17 @@ jQuery(function ($) {
                 status: addForm.find('input[name="status"]:checked').val()
             };
             console.log(category);
-            $.post('/manage/category/add', category, function (data) {
+            $.post('/categories', category, function (data) {
                 // if data is the error page
-                if (typeof data !== 'object') {
-                    $('html').html(data);
-                    return;
-                }
-                if (data.success) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
                     reset();
                     showHintModal('添加成功', true);
                     // hide add modal
                     addModal.modal('hide');
                 } else {
-                    showHintModal(data.data[0].errorMsg + ', 添加失败', false);
+                    showHintModal(data.message + ', 添加失败', false);
                 }
-            });
+            }, DATA_TYPE.JSON);
         });
     }
 
@@ -286,7 +282,7 @@ jQuery(function ($) {
             if(parent.level === 3) {
                return;
             }
-            inputAddParentId.val(parent.categoryId);
+            inputAddParentId.val(parent.id);
             inputAddParentName.val(parent.name);
             inputAddLevel.val(parent.level + 1);
         });

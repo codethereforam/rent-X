@@ -16,11 +16,15 @@
 - 事务配置
 - 角色权限: PasswordEncoder
 - session
+- 统一trim
+- 优化response
+- 优化校验器
 ### knowledge
 - mbp CRUD原理
 - datetime和timestamp
 - devtool
 - Actuator
+- ApiDTO自动转DO
 
 ## learnt
 - log

@@ -6,7 +6,7 @@ package priv.thinkam.rentx.common.base;
  * @author thinkam
  * @date 2019/01/13
  */
-public class Constant {
+public interface Constant {
 
 	/**
 	 * 分隔符
@@ -14,11 +14,20 @@ public class Constant {
 	 * @author yanganyu
 	 * @date 1/25/19 10:43 PM
 	 */
-	public static class Separator {
+	interface Separator {
 		/**
 		 * comma: ","
 		 */
-		public static final String COMMA = ",";
+		String COMMA = ",";
 	}
 
+	/**
+	 * 错误信息
+	 *
+	 * @author yanganyu
+	 * @date 1/27/19 12:23 AM
+	 */
+	interface ErrorMsg {
+		String SYSTEM_INTERNAL_ERROR = "系统内部错误";
+	}
 }

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 响应
  *
@@ -16,7 +18,9 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Response<T> {
+public class Response<T> implements Serializable {
+	public static final Response SUCCESS = new Response().setCode(CodeEnum.SUCCESS);
+
 	/**
 	 * 错误码，0:成功，-1:失败，其他失败
 	 */
@@ -24,7 +28,7 @@ public class Response<T> {
 	/**
 	 * 错误信息
 	 */
-	private String message;
+	private String message = "success";
 	/**
 	 * 数据
 	 */

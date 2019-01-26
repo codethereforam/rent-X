@@ -6,7 +6,7 @@ package priv.thinkam.rentx.web.common.base;
  * @author thinkam
  * @date 2019/01/25
  */
-public class WebConstant {
+public interface WebConstant {
 
 	/**
 	 * 角色标识符
@@ -14,11 +14,11 @@ public class WebConstant {
 	 * @author yanganyu
 	 * @date 1/25/19 10:46 PM
 	 */
-	public static class RoleIdentifier {
+	interface RoleIdentifier {
 		/**
 		 * ROOT角色标识符
 		 */
-		public static final String ROOT = "ROOT";
+		String ROOT = "ROOT";
 	}
 
 }

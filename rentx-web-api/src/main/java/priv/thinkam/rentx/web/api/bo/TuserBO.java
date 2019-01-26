@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-public class TuserBo implements Serializable {
+public class TuserBO implements Serializable {
 	/**
 	 * 名称
 	 */

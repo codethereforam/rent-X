@@ -6,31 +6,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import priv.thinkam.rentx.web.api.bo.TuserBO;
-import priv.thinkam.rentx.web.api.TuserServiceApi;
-import priv.thinkam.rentx.web.api.query.TuserQuery;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.web.api.CategoryServiceApi;
+import priv.thinkam.rentx.web.api.bo.CategoryBO;
 
 import java.util.List;
 
 /**
+ * 类别管理 controller
+ *
  * @author thinkam
  * @date 2019/01/21
  */
 @Slf4j
 @Controller
-@RequestMapping("/tusers")
-public class TuserController extends BaseController {
+@RequestMapping("/categories")
+public class CategoryController extends BaseController {
 	@Reference(version = "${rentx.web.service.version}", url = "${rentx.web.service.url}")
-	private TuserServiceApi tuserService;
+	private CategoryServiceApi categoryService;
+
+	@GetMapping("/index")
+	public String index() {
+		return "category_index";
+	}
 
 	@GetMapping
 	@ResponseBody
 	public Response list() {
-		return new Response<List<TuserBO>>()
+		return new Response<List<CategoryBO>>()
 				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(tuserService.list(new TuserQuery().setNameLike("u")));
+				.setData(categoryService.listCategoryBO());
 	}
-
 }

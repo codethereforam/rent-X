@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>rent-X后台管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<!-- nav bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand glyphicon glyphicon-arrow-left" id="toggleSidebar"></span>
+            <a class="navbar-brand" href="index">rent-X后台管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">设置</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        系统 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                        <li><a href="https://github.com/codethereforam/rent-X/wikis/home">帮助</a></li>
+                        <li><a href="https://github.com/codethereforam/rent-X/blob/master/README.md">关于</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input class="form-control" placeholder="搜索...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div class="nav-sidebar">
+                <div class="nav-sidebar-head">
+                    <ul class="nav">
+                        <li>
+                    <!---->        <a href="#group1" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;&nbsp;我的管理
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="group1" class="nav-sidebar-body collapse in">
+                    <ul class="nav">
+                        <li class="active"><a href="#_sys" data-toggle="tab">用户管理</a></li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="#_categories_index" data-toggle="tab">类别管理</a></li>
+                    </ul>
+                    <ul class="nav">
+                        <li><a href="#_sys_index" data-toggle="tab">物品管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-sidebar">
+                <div class="nav-sidebar-head">
+                    <ul class="nav">
+                        <li>
+                            <a href="#group2" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;&nbsp;我的聊天
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="group2" class="nav-sidebar-body collapse in">
+                    <ul class="nav">
+                        <li><a href="#_sysCall_index" data-toggle="tab">聊天</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main tab-content" id="mainContent">
+            <!-- js generate -->
+            <!--
+            <div id="list" class="tab-pane active fade in">
+                <iframe class="main-iframe" src="list.html" width="100%" frameborder="0" scrolling="auto"></iframe>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

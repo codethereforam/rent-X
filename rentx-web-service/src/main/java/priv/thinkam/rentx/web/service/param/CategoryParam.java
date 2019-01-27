@@ -6,10 +6,7 @@ import lombok.experimental.Accessors;
 import priv.thinkam.rentx.web.service.validator.category.CategoryNameValidator;
 import priv.thinkam.rentx.web.service.validator.category.CategoryParentIdValidator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  * Category Param
@@ -51,6 +48,8 @@ public class CategoryParam {
 	 *  类别层次（只能为1或2或3）
 	 */
 	@NotNull(message = "级别非法操作，否则请联系管理员")
+	@Min(value = 1, message = "级别非法操作，否则请联系管理员")
+	@Max(value = 3, message = "级别非法操作，否则请联系管理员")
 	private Integer level;
 
 	/**

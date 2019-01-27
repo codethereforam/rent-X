@@ -34,10 +34,10 @@ public class CategoryServiceTest {
 	public void add2() {
 		categoryService.add(
 				new CategoryParam()
-						.setName("牛仔裤")
+						.setName("牛仔裤1")
 						.setDescription("牛仔裤描述")
 						.setParentId(14)
-						.setLevel(2)
+						.setLevel(4)
 						.setStatus(true)
 		);
 	}

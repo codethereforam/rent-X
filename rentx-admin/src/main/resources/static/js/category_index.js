@@ -229,25 +229,31 @@ jQuery(function ($) {
                 return;
             }
             // send post request
-            var category = {
+            var category = JSON.stringify({
                 name: inputAddName.val(),
                 description: inputAddDescription.val(),
                 parentId: inputAddParentId.val(),
                 level: inputAddLevel.val(),
                 status: addForm.find('input[name="status"]:checked').val()
-            };
+            });
             console.log(category);
-            $.post('/categories', category, function (data) {
-                // if data is the error page
-                if (data.code === RESPONSE_CODE.SUCCESS) {
-                    reset();
-                    showHintModal('添加成功', true);
-                    // hide add modal
-                    addModal.modal('hide');
-                } else {
-                    showHintModal(data.message + ', 添加失败', false);
+            $.ajax('/categories', {
+                data: category,
+                contentType: 'application/json',
+                type: 'POST',
+                dataType: DATA_TYPE.JSON,
+                success: function (data) {
+                    // if data is the error page
+                    if (data.code === RESPONSE_CODE.SUCCESS) {
+                        reset();
+                        showHintModal('添加成功', true);
+                        // hide add modal
+                        addModal.modal('hide');
+                    } else {
+                        showHintModal(data.message + ', 添加失败', false);
+                    }
                 }
-            }, DATA_TYPE.JSON);
+            });
         });
     }
 

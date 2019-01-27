@@ -3,17 +3,11 @@ package priv.thinkam.rentx.admin.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
-import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 import priv.thinkam.rentx.web.api.param.CategoryApiParam;
-
-import java.util.List;
 
 /**
  * 类别管理 controller
@@ -50,6 +44,32 @@ public class CategoryController extends BaseController {
 	}
 
 	/**
+	 * 修改类别
+	 * @param id category id
+	 * @param categoryApiParam categoryApiParam
+	 * @return Response
+	 */
+	@ResponseBody
+	@PatchMapping("/{id}")
+	public Response modify(@PathVariable Integer id, @RequestBody CategoryApiParam categoryApiParam) {
+		categoryApiParam.setId(id);
+		log.info("modify categoryApiParam: {}", categoryApiParam);
+		return categoryServiceApi.modify(categoryApiParam);
+	}
+
+	/**
+	 * 删除类别
+	 * @param id category id
+	 * @return Response
+	 */
+	@ResponseBody
+	@DeleteMapping("/{id}")
+	public Response delete(@PathVariable Integer id) {
+		log.info("delete category id: {}", id);
+		return categoryServiceApi.delete(id);
+	}
+
+	/**
 	 * 添加类别
 	 *
 	 * @param categoryApiParam categoryApiParam
@@ -57,8 +77,8 @@ public class CategoryController extends BaseController {
 	 */
 	@PostMapping
 	@ResponseBody
-	public Response add(CategoryApiParam categoryApiParam) {
-		log.info("categoryApiParam: {}", categoryApiParam);
+	public Response add(@RequestBody CategoryApiParam categoryApiParam) {
+		log.info("add categoryApiParam: {}", categoryApiParam);
 		return categoryServiceApi.add(categoryApiParam);
 	}
 }

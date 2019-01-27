@@ -53,4 +53,21 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 		return categoryService.add(BeanUtil.map(categoryApiParam, CategoryParam.class));
 	}
 
+	/**
+	 * 修改类别
+	 *
+	 * @param categoryApiParam categoryApiParam
+	 * @return priv.thinkam.rentx.common.base.Response
+	 * @author yanganyu
+	 * @date 1/27/19 6:53 PM
+	 */
+	@Override
+	public Response modify(CategoryApiParam categoryApiParam) {
+		return Response.SUCCESS;
+	}
+
+	@Override
+	public Response delete(Integer id) {
+		return Response.SUCCESS;
+	}
 }

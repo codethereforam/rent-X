@@ -21,6 +21,11 @@ import javax.validation.constraints.Size;
 @Accessors(chain = true)
 public class CategoryParam {
 	/**
+	 * 类别编号
+	 */
+	private Integer id;
+
+	/**
 	 * 类别名称
 	 */
 	@NotBlank(message = "类别名称不能为空")

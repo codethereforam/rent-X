@@ -15,6 +15,10 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class CategoryApiParam implements Serializable {
 	/**
+	 * 类别编号
+	 */
+	private Integer id;
+	/**
 	 * 类别名称
 	 */
 	private String name;

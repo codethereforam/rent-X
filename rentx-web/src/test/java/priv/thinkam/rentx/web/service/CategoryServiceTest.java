@@ -22,7 +22,7 @@ public class CategoryServiceTest {
 	public void add1() {
 		categoryService.add(
 				new CategoryParam()
-						.setName("")
+						.setName("牛仔裤")
 						.setDescription("牛仔裤描述")
 						.setParentId(14)
 						.setLevel(2)
@@ -40,5 +40,18 @@ public class CategoryServiceTest {
 						.setLevel(4)
 						.setStatus(true)
 		);
+	}
+
+	@Test
+	public void modify() {
+		System.out.println(categoryService.modify(
+				new CategoryParam()
+						.setId(31)
+						.setName("牛仔裤222")
+						.setDescription("牛仔裤描述222")
+						.setParentId(14)
+						.setLevel(2)
+						.setStatus(true)
+		));
 	}
 }

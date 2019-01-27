@@ -63,7 +63,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	 */
 	@Override
 	public Response modify(CategoryApiParam categoryApiParam) {
-		return Response.SUCCESS;
+		return categoryService.modify(BeanUtil.map(categoryApiParam, CategoryParam.class));
 	}
 
 	@Override

@@ -98,4 +98,13 @@ public class Response<T> implements Serializable {
 			return value;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Response{" +
+				"code=" + code +
+				", message='" + message + '\'' +
+				", data=" + data +
+				'}';
+	}
 }

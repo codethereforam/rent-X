@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
+import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.entity.Category;
 import priv.thinkam.rentx.web.dao.mapper.CategoryMapper;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
@@ -82,12 +83,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 			log.info("add category invalid param: {}", result.getErrors());
 			return Response.fail(result.getErrors().get(0));
 		}
-		Category category = new Category()
-				.setName(categoryParam.getName())
-				.setDescription(categoryParam.getDescription())
-				.setParentId(categoryParam.getParentId())
-				.setStatus(categoryParam.getStatus())
-				.setLevel(categoryParam.getLevel());
+		Category category = BeanUtil.map(categoryParam, Category.class);
 		this.save(category);
 		log.info("a category saved: {}", category);
 		return Response.SUCCESS;

@@ -3,6 +3,7 @@ package priv.thinkam.rentx.web.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import lombok.extern.slf4j.Slf4j;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
 import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 import priv.thinkam.rentx.web.api.param.CategoryApiParam;
@@ -35,13 +36,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	@Override
 	public List<CategoryApiDTO> listCategoryApiDTO() {
 		return categoryService.list().stream()
-				.map(c -> new CategoryApiDTO()
-						.setId(c.getId())
-						.setName(c.getName())
-						.setDescription(c.getDescription())
-						.setParentId(c.getParentId())
-						.setLevel(c.getLevel())
-						.setStatus(c.getStatus()))
+				.map(c -> BeanUtil.map(c, CategoryApiDTO.class))
 				.collect(Collectors.toList());
 	}
 
@@ -55,13 +50,7 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	 */
 	@Override
 	public Response add(CategoryApiParam categoryApiParam) {
-		CategoryParam categoryParam = new CategoryParam()
-				.setName(categoryApiParam.getName())
-				.setDescription(categoryApiParam.getDescription())
-				.setParentId(categoryApiParam.getParentId())
-				.setLevel(categoryApiParam.getLevel())
-				.setStatus(categoryApiParam.getStatus());
-		return categoryService.add(categoryParam);
+		return categoryService.add(BeanUtil.map(categoryApiParam, CategoryParam.class));
 	}
 
 }

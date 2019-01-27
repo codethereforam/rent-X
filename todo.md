@@ -18,7 +18,7 @@
 - session
 - 统一trim
 - 解决maven重复依赖
-- DO转ApiDTO、ApiParam转DO
+- bean mapping: DO转ApiDTO、ApiParam转DO
 - 优化测试用例
 ### knowledge
 - mbp CRUD原理
@@ -32,6 +32,7 @@
     - 启动参数
     - SpringApplicationContextRegistry
 - 泛型（response）
+- java assist
 
 ## learnt
 - log

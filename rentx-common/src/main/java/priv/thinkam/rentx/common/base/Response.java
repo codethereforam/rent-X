@@ -1,10 +1,6 @@
 package priv.thinkam.rentx.common.base;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -14,12 +10,23 @@ import java.io.Serializable;
  * @author yanganyu
  * @date 1/1/19 10:16 PM
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors(chain = true)
 public class Response<T> implements Serializable {
-	public static final Response SUCCESS = new Response().setCode(CodeEnum.SUCCESS);
+	/**
+	 * default success message
+	 */
+	private static final String DEFAULT_SUCCESS_MESSAGE = "success";
+	/**
+	 * default fail message
+	 */
+	private static final String DEFAULT_FAIL_MESSAGE = "fail";
+	/**
+	 * default success response
+	 */
+	public static final Response SUCCESS = new Response(CodeEnum.SUCCESS, DEFAULT_SUCCESS_MESSAGE);
+	/**
+	 * default fail response
+	 */
+	public static final Response FAIL = new Response(CodeEnum.FAIL, DEFAULT_FAIL_MESSAGE);
 
 	/**
 	 * 错误码，0:成功，-1:失败，其他失败
@@ -28,11 +35,42 @@ public class Response<T> implements Serializable {
 	/**
 	 * 错误信息
 	 */
-	private String message = "success";
+	private String message;
 	/**
 	 * 数据
 	 */
 	private T data;
+
+	private Response(CodeEnum code, String message, T data) {
+		this.code = code;
+		this.message = message;
+		this.data = data;
+	}
+
+	private Response(CodeEnum code, String message) {
+		this.code = code;
+		this.message = message;
+	}
+
+	public static Response fail(String message) {
+		return new Response(CodeEnum.FAIL, message);
+	}
+
+	public static <T> Response<T> success(T data) {
+		return new Response<>(CodeEnum.SUCCESS, DEFAULT_SUCCESS_MESSAGE, data);
+	}
+
+	public Response.CodeEnum getCode() {
+		return this.code;
+	}
+
+	public String getMessage() {
+		return this.message;
+	}
+
+	public T getData() {
+		return this.data;
+	}
 
 	/**
 	 * code enum

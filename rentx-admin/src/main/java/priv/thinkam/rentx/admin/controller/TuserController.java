@@ -28,9 +28,7 @@ public class TuserController extends BaseController {
 	@GetMapping
 	@ResponseBody
 	public Response list() {
-		return new Response<List<TuserApiDTO>>()
-				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(tuserService.list(new TuserQuery().setNameLike("u")));
+		return Response.success(tuserService.list(new TuserQuery().setNameLike("u")));
 	}
 
 }

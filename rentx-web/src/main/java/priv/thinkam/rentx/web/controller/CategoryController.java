@@ -30,8 +30,6 @@ public class CategoryController extends BaseController {
 	@ResponseBody
 	@GetMapping
 	public Response list() {
-		return new Response<List<Category>>()
-				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(categoryService.list());
+		return Response.success(categoryService.list());
 	}
 }

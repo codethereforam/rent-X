@@ -46,9 +46,7 @@ public class CategoryController extends BaseController {
 	@GetMapping
 	@ResponseBody
 	public Response list() {
-		return new Response<List<CategoryApiDTO>>()
-				.setCode(Response.CodeEnum.SUCCESS)
-				.setData(categoryServiceApi.listCategoryApiDTO());
+		return Response.success(categoryServiceApi.listCategoryApiDTO());
 	}
 
 	/**

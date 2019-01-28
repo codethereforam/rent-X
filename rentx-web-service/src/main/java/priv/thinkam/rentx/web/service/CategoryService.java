@@ -71,7 +71,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	 * @date 1/27/19 1:33 PM
 	 */
 	public Response add(CategoryParam categoryParam) {
-		Result result = FluentValidator.checkAll(new Class<?>[]{CategoryValidatorGroup.Add.class})
+		Result result = FluentValidator.checkAll(CategoryValidatorGroup.Add.class)
 				.on(categoryParam, new HibernateSupportedValidator<CategoryParam>()
 						.setHiberanteValidator(hibernateValidator))
 				.configure(springApplicationContextRegistry)
@@ -103,7 +103,7 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 		if (originCategory == null) {
 			return Response.fail(categoryIdErrorMsg);
 		}
-		Result result = FluentValidator.checkAll(new Class<?>[]{CategoryValidatorGroup.Modify.class})
+		Result result = FluentValidator.checkAll(CategoryValidatorGroup.Modify.class)
 				.on(categoryParam, new HibernateSupportedValidator<CategoryParam>()
 						.setHiberanteValidator(hibernateValidator))
 				.configure(springApplicationContextRegistry)

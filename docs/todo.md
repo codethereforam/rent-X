@@ -26,11 +26,8 @@
 - devtool
 - Actuator
 - fluent-validation原理
-- JSR 303 - Bean Validation
-- Locale
 - spring boot
-    - 启动参数
-    - SpringApplicationContextRegistry
+    - ApplicationContextAware
 - 泛型（response）
 - java assist
 
@@ -47,5 +44,6 @@
 - elasticsearch
 - spring security
 - 角色权限设计
+- Java SPI
 
 ## experience

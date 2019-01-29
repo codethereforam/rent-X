@@ -193,21 +193,26 @@ jQuery(function ($) {
                 return;
             }
             // send post request
-            var category = {
-                id: inputCategoryId.val(),
+            var category = JSON.stringify({
                 name: inputName.val(),
                 description: inputDescription.val(),
                 parentId: inputParentId.val(),
                 level: inputLevel.val(),
                 status: updateForm.find('input[name="status"]:checked').val(),
-            };
+            });
             console.log(category);
-            $.post('/manage/category/update', category, function (data) {
-                if (data.success) {
-                    reset();
-                    showHintModal('修改成功', true);
-                } else {
-                    showHintModal(data.data + ', 更新失败', false);
+            $.ajax('/categories/' + inputCategoryId.val(), {
+                data: category,
+                contentType: 'application/json',
+                type: 'PATCH',
+                dataType: DATA_TYPE.JSON,
+                success: function (data) {
+                    if (data.code === RESPONSE_CODE.SUCCESS) {
+                        reset();
+                        showHintModal('修改成功', true);
+                    } else {
+                        showHintModal(data.data + ', 更新失败', false);
+                    }
                 }
             });
         });

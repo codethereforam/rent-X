@@ -3,6 +3,10 @@
 ## technology
 ### primary
 - 基础业务
+    - 类别
+        - 修改校验重复
+        - parentId level 降级校验
+        - 删除
 - 登录注册
 - XSS防御和敏感词过滤
 - 告警

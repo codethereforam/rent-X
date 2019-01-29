@@ -18,7 +18,6 @@
 - session
 - 统一trim
 - 解决maven重复依赖
-- bean mapping: DO转ApiDTO、ApiParam转DO
 - 优化测试用例
 ### knowledge
 - mbp CRUD原理
@@ -30,6 +29,13 @@
     - ApplicationContextAware
 - 泛型（response）
 - java assist
+- assertj & google truth
+- bean mapping（mapstruct, easy mapping, BeanCopier）
+- Annotation Processing
+- lombok原理
+- 字节码 反射 编译时生成代码
+- cglib和jdk proxy
+- compile-time and runtime code generator
 
 ## learnt
 - log

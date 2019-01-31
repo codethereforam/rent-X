@@ -28,14 +28,10 @@
 - spring boot
     - ApplicationContextAware
 - 泛型（response）
-- java assist
+- java assist & 
 - assertj & google truth
-- bean mapping（mapstruct, easy mapping, BeanCopier）
-- Annotation Processing
 - lombok原理
-- 字节码 反射 编译时生成代码
 - cglib和jdk proxy
-- compile-time and runtime code generator
 
 ## learnt
 - log

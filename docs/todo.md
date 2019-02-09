@@ -6,7 +6,8 @@
     - 类别
         - 修改校验重复
         - parentId level 降级校验
-        - 删除
+        - 优化删除
+        - 存到redis
 - 登录注册
 - XSS防御和敏感词过滤
 - 告警
@@ -16,6 +17,7 @@
 - 实时通信
 - 集群部署
 ### secondary
+- mybatis-plus逻辑删除
 - 统一异常处理
 - 事务配置
 - 角色权限: PasswordEncoder

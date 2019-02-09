@@ -7,16 +7,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.entity.Category;
+import priv.thinkam.rentx.web.dao.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.web.dao.mapper.CategoryMapper;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
 import priv.thinkam.rentx.web.service.validator.category.CategoryValidatorGroup;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 类别 service
@@ -31,6 +37,8 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	private javax.validation.Validator hibernateValidator;
 	@Resource
 	private Registry springApplicationContextRegistry;
+	@Resource
+	private CategoryMapper categoryMapper;
 
 	/**
 	 * whether category name exists
@@ -128,6 +136,55 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 		Category category = BeanUtil.map(categoryParam, Category.class);
 		this.updateById(category);
 		log.info("a category modified: {}", category);
+		return Response.SUCCESS;
+	}
+
+	public Response delete(Integer id) {
+		Category category = this.getOne(
+				new QueryWrapper<Category>().lambda()
+						.eq(Category::getId, id)
+						.eq(Category::getMark, EnableEnum.YES.getValue())
+		);
+		if (category == null) {
+			return Response.fail("不存在该类别");
+		}
+		Set<Integer> deleteIdSet = new HashSet<>();
+		deleteIdSet.add(id);
+		if (category.getLevel() == CategoryLevelEnum.TWO.getCode()) {
+			deleteIdSet.addAll(
+					this.list(new QueryWrapper<Category>().lambda()
+							.eq(Category::getParentId, id)
+							.eq(Category::getMark, EnableEnum.YES.getValue())
+					).stream()
+							.map(Category::getId)
+							.collect(Collectors.toSet())
+			);
+		} else if (category.getLevel() == CategoryLevelEnum.ONE.getCode()) {
+			List<Category> secondLevelCategoryList = this.list(new QueryWrapper<Category>().lambda()
+					.eq(Category::getParentId, id)
+					.eq(Category::getMark, EnableEnum.YES.getValue())
+			);
+			deleteIdSet.addAll(
+					secondLevelCategoryList.stream()
+							.map(Category::getId)
+							.collect(Collectors.toSet())
+			);
+			for (Category secondLevelCategory : secondLevelCategoryList) {
+				List<Category> thirdLevelCategoryList = this.list(new QueryWrapper<Category>().lambda()
+						.eq(Category::getParentId, secondLevelCategory.getId())
+						.eq(Category::getMark, EnableEnum.YES.getValue())
+				);
+				if(CollectionUtils.isNotEmpty(thirdLevelCategoryList)) {
+					deleteIdSet.addAll(
+							thirdLevelCategoryList.stream()
+									.map(Category::getId)
+									.collect(Collectors.toSet())
+					);
+				}
+			}
+		}
+		categoryMapper.batchDelete(deleteIdSet);
+		log.info("deleted categories' id: {}", deleteIdSet);
 		return Response.SUCCESS;
 	}
 }

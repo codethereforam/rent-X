@@ -262,6 +262,25 @@ jQuery(function ($) {
         });
     }
 
+    function initDeleteListener() {
+        $('#deleteBtn').click(() => {
+            console.log(`delete id=${inputCategoryId.val()}`);
+            $.ajax(`/categories/${inputCategoryId.val()}`,{
+                type: 'DELETE',
+                dataType: DATA_TYPE.JSON,
+                success: function (data) {
+                    // if data is the error page
+                    if (data.code === RESPONSE_CODE.SUCCESS) {
+                        reset();
+                        showHintModal('删除成功', true);
+                    } else {
+                        showHintModal(data.message + ', 删除失败', false);
+                    }
+                }
+            });
+        });
+    }
+
     function disableUpdateForm() {
         updateFormFieldset.attr("disabled", "disabled");
     }
@@ -310,6 +329,7 @@ jQuery(function ($) {
         initRefreshListener();
         initBindAddSelectParentEvent();
         initAddCategoryListener();
+        initDeleteListener();
     }
 
     $(document).ready(function () {

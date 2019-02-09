@@ -1,12 +1,15 @@
 package priv.thinkam.rentx.web.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
 import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
 import priv.thinkam.rentx.web.api.param.CategoryApiParam;
+import priv.thinkam.rentx.web.dao.entity.Category;
 import priv.thinkam.rentx.web.service.CategoryService;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
 
@@ -35,8 +38,9 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	 */
 	@Override
 	public List<CategoryApiDTO> listCategoryApiDTO() {
-		return categoryService.list().stream()
-				.map(c -> BeanUtil.map(c, CategoryApiDTO.class))
+		return categoryService.list(
+				new QueryWrapper<Category>().lambda().eq(Category::getMark, EnableEnum.YES.getValue())
+		).stream().map(c -> BeanUtil.map(c, CategoryApiDTO.class))
 				.collect(Collectors.toList());
 	}
 
@@ -68,6 +72,6 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 
 	@Override
 	public Response delete(Integer id) {
-		return Response.SUCCESS;
+		return categoryService.delete(id);
 	}
 }

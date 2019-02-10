@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.thinkam.rentx.web.dao.mapper.ItemMapper">
+
+    <select id="listItemDTO" parameterType="int" resultType="priv.thinkam.rentx.web.dao.dto.ItemDTO">
+        select s.name        stuffName,
+               i.apply_time  applyTime,
+               i.create_time createTime,
+               i.rent_day    rentDay,
+               i.end_time    endTime,
+               i.status
+        from item i
+                 inner join stuff s on i.stuff_id = s.id and s.mark = 1
+        where i.mark = 1
+          and i.user_id = #{userId}
+    </select>
+
+</mapper>

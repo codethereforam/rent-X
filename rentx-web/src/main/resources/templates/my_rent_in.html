@@ -34,28 +34,28 @@
                 <th><input type="checkbox" title="全选" id="selectAllCheckBox"/></th>
                 <th>编号</th>
                 <th>物品名称</th>
-                <th>申请日期</th>
+                <th>申请时间</th>
                 <th>租用日期</th>
                 <th>租用天数</th>
-                <th>归还日期</th>
+                <th>归还时间</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="vo, stat: ${personalItemVOList}">
                 <td class="text-center">
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
-                <td>1</td>
-                <td>u1</td>
-                <td>p1</td>
-                <td>male</td>
-                <td>18</td>
-                <td>18</td>
-                <td>18</td>
-                <td>
+                <td th:text="${stat.index + 1}"></td>
+                <td th:text="${vo.stuffName}"></td>
+                <td th:text="${vo.applyTime}"></td>
+                <td th:text="${vo.createTime}"></td>
+                <td th:text="${vo.rentDay}"></td>
+                <td th:text="${vo.endTime}"></td>
+                <td th:text="${vo.status.getName()}"></td>
+                <td th:if="${vo.status.getCode() == 0}">
                     <a href="#" class="btn btn-primary">取消申请</a>
                 </td>
             </tr>

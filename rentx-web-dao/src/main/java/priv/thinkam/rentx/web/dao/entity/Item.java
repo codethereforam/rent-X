@@ -1,5 +1,6 @@
 package priv.thinkam.rentx.web.dao.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import priv.thinkam.rentx.common.base.BaseEntity;
 import lombok.*;
@@ -30,7 +31,7 @@ public class Item extends BaseEntity {
     /**
      * 租用日期
      */
-    private LocalDateTime createTime;
+    private LocalDate createTime;
 
     /**
      * 租用天数
@@ -38,7 +39,7 @@ public class Item extends BaseEntity {
     private Integer rentDay;
 
     /**
-     * 归还日期
+     * 归还时间
      */
     private LocalDateTime endTime;
 

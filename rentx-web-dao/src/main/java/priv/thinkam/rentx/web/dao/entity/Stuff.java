@@ -28,6 +28,11 @@ public class Stuff extends BaseEntity {
     private String name;
 
     /**
+     * 物品描述
+     */
+    private String description;
+
+    /**
      * 押金(rmb)
      */
     private BigDecimal deposit;
@@ -38,7 +43,7 @@ public class Stuff extends BaseEntity {
     private BigDecimal rental;
 
     /**
-     * 物品状态（0:未租；1:申请租用；2:已租）
+     * 物品状态（0:未租；1:申请租用；2:已租;3:不出租）
      */
     private Integer status;
 

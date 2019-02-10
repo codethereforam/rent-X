@@ -15,7 +15,8 @@ $(document).ready(function () {
     var contentInMainContent = '';
     $(".nav-sidebar-body .nav li a").each(function () {
         var val = $(this).attr("href").substr(1);
-        var url = '/' + APP_NAME + val.replace(/_/g, '/');
+        var url = val.replace(/_/g, '/');
+        console.log(url);
         contentInMainContent += '<div id="' + val + '" class="tab-pane fade">\n' +
             '                <iframe class="main-iframe" src="' + url + '" width="100%" frameborder="0"' +
             ' scrolling="auto"></iframe>\n' +

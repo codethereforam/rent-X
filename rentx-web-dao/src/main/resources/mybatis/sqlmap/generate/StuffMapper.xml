@@ -12,6 +12,7 @@
     <result column="mark" property="mark" />
         <result column="category_id" property="categoryId" />
         <result column="name" property="name" />
+        <result column="description" property="description" />
         <result column="deposit" property="deposit" />
         <result column="rental" property="rental" />
         <result column="status" property="status" />
@@ -27,7 +28,7 @@
         update_user_id,
         update_time,
         mark,
-        category_id, name, deposit, rental, status, picture_id, user_id
+        category_id, name, description, deposit, rental, status, picture_id, user_id
     </sql>
 
 </mapper>

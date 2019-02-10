@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="priv.thinkam.rentx.web.dao.mapper.StuffMapper">
+
+    <select id="listStuffDTO" resultType="priv.thinkam.rentx.web.dao.dto.StuffDTO">
+        select c.name        categoryName,
+               s.name        stuffName,
+               u.username    ownerName,
+               s.deposit,
+               s.rental,
+               s.status,
+               i.create_time createTime,
+               i.rent_day    rentDay
+        from stuff s
+                 left join category c on s.category_id = c.id and c.mark = 1
+                 left join user u on s.user_id = u.id and u.mark = 1
+                 left join item i on s.id = i.stuff_id and i.mark = 1
+        where s.mark = 1
+          and s.status != 3;
+    </select>
+
+</mapper>

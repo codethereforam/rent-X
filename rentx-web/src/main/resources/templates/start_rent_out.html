@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>开始出租</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/start_rent_out.css}">
+</head>
+<body>
+<div class="page-header ">
+    <h2 class="col-sm-offset-4 text-primary"><em>添加物品</em></h2>
+</div>
+<div class="container">
+    <form method="post" action="#" class="form-horizontal">
+        <input type="hidden" id="inputCategoryId" name="categoryId"/>
+        <div class="form-group">
+            <label for="inputCategoryName" class="col-sm-2 control-label">类别名称</label>
+            <div class="col-sm-3">
+                <input id="inputCategoryName" name="categoryName" class="form-control" placeholder="not blank"
+                       autofocus required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">物品名称</label>
+            <div class="col-sm-3">
+                <input id="inputName" name="name" class="form-control" placeholder="not blank"
+                       required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDeposit" class="col-sm-2 control-label">押金</label>
+            <div class="col-sm-3">
+                <input id="inputDeposit" name="deposit" class="form-control" placeholder="not blank"
+                       required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRental" class="col-sm-2 control-label">租金(rmb/day)</label>
+            <div class="col-sm-3">
+                <input id="inputRental" name="rental" class="form-control" placeholder="not blank"
+                       required/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">状态</label>
+            <div class="radio col-sm-3">
+                <label class="radio-inline">
+                    <input type="radio" id="inputStatus1" name="status" value="0" checked>出租
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" id="inputStatus2" name="status" value="3">不出租
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputDescription" class="col-sm-2 control-label">物品描述</label>
+            <div class="col-sm-4">
+                <textarea id="inputDescription" name="description" class="form-control" cols="30" rows="10"
+                          required></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-success btn-lg btn-block">添加</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="reset" class="btn btn-danger btn-lg btn-block">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/start_rent_out.js}"></script>
+</body>
+</html>

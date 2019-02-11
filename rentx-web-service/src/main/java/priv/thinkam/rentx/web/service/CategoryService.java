@@ -17,6 +17,7 @@ import priv.thinkam.rentx.web.dao.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.web.dao.mapper.CategoryMapper;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
 import priv.thinkam.rentx.web.service.validator.category.CategoryValidatorGroup;
+import priv.thinkam.rentx.web.service.vo.CategoryVO;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
@@ -186,5 +187,14 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 		categoryMapper.batchDelete(deleteIdSet);
 		log.info("deleted categories' id: {}", deleteIdSet);
 		return Response.SUCCESS;
+	}
+
+	public List<CategoryVO> listCategoryVO() {
+		return this.list(
+				new QueryWrapper<Category>().lambda()
+						.eq(Category::getMark, EnableEnum.YES.getValue())
+						.eq(Category::getStatus, EnableEnum.YES.getValue())
+		).stream().map(c -> BeanUtil.map(c, CategoryVO.class))
+				.collect(Collectors.toList());
 	}
 }

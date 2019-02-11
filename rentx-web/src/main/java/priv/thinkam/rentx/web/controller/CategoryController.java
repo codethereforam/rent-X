@@ -30,6 +30,6 @@ public class CategoryController extends BaseController {
 	@ResponseBody
 	@GetMapping
 	public Response list() {
-		return Response.success(categoryService.list());
+		return Response.success(categoryService.listCategoryVO());
 	}
 }

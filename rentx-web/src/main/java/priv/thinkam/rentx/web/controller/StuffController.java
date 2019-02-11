@@ -3,10 +3,11 @@ package priv.thinkam.rentx.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import priv.thinkam.rentx.common.base.BaseController;
+import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.service.StuffService;
+import priv.thinkam.rentx.web.service.param.StuffParam;
 
 import javax.annotation.Resource;
 
@@ -65,5 +66,21 @@ public class StuffController extends BaseController {
 		final int userId = 1;
 		model.addAttribute("stuffOutVOList", stuffService.listStuffOutVO(userId));
 		return "my_rent_out";
+	}
+
+	/**
+	 * 开始出租提交
+	 *
+	 * @param stuffParam stuffParam
+	 * @return Response
+	 */
+	@ResponseBody
+	@PostMapping("/out")
+	public Response addRentOut(@RequestBody StuffParam stuffParam) {
+		// 获取当前用户ID
+		final int userId = 1;
+		stuffParam.setUserId(userId);
+		log.info("开始出租提交stuffParam: {}", stuffParam);
+		return Response.success("");
 	}
 }

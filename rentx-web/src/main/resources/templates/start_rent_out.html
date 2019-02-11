@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>开始出租</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/zTree_v3-3.5.33/css/zTreeStyle/zTreeStyle.css}">
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/start_rent_out.css}">
@@ -13,7 +14,7 @@
     <h2 class="col-sm-offset-4 text-primary"><em>添加物品</em></h2>
 </div>
 <div class="container">
-    <form method="post" action="#" class="form-horizontal">
+    <form id="addForm" class="form-horizontal">
         <input type="hidden" id="inputCategoryId" name="categoryId"/>
         <div class="form-group">
             <label for="inputCategoryName" class="col-sm-2 control-label">类别名称</label>
@@ -21,6 +22,7 @@
                 <input id="inputCategoryName" name="categoryName" class="form-control" placeholder="not blank"
                        autofocus required/>
             </div>
+            <button class="btn btn-primary" type="button" id="categorySelectBtn">选择类别</button>
         </div>
         <div class="form-group">
             <label for="inputName" class="col-sm-2 control-label">物品名称</label>
@@ -63,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="submit" class="btn btn-success btn-lg btn-block">添加</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" id="addBtn">添加</button>
             </div>
             <div class="col-sm-2">
                 <button type="reset" class="btn btn-danger btn-lg btn-block">重置</button>
@@ -71,8 +73,46 @@
         </div>
     </form>
 </div>
+<!--parent category select modal-->
+<div class="modal fade" id="categorySelectModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">选择类别</h4>
+            </div>
+            <div class="modal-body">
+                <ul id="categorySelectTreeBlock" class="ztree">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--hint modal-->
+<div class="modal fade" id="hintModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">信息</h4>
+            </div>
+            <div class="modal-body">
+                <h5><span id="hintContent"></span></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/zTree_v3-3.5.33/js/jquery.ztree.core.min.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/start_rent_out.js}"></script>
 </body>

@@ -1,18 +1,21 @@
-package priv.thinkam.rentx.web.dao.dto;
+package priv.thinkam.rentx.web.service.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
+ * 租用物品VO
+ *
  * @author thinkam
  * @date 2019/02/10
  */
 @Data
 @Accessors(chain = true)
-public class StuffDTO {
+public class StuffOutVO {
 	/**
 	 * 类别名称
 	 */
@@ -22,9 +25,9 @@ public class StuffDTO {
 	 */
 	private String stuffName;
 	/**
-	 * 所有者名称
+	 * 租用者名称
 	 */
-	private String ownerName;
+	private String renterName;
 	/**
 	 * 押金(rmb)
 	 */
@@ -37,17 +40,9 @@ public class StuffDTO {
 	/**
 	 * 物品状态（0:未租；1:申请租用；2:已租;3:不出租）
 	 */
-	private Integer status;
+	private StuffStatusEnum status;
 	/**
-	 * 租用日期
+	 * 应还日期
 	 */
-	private LocalDate createTime;
-	/**
-	 * 租用天数
-	 */
-	private Integer rentDay;
-	/**
-	 * 租用者
-	 */
-	private String renterName;
+	private LocalDate shouldReturnDate;
 }

@@ -19,4 +19,20 @@
           and s.status != 3;
     </select>
 
+    <select id="listOutStuffDTO" parameterType="int" resultType="priv.thinkam.rentx.web.dao.dto.StuffDTO">
+        select c.name        categoryName,
+               s.name        stuffName,
+               u.username    renterName,
+               s.deposit,
+               s.rental,
+               s.status,
+               i.create_time createTime,
+               i.rent_day    rentDay
+        from stuff s
+                 left join category c on s.category_id = c.id and c.mark = 1
+                 left join item i on s.id = i.stuff_id and i.mark = 1
+                 left join user u on i.user_id = u.id and u.mark = 1
+        where s.mark = 1
+          and s.user_id = #{userId}
+    </select>
 </mapper>

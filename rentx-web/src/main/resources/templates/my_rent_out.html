@@ -35,29 +35,29 @@
                 <th>编号</th>
                 <th>类别名称</th>
                 <th>物品名称</th>
+                <th>租用者</th>
                 <th>押金</th>
                 <th>租金(rmb/day)</th>
                 <th>状态</th>
                 <th>应还日期</th>
-                <th>租用者</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="vo, stat: ${stuffOutVOList}">
                 <td class="text-center">
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
-                <td>1</td>
-                <td>u1</td>
-                <td>p1</td>
-                <td>male</td>
-                <td>18</td>
-                <td>18</td>
-                <td>18</td>
-                <td>18</td>
-                <td>
+                <td th:text="${stat.index + 1}"></td>
+                <td th:text="${vo.categoryName}"></td>
+                <td th:text="${vo.stuffName}"></td>
+                <td th:text="${vo.renterName}"></td>
+                <td th:text="${vo.deposit}"></td>
+                <td th:text="${vo.rental}"></td>
+                <td th:text="${vo.status.getName()}"></td>
+                <td th:text="${vo.shouldReturnDate}"></td>
+                <td th:if="${vo.status.getCode() == 0}">
                     <a href="#" class="btn btn-primary">取消出租</a>
                 </td>
             </tr>

@@ -9,6 +9,7 @@ import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
 import priv.thinkam.rentx.web.dao.mapper.StuffMapper;
 import priv.thinkam.rentx.web.service.vo.StuffInVO;
+import priv.thinkam.rentx.web.service.vo.StuffOutVO;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,4 +41,17 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 		).collect(Collectors.toList());
 	}
 
+	public List<StuffOutVO> listStuffOutVO(Integer userId) {
+		List<StuffDTO> stuffDTOList = stuffMapper.listOutStuffDTO(userId);
+		return stuffDTOList.stream().map(
+				s -> new StuffOutVO()
+						.setCategoryName(s.getCategoryName())
+						.setStuffName(s.getStuffName())
+						.setRenterName(s.getRenterName())
+						.setDeposit(s.getDeposit())
+						.setRental(s.getRental())
+						.setStatus(StuffStatusEnum.getByValue(s.getStatus()))
+						.setShouldReturnDate(s.getCreateTime() == null ? null : s.getCreateTime().plusDays(s.getRentDay()))
+		).collect(Collectors.toList());
+	}
 }

@@ -16,4 +16,5 @@ public interface StuffMapper extends BaseMapper<Stuff> {
 
 	List<StuffDTO> listStuffDTO();
 
+	List<StuffDTO> listOutStuffDTO(Integer userId);
 }

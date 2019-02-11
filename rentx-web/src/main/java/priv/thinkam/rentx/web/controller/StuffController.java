@@ -53,10 +53,17 @@ public class StuffController extends BaseController {
 	/**
 	 * 我的出租
 	 *
+	 * <pre>
+	 *     "未租"的显示取消出租
+	 * </pre>
+	 *
 	 * @return page
 	 */
 	@GetMapping("/out")
-	public String myRentOut() {
+	public String myRentOut(Model model) {
+		// 获取当前用户ID
+		final int userId = 1;
+		model.addAttribute("stuffOutVOList", stuffService.listStuffOutVO(userId));
 		return "my_rent_out";
 	}
 }

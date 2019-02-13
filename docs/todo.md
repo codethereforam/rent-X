@@ -14,8 +14,7 @@
     - 用户租赁系统
         - 开始租用 - 租用
         - 我的租用 - 取消申请
-        - 开始出租
-        - 我的出租 - 取消出租
+    -     我的出租 - 取消出租、编辑、租用历史
 - 登录注册
 - XSS防御和敏感词过滤
 - 告警
@@ -46,6 +45,9 @@
 - assertj & google truth
 - lombok原理
 - cglib和jdk proxy
+- spring security
+    - frameOptions
+    - csrf
 
 ## learnt
 - log

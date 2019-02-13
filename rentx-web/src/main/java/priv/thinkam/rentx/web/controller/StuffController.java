@@ -81,6 +81,6 @@ public class StuffController extends BaseController {
 		final int userId = 1;
 		stuffParam.setUserId(userId);
 		log.info("开始出租提交stuffParam: {}", stuffParam);
-		return Response.success("");
+		return stuffService.add(stuffParam);
 	}
 }

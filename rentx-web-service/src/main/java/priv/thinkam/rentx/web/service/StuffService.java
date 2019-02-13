@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.dto.StuffDTO;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
 import priv.thinkam.rentx.web.dao.mapper.StuffMapper;
+import priv.thinkam.rentx.web.service.param.StuffParam;
 import priv.thinkam.rentx.web.service.vo.StuffInVO;
 import priv.thinkam.rentx.web.service.vo.StuffOutVO;
 
@@ -53,5 +56,18 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 						.setStatus(StuffStatusEnum.getByValue(s.getStatus()))
 						.setShouldReturnDate(s.getCreateTime() == null ? null : s.getCreateTime().plusDays(s.getRentDay()))
 		).collect(Collectors.toList());
+	}
+
+	public Response add(StuffParam stuffParam) {
+		Stuff stuff = BeanUtil.map(stuffParam, Stuff.class);
+		stuff.setAddUserId(stuff.getUserId());
+		stuff.setUpdateUserId(stuff.getUserId());
+		boolean success = this.save(stuff);
+		log.info("a stuff saved: {}", stuff);
+		if(success) {
+			return Response.SUCCESS;
+		} else {
+			return Response.FAIL;
+		}
 	}
 }

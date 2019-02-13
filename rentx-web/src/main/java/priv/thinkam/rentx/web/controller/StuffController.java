@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.web.service.ItemService;
 import priv.thinkam.rentx.web.service.StuffService;
 import priv.thinkam.rentx.web.service.param.StuffParam;
 
@@ -23,6 +24,8 @@ import javax.annotation.Resource;
 public class StuffController extends BaseController {
 	@Resource
 	private StuffService stuffService;
+	@Resource
+	private ItemService itemService;
 
 	/**
 	 * 开始租用
@@ -84,11 +87,32 @@ public class StuffController extends BaseController {
 		return stuffService.add(stuffParam);
 	}
 
+	/**
+	 * 取消出租
+	 *
+	 * @param id stuff id
+	 * @return Response
+	 */
 	@ResponseBody
 	@PostMapping("/{id}/cancel-rent")
 	public Response cancelRent(@PathVariable Integer id) {
 		// 获取当前用户ID
 		final int userId = 1;
 		return stuffService.cancelRent(id, userId);
+	}
+
+	/**
+	 * 租用
+	 *
+	 * @param id stuff id
+	 * @param rentDay rent day
+	 * @return Response
+	 */
+	@ResponseBody
+	@PostMapping("/{id}/rent")
+	public Response rent(@PathVariable Integer id, Integer rentDay) {
+		// 获取当前用户ID
+		final int userId = 1;
+		return itemService.rent(id, userId, rentDay);
 	}
 }

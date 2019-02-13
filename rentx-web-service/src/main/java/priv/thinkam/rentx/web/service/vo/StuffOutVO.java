@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Data
 @Accessors(chain = true)
 public class StuffOutVO {
+	private Integer id;
 	/**
 	 * 类别名称
 	 */

@@ -1,10 +1,12 @@
 package priv.thinkam.rentx.web.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.dto.StuffDTO;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
@@ -48,6 +50,7 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 		List<StuffDTO> stuffDTOList = stuffMapper.listOutStuffDTO(userId);
 		return stuffDTOList.stream().map(
 				s -> new StuffOutVO()
+						.setId(s.getStuffId())
 						.setCategoryName(s.getCategoryName())
 						.setStuffName(s.getStuffName())
 						.setRenterName(s.getRenterName())
@@ -65,6 +68,27 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 		boolean success = this.save(stuff);
 		log.info("a stuff saved: {}", stuff);
 		if(success) {
+			return Response.SUCCESS;
+		} else {
+			return Response.FAIL;
+		}
+	}
+
+	public Response cancelRent(Integer stuffId, int userId) {
+		if (this.count(
+				new QueryWrapper<Stuff>().lambda()
+						.eq(Stuff::getId, stuffId)
+						.eq(Stuff::getMark, EnableEnum.YES.getValue())
+		) <= 0) {
+			return Response.fail("物品不存在");
+		}
+		Stuff stuff = new Stuff();
+		stuff.setId(stuffId);
+		stuff.setStatus(StuffStatusEnum.NOT.getCode());
+		stuff.setUpdateUserId(userId);
+		boolean success = this.updateById(stuff);
+		log.info("a stuff updated: {}", stuff);
+		if (success) {
 			return Response.SUCCESS;
 		} else {
 			return Response.FAIL;

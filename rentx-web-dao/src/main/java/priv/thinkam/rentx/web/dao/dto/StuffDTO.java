@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @Accessors(chain = true)
 public class StuffDTO {
+	private Integer stuffId;
 	/**
 	 * 类别名称
 	 */

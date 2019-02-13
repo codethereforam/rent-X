@@ -83,4 +83,12 @@ public class StuffController extends BaseController {
 		log.info("开始出租提交stuffParam: {}", stuffParam);
 		return stuffService.add(stuffParam);
 	}
+
+	@ResponseBody
+	@PostMapping("/{id}/cancel-rent")
+	public Response cancelRent(@PathVariable Integer id) {
+		// 获取当前用户ID
+		final int userId = 1;
+		return stuffService.cancelRent(id, userId);
+	}
 }

@@ -20,7 +20,8 @@
     </select>
 
     <select id="listOutStuffDTO" parameterType="int" resultType="priv.thinkam.rentx.web.dao.dto.StuffDTO">
-        select c.name        categoryName,
+        select s.id          stuffId,
+               c.name        categoryName,
                s.name        stuffName,
                u.username    renterName,
                s.deposit,

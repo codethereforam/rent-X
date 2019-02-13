@@ -163,4 +163,35 @@ $(document).ready(function () {
             $(this).find("td").eq(index).toggle();
         });
     });
+
+    var hintModal = $('#hintModal');
+    var hintContent = $('#hintContent');
+    var hintModalHeader = hintModal.find('.modal-header');
+    var hintModalBody = hintModal.find('.modal-body');
+    // 显示提示框
+    function showHintModal(message, success) {
+        if (success) {
+            hintModalHeader.attr('class', 'modal-header bg-success');
+            hintModalBody.attr('class', 'modal-body text-success');
+        } else {
+            hintModalHeader.attr('class', 'modal-header bg-warning');
+            hintModalBody.attr('class', 'modal-body text-warning');
+        }
+        hintContent.text(message);
+        hintModal.modal();
+    }
+
+    $('.cancelRentBtn').click(function () {
+        $.ajax('/stuffs/' + $(this).parents('tr').find('input[name="inputStuffId"]').val() +"/cancel-rent", {
+            type: 'POST',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    window.location.reload(true);
+                } else {
+                    showHintModal(data.message + ', 更新失败', false);
+                }
+            }
+        });
+    });
 });

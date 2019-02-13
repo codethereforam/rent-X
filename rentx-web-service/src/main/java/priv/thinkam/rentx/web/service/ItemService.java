@@ -1,12 +1,16 @@
 package priv.thinkam.rentx.web.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.web.dao.entity.Item;
+import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.web.dao.enums.ItemStatusEnum;
+import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
 import priv.thinkam.rentx.web.dao.mapper.ItemMapper;
 import priv.thinkam.rentx.web.service.vo.PersonalItemVO;
 
@@ -26,6 +30,8 @@ import java.util.stream.Collectors;
 public class ItemService extends ServiceImpl<ItemMapper, Item> implements IService<Item> {
 	@Resource
 	private ItemMapper itemMapper;
+	@Resource
+	private StuffService stuffService;
 
 	public List<PersonalItemVO> listPersonItemVO(Integer userId) {
 		return itemMapper.listItemDTO(userId).stream()
@@ -41,6 +47,24 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 	}
 
 	public Response rent(Integer stuffId, int userId, Integer rentDay) {
+		// update stuff
+		if (stuffService.count(
+				new QueryWrapper<Stuff>().lambda()
+						.eq(Stuff::getId, stuffId)
+						.eq(Stuff::getMark, EnableEnum.YES.getValue())
+		) <= 0) {
+			return Response.fail("物品不存在");
+		}
+		Stuff stuff = new Stuff();
+		stuff.setId(stuffId);
+		stuff.setStatus(StuffStatusEnum.APPLY.getCode());
+		stuff.setUpdateUserId(userId);
+		boolean updateStuffSuccess = stuffService.updateById(stuff);
+		log.info("a stuff updated: {}", stuff);
+		if (!updateStuffSuccess) {
+			return Response.fail("更新物品失败");
+		}
+		// insert item
 		Item item = new Item();
 		item.setUserId(userId);
 		item.setStuffId(stuffId);
@@ -50,6 +74,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		item.setAddUserId(userId);
 		item.setUpdateUserId(userId);
 		boolean success = this.save(item);
+		log.info("an item saved: {}", item);
 		if(success) {
 			return Response.SUCCESS;
 		} else {

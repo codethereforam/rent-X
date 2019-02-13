@@ -17,6 +17,10 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 public class StuffInVO {
 	/**
+	 * stuff id
+	 */
+	private Integer id;
+	/**
 	 * 类别名称
 	 */
 	private String categoryName;

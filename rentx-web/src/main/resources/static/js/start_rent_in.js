@@ -163,4 +163,45 @@ $(document).ready(function () {
             $(this).find("td").eq(index).toggle();
         });
     });
+
+    // --------------------------
+
+    const hintModal = $('#hintModal');
+    const hintContent = $('#hintContent');
+    const hintModalHeader = hintModal.find('.modal-header');
+    const hintModalBody = hintModal.find('.modal-body');
+    // 显示提示框
+    function showHintModal(message, success) {
+        if (success) {
+            hintModalHeader.attr('class', 'modal-header bg-success');
+            hintModalBody.attr('class', 'modal-body text-success');
+        } else {
+            hintModalHeader.attr('class', 'modal-header bg-warning');
+            hintModalBody.attr('class', 'modal-body text-warning');
+        }
+        hintContent.text(message);
+        hintModal.modal();
+    }
+
+    let stuffId = 0;
+    $('.rentBtn').click(function () {
+        stuffId = $(this).parents('tr').find('input[name="inputStuffId"]').val();
+    });
+
+    $('#rentSubmitBtn').click(function () {
+        $.ajax(`/stuffs/${stuffId}/rent`, {
+            data:{
+              rentDay: $('#inputRentDay').val()
+            },
+            type: 'POST',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    window.location.reload(true);
+                } else {
+                    showHintModal(data.message + ', 申请租用失败', false);
+                }
+            }
+        });
+    });
 });

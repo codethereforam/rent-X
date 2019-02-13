@@ -112,7 +112,7 @@ public class StuffController extends BaseController {
 	@PostMapping("/{id}/rent")
 	public Response rent(@PathVariable Integer id, Integer rentDay) {
 		// 获取当前用户ID
-		final int userId = 1;
+		final int userId = 3;
 		return itemService.rent(id, userId, rentDay);
 	}
 }

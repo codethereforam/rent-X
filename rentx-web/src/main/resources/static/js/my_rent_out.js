@@ -189,7 +189,7 @@ $(document).ready(function () {
                 if (data.code === RESPONSE_CODE.SUCCESS) {
                     window.location.reload(true);
                 } else {
-                    showHintModal(data.message + ', 更新失败', false);
+                    showHintModal(data.message + ', 取消出租失败', false);
                 }
             }
         });

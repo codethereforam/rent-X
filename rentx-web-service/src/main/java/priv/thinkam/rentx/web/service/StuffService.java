@@ -36,6 +36,7 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 		List<StuffDTO> stuffDTOList = stuffMapper.listStuffDTO();
 		return stuffDTOList.stream().map(
 				s -> new StuffInVO()
+						.setId(s.getStuffId())
 						.setCategoryName(s.getCategoryName())
 						.setStuffName(s.getStuffName())
 						.setOwnerName(s.getOwnerName())

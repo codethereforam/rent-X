@@ -3,7 +3,8 @@
 <mapper namespace="priv.thinkam.rentx.web.dao.mapper.StuffMapper">
 
     <select id="listStuffDTO" resultType="priv.thinkam.rentx.web.dao.dto.StuffDTO">
-        select c.name        categoryName,
+        select s.id          stuffId,
+               c.name        categoryName,
                s.name        stuffName,
                u.username    ownerName,
                s.deposit,

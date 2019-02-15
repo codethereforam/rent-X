@@ -36,7 +36,9 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 	public List<PersonalItemVO> listPersonItemVO(Integer userId) {
 		return itemMapper.listItemDTO(userId).stream()
 				.map(
-						i -> new PersonalItemVO().setStuffName(i.getStuffName())
+						i -> new PersonalItemVO()
+								.setItemId(i.getItemId())
+								.setStuffName(i.getStuffName())
 								.setApplyTime(i.getApplyTime())
 								.setCreateTime(i.getCreateTime())
 								.setRentDay(i.getRentDay())
@@ -93,8 +95,8 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		}
 		Item updateItem = new Item();
 		updateItem.setId(itemId);
-		updateItem.setStatus(ItemStatusEnum.DISAPPROVED.getCode());
 		updateItem.setUpdateUserId(userId);
+		updateItem.setMark(false);
 		boolean updateItemSuccess = this.updateById(updateItem);
 		if(!updateItemSuccess) {
 			return Response.fail("更新租用项失败");

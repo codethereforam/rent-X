@@ -15,6 +15,10 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class PersonalItemVO {
 	/**
+	 * 租用项ID
+	 */
+	private Integer itemId;
+	/**
 	 * 物品名称
 	 */
 	private String stuffName;

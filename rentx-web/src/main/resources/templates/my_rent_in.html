@@ -44,6 +44,7 @@
             </thead>
             <tbody>
             <tr th:each="vo, stat: ${personalItemVOList}">
+                <input name="inputItemId" type="hidden" th:value="${vo.itemId}"/>
                 <td class="text-center">
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
@@ -56,7 +57,7 @@
                 <td th:text="${vo.endTime}"></td>
                 <td th:text="${vo.status.getName()}"></td>
                 <td th:if="${vo.status.getCode() == 0}">
-                    <a href="#" class="btn btn-primary">取消申请</a>
+                    <a href="javascript:void(0)" class="btn btn-primary cancelApplyBtn">取消申请</a>
                 </td>
             </tr>
             </tbody>
@@ -74,6 +75,25 @@
             <li class="next"><a href="#"><span>&raquo;</span></a></li>
         </ul>
     </nav>
+</div>
+<!--hint modal-->
+<div class="modal fade" id="hintModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">信息</h4>
+            </div>
+            <div class="modal-body">
+                <h5><span id="hintContent"></span></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>

@@ -3,7 +3,8 @@
 <mapper namespace="priv.thinkam.rentx.web.dao.mapper.ItemMapper">
 
     <select id="listItemDTO" parameterType="int" resultType="priv.thinkam.rentx.web.dao.dto.ItemDTO">
-        select s.name        stuffName,
+        select i.id          itemId,
+               s.name        stuffName,
                i.apply_time  applyTime,
                i.create_time createTime,
                i.rent_day    rentDay,

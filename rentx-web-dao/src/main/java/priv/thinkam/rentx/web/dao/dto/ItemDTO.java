@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class ItemDTO {
 	/**
+	 * 租用项ID
+	 */
+	private Integer itemId;
+	/**
 	 * 物品名称
 	 */
 	private String stuffName;

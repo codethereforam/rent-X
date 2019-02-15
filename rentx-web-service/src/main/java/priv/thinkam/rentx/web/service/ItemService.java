@@ -81,4 +81,34 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 			return Response.FAIL;
 		}
 	}
+
+	public Response cancelApply(Integer itemId, int userId) {
+		Item item = this.getOne(
+				new QueryWrapper<Item>().lambda()
+						.eq(Item::getId, itemId)
+						.eq(Item::getMark, EnableEnum.YES.getValue())
+		);
+		if(item == null) {
+			return Response.fail("租用项不存在");
+		}
+		Item updateItem = new Item();
+		updateItem.setId(itemId);
+		updateItem.setStatus(ItemStatusEnum.DISAPPROVED.getCode());
+		updateItem.setUpdateUserId(userId);
+		boolean updateItemSuccess = this.updateById(updateItem);
+		if(!updateItemSuccess) {
+			return Response.fail("更新租用项失败");
+		}
+		log.info("an item updated: {}", updateItem);
+		Stuff updateStuff = new Stuff();
+		updateStuff.setId(item.getStuffId());
+		updateStuff.setStatus(StuffStatusEnum.HAVE_NOT.getCode());
+		updateStuff.setUpdateUserId(userId);
+		boolean updateStuffSuccess = stuffService.updateById(updateStuff);
+		if(!updateStuffSuccess) {
+			return Response.fail("更新物品失败");
+		}
+		log.info("a stuff updated: {}", updateStuff);
+		return Response.SUCCESS;
+	}
 }

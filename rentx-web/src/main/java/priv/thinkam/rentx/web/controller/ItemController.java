@@ -1,12 +1,11 @@
 package priv.thinkam.rentx.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import priv.thinkam.rentx.common.base.BaseController;
+import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.service.ItemService;
 
 import javax.annotation.Resource;
@@ -39,5 +38,19 @@ public class ItemController extends BaseController {
 		int userId = 3;
 		model.addAttribute("personalItemVOList", itemService.listPersonItemVO(userId));
 		return "my_rent_in";
+	}
+
+	/**
+	 * 取消申请
+	 *
+	 * @param id item id
+	 * @return Response
+	 */
+	@ResponseBody
+	@PostMapping("/{id}/cancel-apply")
+	public Response cancelApply(@PathVariable Integer id) {
+		// 获取当前用户ID
+		final int userId = 3;
+		return itemService.cancelApply(id, userId);
 	}
 }

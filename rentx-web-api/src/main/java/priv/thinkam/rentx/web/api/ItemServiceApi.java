@@ -1,5 +1,6 @@
 package priv.thinkam.rentx.web.api;
 
+import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.api.dto.ItemApiDTO;
 
 import java.util.List;
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface ItemServiceApi {
 	List<ItemApiDTO> listItemApiDTO();
+
+	Response patchStatus(Integer itemId, Integer status, int userId);
 }

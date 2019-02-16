@@ -7,10 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
-import priv.thinkam.rentx.web.dao.entity.Item;
-import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 import priv.thinkam.rentx.common.enums.StuffStatusEnum;
+import priv.thinkam.rentx.web.dao.entity.Item;
+import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.web.dao.mapper.ItemMapper;
 import priv.thinkam.rentx.web.service.vo.PersonalItemVO;
 
@@ -108,6 +108,58 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		updateStuff.setUpdateUserId(userId);
 		boolean updateStuffSuccess = stuffService.updateById(updateStuff);
 		if(!updateStuffSuccess) {
+			return Response.fail("更新物品失败");
+		}
+		log.info("a stuff updated: {}", updateStuff);
+		return Response.SUCCESS;
+	}
+
+	public Response patchStatus(Integer itemId, Integer status, int userId) {
+		if (status == ItemStatusEnum.APPLYING.getCode()) {
+			return Response.fail("更新租用项状态，状态错误");
+		}
+		Item item = this.getOne(
+				new QueryWrapper<Item>().lambda()
+						.eq(Item::getId, itemId)
+						.eq(Item::getMark, EnableEnum.YES.getValue())
+		);
+		if (item == null) {
+			return Response.fail("租用项不存在");
+		}
+		LocalDateTime now = LocalDateTime.now();
+		Item updateItem = new Item();
+		updateItem.setId(itemId);
+		updateItem.setUpdateUserId(userId);
+		updateItem.setStatus(status);
+		switch (status) {
+			case 2:
+				updateItem.setCreateTime(now.toLocalDate());
+				break;
+			case 3:
+				updateItem.setEndTime(now);
+				break;
+			default:
+		}
+		boolean updateItemSuccess = this.updateById(updateItem);
+		if (!updateItemSuccess) {
+			return Response.fail("更新租用项失败");
+		}
+		log.info("an item updated: {}", updateItem);
+		Stuff updateStuff = new Stuff();
+		updateStuff.setId(item.getStuffId());
+		switch (status) {
+			case 2:
+				updateStuff.setStatus(StuffStatusEnum.ALREADY.getCode());
+				break;
+			case 1:
+			case 3:
+				updateStuff.setStatus(StuffStatusEnum.HAVE_NOT.getCode());
+				break;
+			default:
+		}
+		updateStuff.setUpdateUserId(userId);
+		boolean updateStuffSuccess = stuffService.updateById(updateStuff);
+		if (!updateStuffSuccess) {
 			return Response.fail("更新物品失败");
 		}
 		log.info("a stuff updated: {}", updateStuff);

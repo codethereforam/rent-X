@@ -2,10 +2,12 @@ package priv.thinkam.rentx.web.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import lombok.extern.slf4j.Slf4j;
+import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 import priv.thinkam.rentx.web.api.ItemServiceApi;
 import priv.thinkam.rentx.web.api.dto.ItemApiDTO;
 import priv.thinkam.rentx.web.dao.mapper.ItemMapper;
+import priv.thinkam.rentx.web.service.ItemService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 public class ItemServiceImpl implements ItemServiceApi {
 	@Resource
 	private ItemMapper itemMapper;
+	@Resource
+	private ItemService itemService;
 
 	@Override
 	public List<ItemApiDTO> listItemApiDTO() {
@@ -39,5 +43,10 @@ public class ItemServiceImpl implements ItemServiceApi {
 								.setRenterName(i.getRenterName())
 				)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public Response patchStatus(Integer itemId, Integer status, int userId) {
+		return itemService.patchStatus(itemId, status, userId);
 	}
 }

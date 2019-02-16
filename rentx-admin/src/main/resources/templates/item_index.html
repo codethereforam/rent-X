@@ -62,11 +62,11 @@
                 <td th:text="${dto.renterName}"></td>
                 <td th:switch="${dto.status.getCode()}">
                     <div th:case="0">
-                        <a href="javascript:void(0)" class="btn btn-primary">批准</a>
-                        <a href="javascript:void(0)" class="btn btn-primary">否定</a>
+                        <a href="javascript:void(0)" class="btn btn-primary approveBtn">批准</a>
+                        <a href="javascript:void(0)" class="btn btn-primary disApproveBtn">否定</a>
                     </div>
                     <div th:case="2">
-                        <a href="javascript:void(0)" class="btn btn-primary">归还</a>
+                        <a href="javascript:void(0)" class="btn btn-primary returnBtn">归还</a>
                     </div>
                 </td>
             </tr>
@@ -85,6 +85,25 @@
             <li class="next"><a href="#"><span>&raquo;</span></a></li>
         </ul>
     </nav>
+</div>
+<!--hint modal-->
+<div class="modal fade" id="hintModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h4 class="modal-title">信息</h4>
+            </div>
+            <div class="modal-body">
+                <h5><span id="hintContent"></span></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>

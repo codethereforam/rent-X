@@ -165,4 +165,46 @@ $(document).ready(function () {
     });
 
     // ----------------------------------------------------
+
+    const hintModal = $('#hintModal');
+    const hintContent = $('#hintContent');
+    const hintModalHeader = hintModal.find('.modal-header');
+    const hintModalBody = hintModal.find('.modal-body');
+    // 显示提示框
+    function showHintModal(message, success) {
+        if (success) {
+            hintModalHeader.attr('class', 'modal-header bg-success');
+            hintModalBody.attr('class', 'modal-body text-success');
+        } else {
+            hintModalHeader.attr('class', 'modal-header bg-warning');
+            hintModalBody.attr('class', 'modal-body text-warning');
+        }
+        hintContent.text(message);
+        hintModal.modal();
+    }
+
+    $('.approveBtn, .disApproveBtn, .returnBtn').click(function () {
+        let itemId = $(this).parents('tr').find('input[name="inputItemId"]').val();
+        let status = 0;
+        if($(this).hasClass('approveBtn')) {
+            status = 2;
+        }
+        if($(this).hasClass('disApproveBtn')) {
+            status = 1;
+        }
+        if($(this).hasClass('returnBtn')) {
+            status = 3;
+        }
+        $.ajax(`/items/${itemId}/status/${status}`, {
+            type: 'PATCH',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    window.location.reload(true);
+                } else {
+                    showHintModal(data.message + ', 更新租用项状态失败', false);
+                }
+            }
+        });
+    });
 });

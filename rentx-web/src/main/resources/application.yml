@@ -14,7 +14,7 @@ spring:
       cluster-nodes: localhost:9300
   security:
     ignore:
-      paths: /plugins/**, /css/**, /js/**, /favicon.ico
+      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**, /register, /forget
 
 server:
   port: 9999

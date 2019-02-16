@@ -1,0 +1,97 @@
+.paper-content{
+	top:45%;
+    margin-top:-280px;
+    height:520px;
+}
+.form-place{
+	height:462px;
+    width:450px;
+}
+
+
+.form-place .cpassword-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: -325px 0px;
+	width:325px;
+	height:55px;
+	float: left;
+	
+}
+.form-place .sex-choice{
+	height:55px;
+	width:46px;
+	background-image: url(../../img/user/sex.png);
+	background-repeat: no-repeat;
+	float:left;
+}
+.form-place .sex-div{
+	display:block;
+    width:80px;
+    height:44px;
+    margin-top:4px;
+    float:left;
+    
+}
+.form-place .sex-logo{
+	height:32px;
+    width:32px ;
+    margin-top:6px;
+    margin-left:4px;
+    float:left;
+    
+}
+.form-place .sex-logo[index="1"]{
+    background-image: url("../../img/user/sex-logo.png");
+    background-position: 0px 0px;
+}
+.form-place .sex-logo[index="2"]{
+    background-image: url("../../img/user/sex-logo.png");
+    background-position: -32px 0px;
+}
+.form-place .sex-logo[index="3"]{
+    background-image: url("../../img/user/sex-logo.png");
+    background-position: -64px 0px;
+}
+
+.form-place input[type=radio]{
+    margin-left: 15px;
+    vertical-align:8px;
+    visibility: hidden;
+    display: inline-block;
+    float: left;
+}
+.form-place label{
+	height:17px;
+    width:17px;
+    margin-left:12px;
+    margin-top: -2px;
+    float: left;
+    cursor: pointer;
+    background-image: url("../../img/user/optioninput.png");
+    background-repeat:no-repeat;
+    background-position: -17px 0px;
+}
+
+.form-place .email-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: -650px 0px;
+	width:325px;
+	height:55px;
+	float: left;
+}
+#email{
+    width:203px;
+}
+#codebutton{
+    height:43px;
+    width:60px;
+    margin-top:5px;
+    margin-left:0px;
+}
+#submitbutton{
+    height:44px;
+    width:115px;
+    margin-top:4px;
+    margin-left:20px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}

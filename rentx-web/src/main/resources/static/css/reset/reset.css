@@ -1,0 +1,53 @@
+.form-place .email-div {
+    background-image: url(../../img/user/input-all.png);
+    background-position: -650px 0px;
+    width: 325px;
+    height: 55px;
+    float: left;
+}
+
+.form-place .cpassword-div{
+    background-image: url(../../img/user/input-all.png);
+    background-position: -325px 0px;
+    width:325px;
+    height:55px;
+    float: left;
+
+}
+
+.paper-content {
+    top: 40%;
+    margin-top: -190px;
+    height: 450px;
+}
+
+.form-place {
+    height: 322px;
+}
+
+#emailinput {
+    width: 203px;
+}
+
+#emailSendButton {
+    height: 42px;
+    width: 60px;
+    margin-top: 5px;
+    margin-left: 0px;
+}
+
+#nextStepButton #resetButton {
+    height: 44px;
+    width: 195px;
+    margin-top: 4px;
+    margin-left: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+#resetbutton {
+    height: 44px;
+    width: 100px;
+    margin-top: 4px;
+    margin-left: 16px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}

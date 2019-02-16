@@ -14,9 +14,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AuthController {
 
+	/**
+	 * 跳转到”登录“页面
+	 *
+	 * @return page
+	 */
 	@GetMapping("/login")
 	public String login(){
 		return "login";
 	}
 
+	/**
+	 * 跳转到”忘记密码“页面
+	 *
+	 * @return page
+	 */
+	@GetMapping("/forget")
+	public String forgetPassword() {
+		return "reset";
+	}
 }

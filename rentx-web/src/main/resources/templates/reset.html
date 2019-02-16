@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>忘记密码</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/style.css}">
+    <link rel="stylesheet" th:href="@{/css/reset/reset.css}">
+</head>
+<body>
+<!--[if lte IE8]>
+<p>浏览器版本太低，请
+    <a target="_blank" href="http://www.browsehappy.com">升级</a>
+    为最新的ie浏览器！
+</p>
+<![endif]-->
+<div class="ct-container col-md-12">
+    <header class="share-header col-md-12"></header>
+    <div class="register-login-content col-md-12">
+        <div class="paper-content">
+            <header class="paper-header">forget password</header>
+            <form>
+                <!--forget password -->
+                <ul class="form-place col-md-12" id="formplace">
+                    <li style="margin-top:25px;">
+                        <h2>第一步：</h2>
+                    </li>
+                    <li style="margin-top:0;">
+                        <div class="user-div">
+                            <input id="accountName" type="text" placeholder="用户名/邮箱">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="code-div">
+                            <input name="code" type="text" id="emailCaptcha" placeholder="邮箱验证码">
+                        </div>
+                        <button type="button" class="button button-caution button-box button-raised button-giant"
+                                id="emailSendButton">
+                            <i class="fa">发送</i>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="button button-caution button-box button-raised button-giant"
+                                id="nextStepButton">
+                            <i class="fa">下一步</i>
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- reset password -->
+                <ul class="form-place col-md-12" id="formplace">
+                    <li style="margin-top:25px;">
+                        <h2>第二步：</h2>
+                    </li>
+                    <li style="margin-top:25px">
+                        <div class="user-div">
+                            <input name="username" id="username" type="text" value="111" disabled="disabled">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="password-div">
+                            <input name="password" id="password" type="password"
+                                   placeholder="密码：6~16个字符，首尾不能有空格">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="cpassword-div">
+                            <input name="cpassword" id="confirmedPassword"
+                                   type="password" placeholder="确认密码：请再次填写密码">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <button type="button" class="button button-caution button-box button-raised button-giant"
+                                id="resetButton">
+                            <i class="fa">重置</i>
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <footer class="share-footer col-md-12"></footer>
+    <div class="error-box" id="error-box">
+        <p class="error-info" id="error-info">出错了</p>
+    </div>
+</div>
+</body>
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/reset.js}"></script>
+</html>

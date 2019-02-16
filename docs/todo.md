@@ -24,7 +24,7 @@
 - mybatis-plus逻辑删除
 - 统一异常处理
 - 事务配置
-- 角色权限: PasswordEncoder
+- 角色权限: PasswordEncoder BCryptPasswordEncoder
 - session
 - 统一trim
 - 解决maven重复依赖

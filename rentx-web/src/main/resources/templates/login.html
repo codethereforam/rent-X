@@ -2,43 +2,89 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>登录页面</title>
     <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/style.css}">
+    <link rel="stylesheet" th:href="@{/css/login/login.css}">
 </head>
 <body>
+<!--[if lte IE8]>
+<p>浏览器版本太低，请
+    <a target="_blank" href="http://www.browsehappy.com">升级</a>
+    为最新的ie浏览器！
+</p>
+<![endif]-->
+<div class="ct-container col-md-12">
+    <header class="share-header col-md-12"></header>
+    <div class="register-login-content col-md-12">
+        <div class="paper-content">
+            <header class="paper-header">Account Login</header>
+            <form action="" method="post">
+                <ul class="form-place col-md-12" id="formplace">
+                    <li style="margin-top:25px">
+                        <div class="user-div">
+                            <input name="accountName" id="accountName" type="text" placeholder="用户名/邮箱">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="password-div">
+                            <input name="password" autocomplete="on" id="password" type="password"
+                                   placeholder="密码">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="code-div">
+                            <input name="captcha" type="text" id="captcha" placeholder="验证码">
+                        </div>
+                        <div class="code-image">
+                            <img src="" alt="验证码" id="captchaImage">
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" disabled="disabled"
+                                class="button button-caution button-box button-raised button-giant" id="submitbutton">
+                            <i class="fa">登录</i>
+                        </button>
+                        <button type="reset" class="button button-caution button-box button-raised button-giant"
+                                id="resetbutton">
+                            <i class="fa">重置</i>
+                        </button>
+                    </li>
 
-<div class="container">
-    <div th:if="${param.error}">
-        Invalid username and password.
+                    <li class="alert-box">
+                        <input type="checkbox" checked="checked" name="rememberMe" id="rememberMe">
+                        <label for="rememberMe"></label>
+                        <p>记住密码</p>
+                        <button type="button" class="button button-caution button-box button-raised button-giant"
+                                id="forgetPwdBtn">
+                            <i class="fa">忘记密码</i>
+                        </button>
+                        <button type="button" class="button button-caution button-box button-raised button-giant"
+                                id="registerBtn">
+                            <i class="fa">注册</i>
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
     </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
+
+    <footer class="share-footer col-md-12"></footer>
+
+    <div class="error-box" id="error-box">
+        <p class="error-info" id="error-info">出错了</p>
     </div>
-    <form class="form-signin" th:action="@{/login}" method="post">
-        <h2 class="form-signin-heading">sign in</h2>
-        <div class="form-group input-lg">
-            <span class="glyphicon glyphicon-user"></span>
-            <label for="inputAccountName"></label>
-            <input id="inputAccountName" name="username" placeholder="Account name: not blank" required autofocus>
-        </div>
-        <div class="form-group input-lg">
-            <span class="glyphicon glyphicon-lock"></span>
-            <label for="inputPassword"></label>
-            <input type="password" name="password" id="inputPassword" placeholder="Password: not blank" required>
-        </div>
-        <div class="checkbox input-lg">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
-    </form>
 </div>
-
-<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
-<script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/common.js}"></script>
 </body>
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/login.js}"></script>
 </html>

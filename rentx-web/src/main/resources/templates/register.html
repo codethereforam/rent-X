@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>注册页面</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/assets.css}">
+    <link rel="stylesheet" th:href="@{/css/layout/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/buttons.css}">
+    <link rel="stylesheet" th:href="@{/css/plugs/style.css}">
+    <link rel="stylesheet" th:href="@{/css/register/register.css}">
+</head>
+<body>
+<!--[if lte IE8]>
+<p>浏览器版本太低，请
+    <a target="_blank" href="http://www.browsehappy.com">升级</a>
+    为最新的ie浏览器！
+</p>
+<![endif]-->
+<div class="ct-container col-md-12">
+    <header class="share-header col-md-12"></header>
+    <div class="register-login-content col-md-12">
+        <div class="paper-content">
+            <header class="paper-header">Account Register</header>
+            <form action="" method="post">
+                <ul class="form-place col-md-12" id="formplace">
+                    <li style="margin-top:25px">
+                        <div class="user-div">
+                            <input name="username" id="username" type="text" placeholder="用户名：5~15个字符，不能有空格"/>
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="password-div">
+                            <input name="password" id="password" type="password" autocomplete="on"
+                                   placeholder="密码：6~16个字符，首尾不能有空格">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="cpassword-div">
+                            <input name="cpassword" id="confirmedPassword" autocomplete="on"
+                                   type="password" placeholder="确认密码：请再次填写密码">
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <span class="sex-choice"></span>
+                        <div class="sex-div" style="margin-left:20px;" title="男生">
+                            <span class="sex-logo" index="1"></span>
+                            <input name="sex" class="sex-radio" id="sex-female" type="radio" value="0"/>
+                            <label for="sex-female"></label>
+                        </div>
+                        <div class="sex-div" title="女生">
+                            <span class="sex-logo" index="2"></span>
+                            <input name="sex" class="sex-radio" id="sex-male" type="radio" value="1"/>
+                            <label for="sex-male"></label>
+                        </div>
+                        <div class="sex-div" title="保密">
+                            <span class="sex-logo" index="3"></span>
+                            <input name="sex" class="sex-radio" id="sex-secret" type="radio" value="2"
+                                   checked="checked"/>
+                            <label for="sex-secret"></label>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="email-div">
+                            <input id="email" name="email" type="text" autocomplete="off"
+                                   placeholder="邮箱：请输入你的邮箱地址">
+                            <button type="button" disabled="disabled"
+                                    class="button button-caution button-box button-raised button-giant"
+                                    id="codebutton">
+                                <i class="fa">发送</i>
+                            </button>
+                        </div>
+                        <span class=""></span>
+                    </li>
+                    <li>
+                        <div class="code-div">
+                            <input name="code" type="text" id="emailCaptcha" placeholder="邮箱验证码">
+                        </div>
+                        <button type="button" disabled="disabled"
+                                class="button button-caution button-box button-raised button-giant" id="submitbutton">
+                            <i class="fa">注册</i>
+                        </button>
+
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <footer class="share-footer col-md-12"></footer>
+    <div id="error-box">
+        <p id="error-info">出错了</p>
+    </div>
+</div>
+</body>
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/register.js}"></script>
+</html>

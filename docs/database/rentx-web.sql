@@ -260,7 +260,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
                       `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
                       `username` varchar(20) NOT NULL COMMENT '用户名',
-                      `password` char(32) NOT NULL COMMENT '密码',
+                      `password` char(60) NOT NULL COMMENT '密码',
                       `salt` char(32) NOT NULL COMMENT '盐',
                       `email` varchar(50) NOT NULL COMMENT '邮箱',
                       `sex` tinyint(2) unsigned DEFAULT '2' COMMENT '性别(0:女，1:男，2:不愿透露)',

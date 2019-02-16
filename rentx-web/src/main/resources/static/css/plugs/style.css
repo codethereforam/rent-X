@@ -1,0 +1,133 @@
+.form-place input[type=text]{
+	height:42px;
+	width: 268px;
+    margin-left:46px;
+    margin-top:5px;
+    border-radius:4px;
+    font-size: 14px;
+    font-family: 微软雅黑，Arial;
+    font-weight: 100;
+    line-height: 40px;
+    text-indent: 6px;
+}
+.form-place input[type=password]{
+	height:42px;
+	width: 268px;
+	margin-left:45.5px;
+	margin-top:5px;
+	border-radius:4px;
+	font-size: 14px;
+	font-family: 微软雅黑，Arial;
+	font-weight: 100;
+	line-height: 40px;
+	text-indent: 6px;
+}
+.form-place input[type=email]{
+	height:42px;
+	width: 268px;
+	margin-left:45.5px;
+	margin-top:5px;
+	border-radius:4px;
+	font-size: 14px;
+	font-family: 微软雅黑，Arial;
+	font-weight: 100;
+	line-height: 40px;
+	text-indent: 6px;
+}
+.checkspan{
+	display: block;
+	background-repeat: no-repeat;
+	background-color: #fdf8f2;
+	width:16px;
+	height:16px;
+	margin-top: 18px;
+	margin-left:6px;
+	float: left;
+}
+.checkright{
+	background-image: url("../../img/user/checkspan.png");
+	background-position: 0px 0px;
+
+
+}
+.checkwrong{
+	background-image: url("../../img/user/checkspan.png");
+	background-position: -16px 0px;
+}
+
+
+.form-place input[type=radio]:checked+label{
+	background-image: url("../../img/user/optioninput.png");
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+
+}
+.form-place input[type=checkbox]:checked+label{
+	background-position: 0px 0px;
+
+}
+
+#error-box{
+	padding:2px 5px;
+	border-radius: 6px;
+	background-color: white;
+	position: absolute;
+	height:36px;
+	display: none;
+	
+}
+#error-info{
+	font-weight: 500;
+	z-index: 100;
+	display: none;
+	color:black;
+	letter-spacing: 1px;
+	line-height:32px;
+	font-size:12px;
+}
+.form-place .user-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: 0px 0px;
+	width:325px;
+	height:55px;
+	float: left;
+
+}
+.form-place .password-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: -325px 0px;
+	width:325px;
+	height:55px;
+	float: left;
+}
+.form-place .code-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: -975px 0px;
+	background-repeat: no-repeat ;
+	width:180px;
+	height:55px;
+	float: left;
+}
+
+.form-place .code-div input{
+	width:128px;
+}
+
+.button-raised.button-caution{
+	background: #f7c9ac;
+	border-color:#f7c9ac;
+	border-radius: 2px;
+	color:white;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.button-raised.button-caution:hover{
+	background: #ffb3b2;
+	border-color:#ffb3b2;
+	color:white;
+
+}
+.button-raised.button-caution:focus{
+	background: #f7c9ac;
+	border-color:#f7c9ac;
+	color:white;
+}

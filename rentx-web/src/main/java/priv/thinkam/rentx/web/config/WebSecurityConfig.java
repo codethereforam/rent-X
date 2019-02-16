@@ -2,6 +2,7 @@ package priv.thinkam.rentx.web.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import priv.thinkam.rentx.common.base.Constant;
 import priv.thinkam.rentx.web.common.base.WebConstant;
 import priv.thinkam.rentx.web.dao.dto.RoleResourceDTO;
@@ -65,5 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		for (UserRoleDTO dto : userRoleDTOList) {
 			auth.inMemoryAuthentication().withUser(dto.getUsername()).password(dto.getPassword()).roles(dto.getRoleIdentifier());
 		}
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }

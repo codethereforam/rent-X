@@ -1,0 +1,81 @@
+.paper-content {
+    top: 40%;
+    margin-top: -190px;
+    height: 440px;
+}
+
+.form-place {
+    height: 342px;
+}
+
+#submitbutton {
+    height: 44px;
+    width: 193px;
+    margin-top: 4px;
+    margin-left: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+#resetbutton {
+    height: 44px;
+    width: 100px;
+    margin-top: 4px;
+    margin-left: 16px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+#forgetPwdBtn {
+    height: 44px;
+    width: 93px;
+    margin-top: 4px;
+    margin-left: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+#registerBtn {
+    height: 44px;
+    width: 93px;
+    margin-top: 4px;
+    margin-left: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+.code-image {
+    height: 44px;
+    width: 100px;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    float: left;
+    margin-top: 4px;
+    margin-left: 34px;
+    border-radius: 4px;
+}
+
+.alert-box input {
+    visibility: hidden;
+}
+
+.alert-box label {
+    height: 24px;
+    width: 23px;
+    background-image: url("../../img/user/checkbox.png");
+    background-position: -23px 0px;
+    margin-left: 5px;
+    float: left;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+.alert-box p {
+    float: left;
+    margin-left: 10px;
+    margin-top: 4px;
+}
+
+.alert-box a {
+    margin-left: 100px;
+    margin-top: 4px;
+    font-size: 16px;
+    color: #3c3c3c;
+    float: left;
+}

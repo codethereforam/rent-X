@@ -1,0 +1,104 @@
+.ct-container {
+    height:calc(100vh + 60px);
+    position:relative;
+    min-height:920px;
+    min-width:960px;
+}
+.ct-container:before{
+	content:"";
+	height:100vh;
+	width: 100%;
+	min-height:860px;
+	min-width:960px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	z-index:-100;
+	background-image: url(../../img/bg/bgImage2.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	display: block;
+	opacity:0.8;
+	
+}
+.share-header{
+	height:50px;
+}
+.register-login-content{
+    height:calc(100vh - 50px);
+    min-height:810px;
+   
+}
+.share-footer{
+    height:60px;
+    background: #7fcdff;
+}
+/**
+ * login和register页面的布局 纸张部分
+ */
+.paper-content{
+    width:460px;
+    position: absolute;
+    left:50%;
+    margin-left: -230px;
+    background-color:#fdf8f2;
+    border: 1px solid #eee;
+    box-shadow: 6px 2px 10px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+    *zoom: 1;
+}
+	/** * 定义两个伪元素，平行四边形的，用底部的box-shadow来做纸面的曲边部分 * **/
+.paper-content:before {
+    transform: skew(-15deg) rotate(-5deg);
+    left: 35px;
+}
+.paper-content:after {
+    transform: skew(15deg) rotate(5deg);
+    right: 35px;
+}
+
+.paper-content:before, .paper-content:after {
+    width: 70%;
+    height: 55%;
+    content: ' ';
+    background-color:transparent;
+    box-shadow: 0 13px 20px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 15px;
+    z-index: -1;
+}
+
+/**
+ * register和login页面的布局  表单部分
+ */
+.paper-header{
+    font-family: LeckerliOne,微软雅黑,Arial;
+    color:white;
+    font-size:28px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 80px;
+    margin-top: -40px;
+    box-shadow:0px 1px 1px #f7c9ac;
+    position:relative;
+    left:-1px;
+    border-radius:18px 0px 18px  0px;
+    height:80px;
+    width:calc(100% + 2px);
+    background-color: #f7c9ac;
+}
+.form-place{
+    margin-top:18px;
+}
+
+/**
+ * register和login页面的布局  li部分
+ */
+.form-place li{
+    height:55px;
+    width:380px;
+    margin-left:68px;
+    margin-top: 10px;
+    background-repeat: no-repeat;
+
+}

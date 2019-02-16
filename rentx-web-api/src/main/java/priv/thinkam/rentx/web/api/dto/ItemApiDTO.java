@@ -1,18 +1,22 @@
-package priv.thinkam.rentx.web.dao.dto;
+package priv.thinkam.rentx.web.api.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
+ * item api dto
+ *
  * @author thinkam
- * @date 2019/02/10
+ * @date 2019/02/16
  */
 @Data
 @Accessors(chain = true)
-public class ItemDTO {
+public class ItemApiDTO implements Serializable {
 	/**
 	 * 租用项ID
 	 */
@@ -41,7 +45,7 @@ public class ItemDTO {
 	/**
 	 * 状态（0：申请中；1：不通过；2：租用中；3： 已归还）
 	 */
-	private Integer status;
+	private ItemStatusEnum status;
 	/**
 	 * 所有者名称
 	 */

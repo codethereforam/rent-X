@@ -9,7 +9,7 @@
             - parentId level 降级校验
             - 优化删除
             - 存到redis
-        - 租用管理
+    -     租用管理：批准、否定、归还
         - 角色权限资源管理
     - 用户租赁系统
         - 我的出租 - 编辑、租用历史
@@ -46,6 +46,7 @@
 - spring security
     - frameOptions
     - csrf
+- controller测试
 
 ## learnt
 - log

@@ -10,7 +10,7 @@ import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.dto.StuffDTO;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
-import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
+import priv.thinkam.rentx.common.enums.StuffStatusEnum;
 import priv.thinkam.rentx.web.dao.mapper.StuffMapper;
 import priv.thinkam.rentx.web.service.param.StuffParam;
 import priv.thinkam.rentx.web.service.vo.StuffInVO;

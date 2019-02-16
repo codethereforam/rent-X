@@ -16,4 +16,5 @@ public interface ItemMapper extends BaseMapper<Item> {
 
 	List<ItemDTO> listItemDTO(Integer userId);
 
+	List<ItemDTO> listCompleteItemDTO();
 }

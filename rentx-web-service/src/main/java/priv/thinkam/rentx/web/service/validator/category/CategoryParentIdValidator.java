@@ -5,7 +5,7 @@ import com.baidu.unbiz.fluentvalidator.Validator;
 import com.baidu.unbiz.fluentvalidator.ValidatorContext;
 import com.baidu.unbiz.fluentvalidator.ValidatorHandler;
 import org.springframework.stereotype.Component;
-import priv.thinkam.rentx.web.dao.enums.CategoryLevelEnum;
+import priv.thinkam.rentx.common.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.web.service.CategoryService;
 
 import javax.annotation.Resource;

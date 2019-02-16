@@ -2,7 +2,7 @@ package priv.thinkam.rentx.web.service.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
+import priv.thinkam.rentx.common.enums.StuffStatusEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

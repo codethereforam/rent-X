@@ -16,4 +16,20 @@
           and i.user_id = #{userId}
     </select>
 
+    <select id="listCompleteItemDTO" resultType="priv.thinkam.rentx.web.dao.dto.ItemDTO">
+        select i.id          itemId,
+               s.name        stuffName,
+               i.apply_time  applyTime,
+               i.create_time createTime,
+               i.rent_day    rentDay,
+               i.end_time    endTime,
+               i.status,
+               u1.username   renterName,
+               u2.username   ownerName
+        from item i
+                 inner join stuff s on i.stuff_id = s.id and s.mark = 1
+                 inner join user u1 on i.user_id = u1.id and u1.mark = 1
+                 inner join user u2 on s.user_id = u2.id and u2.mark = 1
+        where i.mark = 1
+    </select>
 </mapper>

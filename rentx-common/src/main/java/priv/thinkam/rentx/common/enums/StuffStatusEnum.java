@@ -1,6 +1,4 @@
-package priv.thinkam.rentx.web.dao.enums;
-
-import com.fasterxml.jackson.annotation.JsonValue;
+package priv.thinkam.rentx.common.enums;
 
 import java.util.Arrays;
 import java.util.HashMap;

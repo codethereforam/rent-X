@@ -13,7 +13,7 @@ import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.entity.Category;
-import priv.thinkam.rentx.web.dao.enums.CategoryLevelEnum;
+import priv.thinkam.rentx.common.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.web.dao.mapper.CategoryMapper;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
 import priv.thinkam.rentx.web.service.validator.category.CategoryValidatorGroup;

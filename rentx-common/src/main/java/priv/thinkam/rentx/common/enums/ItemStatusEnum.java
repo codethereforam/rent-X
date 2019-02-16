@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.web.dao.enums;
+package priv.thinkam.rentx.common.enums;
 
 import java.util.Arrays;
 import java.util.HashMap;

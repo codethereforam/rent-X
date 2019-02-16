@@ -1,4 +1,4 @@
-package priv.thinkam.rentx.web.dao.enums;
+package priv.thinkam.rentx.common.enums;
 
 /**
  * 类别层次枚举

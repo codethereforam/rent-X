@@ -9,8 +9,8 @@ import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.web.dao.entity.Item;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
-import priv.thinkam.rentx.web.dao.enums.ItemStatusEnum;
-import priv.thinkam.rentx.web.dao.enums.StuffStatusEnum;
+import priv.thinkam.rentx.common.enums.ItemStatusEnum;
+import priv.thinkam.rentx.common.enums.StuffStatusEnum;
 import priv.thinkam.rentx.web.dao.mapper.ItemMapper;
 import priv.thinkam.rentx.web.service.vo.PersonalItemVO;
 

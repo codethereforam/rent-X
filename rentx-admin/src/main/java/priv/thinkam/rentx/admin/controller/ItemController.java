@@ -37,7 +37,7 @@ public class ItemController {
 	public Response patchStatus(@PathVariable Integer id,@PathVariable Integer status) {
 		log.info("patch item status, id={}, status={}", id, status);
 		// 获取当前用户ID
-		final int userId = 3;
+		final int userId = -1;
 		return itemServiceApi.patchStatus(id, status,userId);
 	}
 }

@@ -1,15 +1,20 @@
 var usernameValid = false;
 var passwordValid = false;
-var captchaValid = false;
+var captchaValid = true;
 
 function checkLoginButton() {
     document.getElementById("submitbutton").disabled = !(usernameValid && passwordValid && captchaValid);
 }
 
+function recaptchaCallback() {
+    captchaValid = true;
+    console.log(usernameValid + "," + passwordValid + ","+captchaValid)
+    checkLoginButton();
+}
+
 window.onload = function () {
     var accountNameObject = document.getElementById("accountName");
     var passwordObject = document.getElementById("password");
-    var captchaObject = document.getElementById("captcha");
 
     functions.checkAccountName = function () {
         accountNameObject.onfocus = function () {
@@ -54,40 +59,14 @@ window.onload = function () {
         }
     };
 
-    functions.checkCaptcha = function () {
-        captchaObject.onfocus = function () {
-            functions.focusInputBack(this, "-975px -55px");
-            functions.resetOutline(this);
-            functions.hideCheckSpan(this);
-        };
-
-        captchaObject.onblur = function () {
-            functions.focusInputBack(this, "-975px 0px");
-            var thisValue = this.value;
-            if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "请输入验证码");
-                captchaValid = false;
-            } else if (thisValue.length !== 4) {
-                functions.showWrongSpanAndMessage(this, "验证码长度应该为4位");
-                captchaValid = false;
-            } else {
-                functions.showRightSpanAndHideMessage(this);
-                captchaValid = true;
-            }
-            checkLoginButton();
-        };
-
-        captchaObject.onkeyup = function () {
-            captchaValid = this.value.length === 4;
-            checkLoginButton();
-        };
-    };
-
-    document.getElementById("registerBtn").onclick = function () {
-        window.location.href = "/register.html";
-    };
-
     functions.checkAccountName();
     functions.checkPassword();
-    functions.checkCaptcha();
+
+    document.querySelector("#registerBtn").onclick = function () {
+        window.location.href = "/register";
+    };
+
+    document.querySelector("#forgetPwdBtn").onclick = function () {
+        window.location.href = "/forget";
+    };
 };

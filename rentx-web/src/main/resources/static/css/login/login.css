@@ -40,17 +40,6 @@
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3) !important;
 }
 
-.code-image {
-    height: 44px;
-    width: 100px;
-    background-color: white;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    float: left;
-    margin-top: 4px;
-    margin-left: 34px;
-    border-radius: 4px;
-}
-
 .alert-box input {
     visibility: hidden;
 }

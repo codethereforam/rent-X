@@ -22,12 +22,19 @@
     <header class="share-header col-md-12"></header>
     <div class="register-login-content col-md-12">
         <div class="paper-content">
-            <header class="paper-header">Account Login</header>
-            <form action="" method="post">
+            <header class="paper-header">
+                 <span th:unless="${param.error}">
+                    登录
+                </span>
+                <span th:if="${param.error}">
+                    用户名或密码错误
+                </span>
+            </header>
+            <form method="post" th:action="@{/login}">
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px">
                         <div class="user-div">
-                            <input name="accountName" id="accountName" type="text" placeholder="用户名/邮箱">
+                            <input name="username" id="accountName" type="text" placeholder="用户名/邮箱">
                         </div>
                         <span class=""></span>
                     </li>
@@ -39,15 +46,12 @@
                         <span class=""></span>
                     </li>
                     <li>
-                        <div class="code-div">
-                            <input name="captcha" type="text" id="captcha" placeholder="验证码">
-                        </div>
-                        <div class="code-image">
-                            <img src="" alt="验证码" id="captchaImage">
+                        <div id="recaptchaContainer" style="transform:scale(0.8);transform-origin:0 0">
+                            <div class="g-recaptcha" data-sitekey="6Ldi6ZEUAAAAACD_KMbxjsFiOaI7kGKzww-KPn89" data-callback="recaptchaCallback"></div>
                         </div>
                     </li>
                     <li>
-                        <button type="button" disabled="disabled"
+                        <button type="submit" disabled="disabled"
                                 class="button button-caution button-box button-raised button-giant" id="submitbutton">
                             <i class="fa">登录</i>
                         </button>
@@ -58,8 +62,8 @@
                     </li>
 
                     <li class="alert-box">
-                        <input type="checkbox" checked="checked" name="rememberMe" id="rememberMe">
-                        <label for="rememberMe"></label>
+                        <input type="checkbox" checked="checked" id="remember-me" name="remember-me"/>
+                        <label for="remember-me"></label>
                         <p>记住密码</p>
                         <button type="button" class="button button-caution button-box button-raised button-giant"
                                 id="forgetPwdBtn">
@@ -87,4 +91,5 @@
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/login.js}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </html>

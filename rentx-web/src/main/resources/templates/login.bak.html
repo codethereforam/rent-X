@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap-3.3.7/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+
+<div class="container">
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <form class="form-signin" th:action="@{/login}" method="post">
+        <h2 class="form-signin-heading">sign in</h2>
+        <div class="form-group input-lg">
+            <span class="glyphicon glyphicon-user"></span>
+            <label for="inputAccountName"></label>
+            <input id="inputAccountName" name="username" placeholder="Account name: not blank" required autofocus>
+        </div>
+        <div class="form-group input-lg">
+            <span class="glyphicon glyphicon-lock"></span>
+            <label for="inputPassword"></label>
+            <input type="password" name="password" id="inputPassword" placeholder="Password: not blank" required>
+        </div>
+        <div class="checkbox input-lg">
+            <label>
+                <input type="checkbox" id="remember-me" name="remember-me"/> Remember me
+            </label>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+
+<script th:src="@{/plugins/jquery-3.2.1/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/plugins/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>

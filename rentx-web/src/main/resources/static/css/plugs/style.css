@@ -100,6 +100,18 @@
 	height:55px;
 	float: left;
 }
+.form-place .code-div{
+	background-image: url(../../img/user/input-all.png);
+	background-position: -975px 0px;
+	background-repeat: no-repeat ;
+	width:180px;
+	height:55px;
+	float: left;
+}
+
+.form-place .code-div input{
+	width:128px;
+}
 
 .button-raised.button-caution{
 	background: #f7c9ac;

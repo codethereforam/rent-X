@@ -19,6 +19,10 @@ public interface Constant {
 		 * comma: ","
 		 */
 		String COMMA = ",";
+		/**
+		 * minus: "-"
+		 */
+		String MINUS = "-";
 	}
 
 	/**
@@ -29,5 +33,9 @@ public interface Constant {
 	 */
 	interface ErrorMsg {
 		String SYSTEM_INTERNAL_ERROR = "系统内部错误";
+	}
+
+	interface Captcha {
+		String UUID_HEADER = "uuid";
 	}
 }

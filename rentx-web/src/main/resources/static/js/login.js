@@ -83,11 +83,32 @@ window.onload = function () {
         };
     };
 
-    document.getElementById("registerBtn").onclick = function () {
-        window.location.href = "/register.html";
+    document.querySelector("#registerBtn").onclick = function () {
+        window.location.href = "/register";
+    };
+
+    document.querySelector("#forgetPwdBtn").onclick = function () {
+        window.location.href = "/forget";
     };
 
     functions.checkAccountName();
     functions.checkPassword();
     functions.checkCaptcha();
+
+    retrieveCaptcha();
+
+    // 获取验证码
+    function retrieveCaptcha() {
+        $.ajax('/captcha', {
+            type: 'GET',
+            success: function (data, status, xhr) {
+                $('input[name="uuid"]').val(xhr.getResponseHeader('uuid'));
+                $('#captchaImage').attr('src', 'data:image/png;base64,' + data)
+            }
+        });
+    }
+
+    $('#captchaImage').click(function () {
+        retrieveCaptcha();
+    });
 };

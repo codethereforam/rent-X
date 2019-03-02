@@ -46,6 +46,10 @@
     - frameOptions
     - csrf
 - controller测试
+- spring social
+- recaptcha 
+- 2fa
+- base64图片
 
 ## learnt
 - log

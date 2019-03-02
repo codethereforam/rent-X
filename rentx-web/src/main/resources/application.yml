@@ -9,12 +9,13 @@ spring:
     password: ${MYSQL_PASSWD}
   redis:
     timeout: 3000
+    host: localhost
   data:
     elasticsearch:
       cluster-nodes: localhost:9300
   security:
     ignore:
-      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**, /register, /forget
+      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**, /register, /forget, /captcha, /captcha/error
 
 server:
   port: 9999
@@ -49,3 +50,13 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+
+kaptcha:
+  border: "yes"
+  imageWidth: 100
+  imageHeight: 45
+  sessionKey: code
+  textproducerCharLength: 4
+  textproducerFontSize: 35
+  textproducerFontColor: blue
+  textproducerFontNames: 宋体,楷体,微软雅黑

@@ -13,11 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import priv.thinkam.rentx.common.base.Constant;
 import priv.thinkam.rentx.web.common.base.WebConstant;
 import priv.thinkam.rentx.web.dao.dto.RoleResourceDTO;
 import priv.thinkam.rentx.web.dao.dto.UserRoleDTO;
 import priv.thinkam.rentx.web.dao.mapper.UserRoleMapper;
+import priv.thinkam.rentx.web.filter.CaptchaValidationFilter;
 import priv.thinkam.rentx.web.service.RoleResourceService;
 
 import javax.annotation.Resource;
@@ -39,6 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private RoleResourceService roleResourceService;
 	@Value("${spring.security.ignore.paths}")
 	private String[] ignorePath;
+	@Resource
+	private CaptchaValidationFilter captchaValidationFilter;
 
 	@Override
 	public void configure(WebSecurity web) {
@@ -49,6 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().disable();
 		http.csrf().disable();
+		// 在用户名密码认证过滤器钱添加验证码校验过滤器
+		http.addFilterBefore(captchaValidationFilter, UsernamePasswordAuthenticationFilter.class);
 		List<RoleResourceDTO> roleResourceDTOList = roleResourceService.listRoleResourceDTOPlusRoot();
 		log.info("RoleResourceDTO list: {}", roleResourceDTOList);
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();

@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import priv.thinkam.rentx.web.service.validator.auth.AuthValidatorGroup;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.TimeUnit;
 
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toComplex;
 import static com.baidu.unbiz.fluentvalidator.ResultCollectors.toSimple;
@@ -47,6 +49,8 @@ public class RegisterController extends BaseController {
 	private TemplateEngine templateEngine;
 	@Autowired
 	private InMemoryUserDetailsManager inMemoryUserDetailsManager;
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 
 	/**
 	 * 跳转到“注册页面”
@@ -80,8 +84,10 @@ public class RegisterController extends BaseController {
 							context.addError(ValidationError.create(errorMsg).setField("emailCaptcha"));
 							return false;
 						}
-						Object emailCaptcha = session.getAttribute(Constant.Session.EMAIL_CAPTCHA_SESSION_KEY);
-						if (emailCaptcha == null || !inputEmailCaptcha.equalsIgnoreCase((String) emailCaptcha)) {
+						String redisKey = getEmailCaptchaRedisKey(session, registerParam.getEmail());
+						String emailCaptcha = stringRedisTemplate.opsForValue().get(redisKey);
+						stringRedisTemplate.delete(redisKey);
+						if (!inputEmailCaptcha.equalsIgnoreCase(emailCaptcha)) {
 							context.addError(ValidationError.create(errorMsg).setField("emailCaptcha"));
 							return false;
 						}
@@ -166,13 +172,28 @@ public class RegisterController extends BaseController {
 			return Response.fail("该邮箱已有人使用");
 		}
 		String captcha = StringUtil.randomString(6);
-		//保存到session
-		session.setAttribute(Constant.Session.EMAIL_CAPTCHA_SESSION_KEY, captcha);
+		//保存到redis，内存中sessionID+email对应一个邮件验证码，防止验证码正确而换了邮箱
+		String redisKey = this.getEmailCaptchaRedisKey(session, email);
+		stringRedisTemplate.opsForValue().set(redisKey, captcha);
+		stringRedisTemplate.expire(redisKey, 2, TimeUnit.MINUTES);
+		// 渲染邮件模板
 		Context context = new Context();
 		context.setVariable("captcha", captcha);
 		String emailContent = templateEngine.process("mail/email_captcha", context);
+		// 发送邮件
 		mailService.sendEmailAsync(email, StringUtil.format("{}是您在rent-X的注册验证码", captcha), emailContent);
 		return Response.SUCCESS;
+	}
+
+	/**
+	 * get email captcha redis key
+	 *
+	 * @param session HttpSession
+	 * @param email email
+	 * @return email captcha redis key
+	 */
+	private String getEmailCaptchaRedisKey(HttpSession session, String email) {
+		return Constant.EmailCaptcha.REDIS_KEY_PREFIX + session.getId().substring(0, 5) + Constant.Separator.MINUS + email;
 	}
 
 	/**

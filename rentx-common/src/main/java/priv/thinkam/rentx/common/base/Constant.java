@@ -51,7 +51,10 @@ public interface Constant {
 	 * @author yanganyu
 	 * @date 2019/3/3 21:44
 	 */
-	interface Session {
-		String EMAIL_CAPTCHA_SESSION_KEY = "email_captcha_session_key";
+	interface EmailCaptcha {
+		/**
+		 * email captcha redis key prefix
+		 */
+		String REDIS_KEY_PREFIX = "email_captcha-";
 	}
 }

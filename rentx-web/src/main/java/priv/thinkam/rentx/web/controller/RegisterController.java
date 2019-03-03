@@ -121,12 +121,8 @@ public class RegisterController extends BaseController {
 			return Response.fail("两个密码不匹配", "password");
 		}
 		// save user
-		boolean success = userService.save(getUserFrom(registerParam));
-		if (success) {
-			return Response.SUCCESS;
-		} else {
-			return Response.FAIL;
-		}
+		userService.save(getUserFrom(registerParam), registerParam.getRole());
+		return Response.SUCCESS;
 	}
 
 	/**

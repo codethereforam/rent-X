@@ -16,7 +16,6 @@
     - 后台
     - session
 - 注册 
-    - 分出租人和承租人
     - 用户名密码刷新
     - 邮箱验证码session存储
 - XSS防御和敏感词过滤
@@ -57,6 +56,7 @@
 - 2fa
 - base64图片
 - spring session和tomcat（jetty） session
+- proxy-target-class
 
 ## learnt
 - log

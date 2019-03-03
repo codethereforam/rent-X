@@ -254,7 +254,8 @@ window.onload = function () {
                 confirmedPassword: confirmedPasswordObject.value,
                 sex: $('form').find('input[name="sex"]:checked').val(),
                 email: emailObject.value,
-                emailCaptcha: emailCaptchaObject.value
+                emailCaptcha: emailCaptchaObject.value,
+                role: $('form').find('input[name="role"]:checked').val(),
             }),
             contentType: 'application/json',
             dataType: DATA_TYPE.JSON,
@@ -269,6 +270,9 @@ window.onload = function () {
                     }
                     if (field === "sex") {
                         field = "sex-secret";
+                    }
+                    if (field === "role") {
+                        field = "role-lessee";
                     }
                     functions.showWrongSpanAndMessage(document.getElementById(field), data.message);
                 }

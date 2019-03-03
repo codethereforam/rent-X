@@ -22,7 +22,7 @@
     <header class="share-header col-md-12"></header>
     <div class="register-login-content col-md-12">
         <div class="paper-content">
-            <header class="paper-header">Account Register</header>
+            <header class="paper-header">注册</header>
             <form action="" method="post">
                 <ul class="form-place col-md-12" id="formplace">
                     <li style="margin-top:25px">
@@ -64,7 +64,6 @@
                             <label for="sex-secret"></label>
                         </div>
                     </li>
-
                     <li>
                         <div class="email-div">
                             <input id="email" name="email" type="text" autocomplete="off"
@@ -85,7 +84,17 @@
                                 class="button button-caution button-box button-raised button-giant" id="submitbutton">
                             <i class="fa">注册</i>
                         </button>
-
+                    </li>
+                    <li>
+                        <span class="sex-choice"></span>
+                        <div class="role-div" style="margin-left:20px;" title="出租人">
+                            <input name="role" class="role-radio" id="role-lessor" type="radio" value="2" checked="checked"/>
+                            <label for="role-lessor">出租人</label>
+                        </div>
+                        <div class="role-div" title="承租人">
+                            <input name="role" class="role-radio" id="role-lessee" type="radio" value="3"/>
+                            <label for="role-lessee">承租人</label>
+                        </div>
                     </li>
                 </ul>
             </form>

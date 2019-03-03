@@ -59,4 +59,11 @@ public class RegisterParam {
 	 */
 	@NotEmpty(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
 	private String emailCaptcha;
+
+	/**
+	 * 角色(2:出租人，3:承租人)
+	 */
+	@NotNull(message = "此处不能留空", groups = AuthValidatorGroup.Register.class)
+	@Range(min = 2, max = 3, message = "请选择给定的性别", groups = AuthValidatorGroup.Register.class)
+	private Integer role;
 }

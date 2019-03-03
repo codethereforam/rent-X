@@ -24,6 +24,8 @@ spring:
     host: smtp.163.com
     username: xxx@163.com
     password: xxxxxx
+  aop:
+    proxy-target-class: true
 
 mail:
   senderName: rent-X校园租赁

@@ -11,8 +11,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import priv.thinkam.rentx.common.base.Constant;
 import priv.thinkam.rentx.web.common.base.WebConstant;
@@ -23,6 +26,7 @@ import priv.thinkam.rentx.web.filter.CaptchaValidationFilter;
 import priv.thinkam.rentx.web.service.RoleResourceService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,11 +75,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(inMemoryUserDetailsManager());
+	}
+
+	@Bean
+	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
 		List<UserRoleDTO> userRoleDTOList = userRoleMapper.listUserRoleDTO();
 		log.info("userRoleDTO list: {}", userRoleDTOList.toString());
+		List<UserDetails> userDetailsList = new ArrayList<>();
 		for (UserRoleDTO dto : userRoleDTOList) {
-			auth.inMemoryAuthentication().withUser(dto.getUsername()).password(dto.getPassword()).roles(dto.getRoleIdentifier());
+			userDetailsList.add(
+					User.withUsername(dto.getUsername())
+					.password(dto.getPassword())
+					.roles(dto.getRoleIdentifier()).build()
+			);
 		}
+		return new InMemoryUserDetailsManager(userDetailsList);
 	}
 
 	@Bean

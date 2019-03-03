@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
@@ -44,6 +45,8 @@ public class RegisterController extends BaseController {
 	private MailService mailService;
 	@Autowired
 	private TemplateEngine templateEngine;
+	@Autowired
+	private InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
 	/**
 	 * 跳转到“注册页面”
@@ -90,7 +93,7 @@ public class RegisterController extends BaseController {
 				.on(registerParam.getUsername(), new ValidatorHandler<String>() {
 					@Override
 					public boolean validate(ValidatorContext context, String username) {
-						if (userService.existsUsername(username)) {
+						if (inMemoryUserDetailsManager.userExists(username)) {
 							context.addError(ValidationError.create("该用户名已有人使用").setField("username"));
 							return false;
 						}
@@ -146,7 +149,7 @@ public class RegisterController extends BaseController {
 	 * 发送邮件验证码
 	 *
 	 * @param email email
-	 * @return
+	 * @return Response
 	 */
 	@PostMapping("/emails/{email}/send-captcha")
 	@ResponseBody
@@ -181,7 +184,7 @@ public class RegisterController extends BaseController {
 	@PostMapping("/users/{username}/check-exists")
 	@ResponseBody
 	public Response checkUsernameExist(@PathVariable String username) {
-		if (userService.existsUsername(username)) {
+		if (inMemoryUserDetailsManager.userExists(username)) {
 			return Response.fail("该用户名已有人使用");
 		}
 		return Response.SUCCESS;

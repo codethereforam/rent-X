@@ -27,11 +27,6 @@ public class User extends BaseEntity {
     private String password;
 
     /**
-     * 盐
-     */
-    private String salt;
-
-    /**
      * 邮箱
      */
     private String email;

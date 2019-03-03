@@ -12,7 +12,13 @@
         - 角色权限资源管理
     - 用户租赁系统
         - 我的出租 - 编辑、租用历史
-- 登录注册
+- 登录
+    - 后台
+    - session
+- 注册 
+    - 分出租人和承租人
+    - 用户名密码刷新
+    - 邮箱验证码session存储
 - XSS防御和敏感词过滤
 - 告警
 - 支付
@@ -50,6 +56,7 @@
 - recaptcha 
 - 2fa
 - base64图片
+- spring session和tomcat（jetty） session
 
 ## learnt
 - log

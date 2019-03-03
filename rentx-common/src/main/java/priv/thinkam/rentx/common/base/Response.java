@@ -37,6 +37,10 @@ public class Response<T> implements Serializable {
 	 */
 	private String message;
 	/**
+	 * 错误字段
+	 */
+	private String field;
+	/**
 	 * 数据
 	 */
 	private T data;
@@ -52,8 +56,18 @@ public class Response<T> implements Serializable {
 		this.message = message;
 	}
 
+	private Response(CodeEnum code, String message, String field) {
+		this.code = code;
+		this.message = message;
+		this.field = field;
+	}
+
 	public static Response fail(String message) {
 		return new Response(CodeEnum.FAIL, message);
+	}
+
+	public static Response fail(String message, String field) {
+		return new Response(CodeEnum.FAIL, message, field);
 	}
 
 	public static <T> Response<T> success(T data) {
@@ -70,6 +84,14 @@ public class Response<T> implements Serializable {
 
 	public T getData() {
 		return this.data;
+	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
 	}
 
 	/**
@@ -104,6 +126,7 @@ public class Response<T> implements Serializable {
 		return "Response{" +
 				"code=" + code +
 				", message='" + message + '\'' +
+				", field='" + field + '\'' +
 				", data=" + data +
 				'}';
 	}

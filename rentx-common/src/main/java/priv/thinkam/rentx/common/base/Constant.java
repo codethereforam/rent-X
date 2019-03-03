@@ -35,7 +35,23 @@ public interface Constant {
 		String SYSTEM_INTERNAL_ERROR = "系统内部错误";
 	}
 
+	/**
+	 * 图片验证码
+	 *
+	 * @author yanganyu
+	 * @date 2019/3/3 21:43
+	 */
 	interface Captcha {
 		String UUID_HEADER = "uuid";
+	}
+
+	/**
+	 * session
+	 *
+	 * @author yanganyu
+	 * @date 2019/3/3 21:44
+	 */
+	interface Session {
+		String EMAIL_CAPTCHA_SESSION_KEY = "email_captcha_session_key";
 	}
 }

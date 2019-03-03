@@ -1,6 +1,9 @@
 package priv.thinkam.rentx.common.util;
 
 import org.slf4j.helpers.MessageFormatter;
+import org.springframework.util.Assert;
+
+import java.util.UUID;
 
 /**
  * 字符串工具类
@@ -27,5 +30,16 @@ public class StringUtil {
 	 */
 	public static String format(String format, Object... arguments) {
 		return MessageFormatter.arrayFormat(format, arguments).getMessage();
+	}
+
+	/**
+	 * generate random string
+	 *
+	 * @param length random string length
+	 * @return random string
+	 */
+	public static String randomString(int length) {
+		Assert.isTrue(length > 0 && length <= 32, "randomString length must be (0, 32]");
+		return UUID.randomUUID().toString().replace("-", "").substring(0, length);
 	}
 }

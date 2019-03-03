@@ -102,7 +102,7 @@ public class AuthController {
 	 * @author yanganyu
 	 * @date 2019/3/3 1:25
 	 */
-	@RequestMapping("/captcha/error")
+	@GetMapping("/captcha/error")
 	public String captchaError(HttpSession session, Model model) {
 		//spring security默认会把异常存到session中。
 		AuthenticationException authenticationException =

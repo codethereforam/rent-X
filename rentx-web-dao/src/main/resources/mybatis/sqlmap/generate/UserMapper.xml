@@ -12,7 +12,6 @@
     <result column="mark" property="mark" />
         <result column="username" property="username" />
         <result column="password" property="password" />
-        <result column="salt" property="salt" />
         <result column="email" property="email" />
         <result column="sex" property="sex" />
         <result column="status" property="status" />
@@ -26,7 +25,7 @@
         update_user_id,
         update_time,
         mark,
-        username, password, salt, email, sex, status
+        username, password, email, sex, status
     </sql>
 
 </mapper>

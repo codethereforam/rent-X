@@ -32,8 +32,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
                       `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
                       `username` varchar(20) NOT NULL COMMENT '用户名',
-                      `password` char(32) NOT NULL COMMENT '密码',
-                      `salt` char(32) NOT NULL COMMENT '盐',
+                      `password` char(60) NOT NULL COMMENT '密码',
                       `add_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加人ID',
                       `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
                       `update_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新人ID',

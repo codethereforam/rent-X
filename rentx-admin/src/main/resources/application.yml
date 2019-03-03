@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: pc
   application:
     name: rentx-admin
   datasource:
@@ -9,6 +11,8 @@ spring:
     password: ${MYSQL_PASSWD}
   redis:
     timeout: 3000
+  session:
+    store-type: redis
 
 server:
   port: 9988

@@ -46,7 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring().antMatchers(ignorePath);
+		web.ignoring().antMatchers(ignorePath)
+				.regexMatchers(HttpMethod.GET, "/register", "/forget", "/captcha", "/captcha/error")
+				.regexMatchers(HttpMethod.POST, "/users", "/emails/(.+)/send-captcha", "/users/(.+)/check-exists");
 	}
 
 	@Override

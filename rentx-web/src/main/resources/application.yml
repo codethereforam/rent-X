@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: pc
   application:
     name: rentx-web
   datasource:
@@ -15,7 +17,16 @@ spring:
       cluster-nodes: localhost:9300
   security:
     ignore:
-      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**, /register, /forget, /captcha, /captcha/error
+      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**
+  session:
+    store-type: redis
+  mail:
+    host: smtp.163.com
+    username: xxx@163.com
+    password: xxxxxx
+
+mail:
+  senderName: rent-X校园租赁
 
 server:
   port: 9999

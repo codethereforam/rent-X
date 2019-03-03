@@ -12,7 +12,6 @@
     <result column="mark" property="mark" />
         <result column="username" property="username" />
         <result column="password" property="password" />
-        <result column="salt" property="salt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -23,7 +22,7 @@
         update_user_id,
         update_time,
         mark,
-        username, password, salt
+        username, password
     </sql>
 
 </mapper>

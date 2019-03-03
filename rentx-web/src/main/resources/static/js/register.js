@@ -194,4 +194,85 @@ window.onload = function () {
     functions.checkConfirmedPassword();
     functions.checkEmail();
     functions.checkEmailCaptcha();
+
+    //----------------------------------------
+
+    // 检查用户名是否存在
+    usernameObject.onblur = function () {
+        //check before send
+        if (!usernameValid) {
+            return;
+        }
+        $.ajax(`/users/${usernameObject.value}/check-exists`, {
+            type: 'POST',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    usernameNotExist = true;
+                } else {
+                    usernameNotExist = false;
+                    functions.showWrongSpanAndMessage(usernameObject, data.message);
+                }
+                if (usernameValid && usernameNotExist) {
+                    functions.showRightSpanAndHideMessage(usernameObject);
+                }
+                checkRegisterButton();
+            }
+        });
+    };
+
+    // 发送邮箱验证码
+    let codebutton = document.getElementById("codebutton");
+    codebutton.onclick = () => {
+        // check valid
+        if (!emailValid) {
+            return;
+        }
+        $.ajax(`/emails/${emailObject.value}/send-captcha`, {
+            type: 'POST',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                console.log(data);
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    emailNotExist = true;
+                    functions.showRightSpanAndMessage(emailObject, "验证码已发送，请查看并填写");
+                } else {
+                    emailNotExist = false;
+                    functions.showWrongSpanAndMessage(emailObject, data.message);
+                }
+                checkRegisterButton();
+            }
+        });
+    };
+
+    // 注册
+    $('#submitbutton').click(function () {
+        $.ajax('/users', {
+            data: JSON.stringify({
+                username: usernameObject.value,
+                password: passwordObject.value,
+                confirmedPassword: confirmedPasswordObject.value,
+                sex: $('form').find('input[name="sex"]:checked').val(),
+                email: emailObject.value,
+                emailCaptcha: emailCaptchaObject.value
+            }),
+            contentType: 'application/json',
+            dataType: DATA_TYPE.JSON,
+            type: 'POST',
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    window.location.href = "/login";
+                } else {
+                    let field = data.field;
+                    if (field === null) {
+                        field = "username";
+                    }
+                    if (field === "sex") {
+                        field = "sex-secret";
+                    }
+                    functions.showWrongSpanAndMessage(document.getElementById(field), data.message);
+                }
+            }
+        });
+    });
 };

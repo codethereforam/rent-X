@@ -43,4 +43,18 @@ public class BaseEntity {
 	 * 标识(是否有效 0有效；-1无效)
 	 */
 	private Boolean mark;
+
+	/**
+	 * 添加时补全add_user_id, add_time, update_user_id, update_time, mark
+	 *
+	 * @param userId 操作人
+	 */
+	public void completeAddParam(Integer userId) {
+		LocalDateTime now = LocalDateTime.now();
+		this.setAddUserId(userId);
+		this.setAddTime(now);
+		this.setUpdateUserId(userId);
+		this.setUpdateTime(now);
+		this.setMark(true);
+	}
 }

@@ -1,9 +1,9 @@
 package priv.thinkam.rentx.web.service.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
+import priv.thinkam.rentx.common.base.BaseVO;
 
 /**
  * category VO
@@ -11,9 +11,10 @@ import java.io.Serializable;
  * @author thinkam
  * @date 2019/01/26
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-public class CategoryVO {
+public class CategoryVO extends BaseVO {
 	/**
 	 * ID
 	 */

@@ -10,14 +10,13 @@
             - 优化删除
             - 存到redis
         - 角色权限资源管理
+            - 菜单显示
     - 用户租赁系统
         - 我的出租 - 编辑、租用历史
 - 登录
     - 后台
     - session
-- 注册 
-    - 邮箱验证码session存储
-- XSS防御和敏感词过滤
+- 敏感词过滤
 - 告警
 - 支付
 - 搜索
@@ -33,6 +32,7 @@
 - 统一trim
 - 解决maven重复依赖
 - 优化测试用例
+- XSSAspect缓存
 ### knowledge
 - mbp CRUD原理
 - datetime和timestamp

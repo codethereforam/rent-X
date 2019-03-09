@@ -1,7 +1,9 @@
 package priv.thinkam.rentx.web.service.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import priv.thinkam.rentx.common.base.BaseVO;
 import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 
 import java.time.LocalDate;
@@ -11,9 +13,10 @@ import java.time.LocalDateTime;
  * @author thinkam
  * @date 2019/02/10
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-public class PersonalItemVO {
+public class PersonalItemVO extends BaseVO {
 	/**
 	 * 租用项ID
 	 */

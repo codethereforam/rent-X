@@ -201,7 +201,7 @@
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-jdk8</artifactId> <!-- OR use this with Java 8 and beyond: <artifactId>mapstruct-jdk8</artifactId> -->
+            <artifactId>mapstruct-jdk8</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
         <dependency>
@@ -223,11 +223,50 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.11</version>
+                    <configuration>
+                        <complianceLevel>${java.version}</complianceLevel>
+                        <source>${java.version}</source>
+                        <showWeaveInfo/>
+                        <forceAjcCompile>true</forceAjcCompile>
+                        <sources/>
+                        <weaveDirectories>
+                            <weaveDirectory>${project.build.directory}/classes</weaveDirectory>
+                        </weaveDirectories>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjtools</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>

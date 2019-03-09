@@ -1,7 +1,9 @@
 package priv.thinkam.rentx.web.service.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import priv.thinkam.rentx.common.base.BaseVO;
 import priv.thinkam.rentx.common.enums.StuffStatusEnum;
 
 import java.math.BigDecimal;
@@ -13,9 +15,10 @@ import java.time.LocalDate;
  * @author thinkam
  * @date 2019/02/10
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-public class StuffOutVO {
+public class StuffOutVO extends BaseVO {
 	private Integer id;
 	/**
 	 * 类别名称

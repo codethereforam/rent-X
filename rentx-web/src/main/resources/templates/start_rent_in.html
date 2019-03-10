@@ -50,14 +50,14 @@
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
-                <td th:text="${stat.index + 1}"></td>
-                <td th:text="${vo.categoryName}"></td>
-                <td th:text="${vo.stuffName}"></td>
-                <td th:text="${vo.ownerName}"></td>
-                <td th:text="${vo.deposit}"></td>
-                <td th:text="${vo.rental}"></td>
-                <td th:text="${vo.status.getName()}"></td>
-                <td th:text="${vo.shouldReturnDate}"></td>
+                <td th:utext="${stat.index + 1}"></td>
+                <td th:utext="${vo.categoryName}"></td>
+                <td th:utext="${vo.stuffName}"></td>
+                <td th:utext="${vo.ownerName}"></td>
+                <td th:utext="${vo.deposit}"></td>
+                <td th:utext="${vo.rental}"></td>
+                <td th:utext="${vo.status.getName()}"></td>
+                <td th:utext="${vo.shouldReturnDate}"></td>
                 <td th:if="${vo.status.getCode() == 0}">
                     <a href="javascript:void(0)" class="btn btn-primary rentBtn" data-toggle="modal"
                        data-target="#rentModal">租用</a>

@@ -23,6 +23,10 @@ public interface Constant {
 		 * minus: "-"
 		 */
 		String MINUS = "-";
+		/**
+		 *  asterisk: "*"
+		 */
+		char ASTERISK = '*';
 	}
 
 	/**

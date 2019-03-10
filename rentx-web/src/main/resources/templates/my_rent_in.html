@@ -49,13 +49,13 @@
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
-                <td th:text="${stat.index + 1}"></td>
-                <td th:text="${vo.stuffName}"></td>
-                <td th:text="${vo.applyTime}"></td>
-                <td th:text="${vo.createTime}"></td>
-                <td th:text="${vo.rentDay}"></td>
-                <td th:text="${vo.endTime}"></td>
-                <td th:text="${vo.status.getName()}"></td>
+                <td th:utext="${stat.index + 1}"></td>
+                <td th:utext="${vo.stuffName}"></td>
+                <td th:utext="${vo.applyTime}"></td>
+                <td th:utext="${vo.createTime}"></td>
+                <td th:utext="${vo.rentDay}"></td>
+                <td th:utext="${vo.endTime}"></td>
+                <td th:utext="${vo.status.getName()}"></td>
                 <td th:if="${vo.status.getCode() == 0}">
                     <a href="javascript:void(0)" class="btn btn-primary cancelApplyBtn">取消申请</a>
                 </td>

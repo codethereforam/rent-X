@@ -32,7 +32,7 @@
                 <span th:if="${param.logout}">
                     您已退出
                 </span>
-                <span th:if="${captchaErrorMsg}" th:text="${captchaErrorMsg}"></span>
+                <span th:if="${captchaErrorMsg}" th:utext="${captchaErrorMsg}"></span>
             </header>
             <form method="post" th:action="@{/login}">
                 <input type="hidden" name="uuid"/>

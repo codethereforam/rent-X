@@ -16,7 +16,6 @@
 - 登录
     - 后台
     - session
-- 敏感词过滤
 - 告警
 - 支付
 - 搜索
@@ -33,6 +32,8 @@
 - 解决maven重复依赖
 - 优化测试用例
 - XSSAspect缓存
+- XSSAspect和th:text不兼容
+- VO的get被重复调用场景（考虑dubbo）
 ### knowledge
 - mbp CRUD原理
 - datetime和timestamp

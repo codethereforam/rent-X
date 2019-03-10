@@ -16,7 +16,7 @@
 - 登录
     - 后台
     - session
-- 告警
+- 告警（初步）
 - 支付
 - 搜索
 - 统计报表
@@ -34,6 +34,7 @@
 - XSSAspect缓存
 - XSSAspect和th:text不兼容
 - VO的get被重复调用场景（考虑dubbo）
+- spring bean生命周期
 ### knowledge
 - mbp CRUD原理
 - datetime和timestamp

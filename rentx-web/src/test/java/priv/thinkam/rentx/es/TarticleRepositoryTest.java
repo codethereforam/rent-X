@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
+import priv.thinkam.rentx.web.dao.entity.es.StuffDocument;
 import priv.thinkam.rentx.web.dao.entity.es.Tarticle;
+import priv.thinkam.rentx.web.dao.repository.StuffRepository;
 import priv.thinkam.rentx.web.dao.repository.TarticleRepository;
 
 import javax.annotation.Resource;
@@ -19,6 +21,8 @@ import java.util.List;
 public class TarticleRepositoryTest {
 	@Resource
 	private TarticleRepository tarticleRepository;
+	@Resource
+	private StuffRepository stuffRepository;
 
 	@Before
 	public void initRepositoryData() {
@@ -60,5 +64,14 @@ public class TarticleRepositoryTest {
 		System.out.println("------------");
 		List<Tarticle> tarticleList = tarticleRepository.findByContent("东风");
 		tarticleList.forEach(System.out::println);
+	}
+
+	@Test
+	public void findStuffTest() {
+		List<StuffDocument> stuffList1 = stuffRepository.findByDescriptionAndCategoryId("哈哈", null);
+		stuffList1.forEach(System.out::println);
+		System.out.println("-------------------");
+		List<StuffDocument> stuffList2 = stuffRepository.findByNameAndCategoryId("毛衣", 5);
+		stuffList2.forEach(System.out::println);
 	}
 }

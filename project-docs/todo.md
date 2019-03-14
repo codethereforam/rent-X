@@ -2,7 +2,6 @@
 
 ## technology
 ### primary
-- 实时通信
 - 统计报表
 - 支付
 - 基础业务
@@ -20,10 +19,12 @@
     - 后台
     - session
     - 忘记密码 找回密码
+- 实时通信（初步）
 - 告警（初步）
 - 集群部署
 - 图片上传
 ### secondary
+- websocket权限
 - mybatis-plus逻辑删除
 - 统一异常处理
 - 事务配置
@@ -37,6 +38,7 @@
 - VO的get被重复调用场景（考虑dubbo）
 - spring bean生命周期
 ### knowledge
+- webjars
 - mbp CRUD原理
 - datetime和timestamp
 - devtool

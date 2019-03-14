@@ -43,14 +43,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserRoleMapper userRoleMapper;
 	@Resource
 	private RoleResourceService roleResourceService;
-	@Value("${spring.security.ignore.paths}")
-	private String[] ignorePath;
+	@Value("${rentx.security.static-asset-path}")
+	private String[] staticAssetPath;
 	@Resource
 	private CaptchaValidationFilter captchaValidationFilter;
 
 	@Override
 	public void configure(WebSecurity web) {
-		web.ignoring().antMatchers(ignorePath)
+		web.ignoring().antMatchers(staticAssetPath)
+				.antMatchers("/chatServer/**")
 				.regexMatchers(HttpMethod.GET, "/register", "/forget", "/captcha", "/captcha/error")
 				.regexMatchers(HttpMethod.POST, "/users", "/emails/(.+)/send-captcha", "/users/(.+)/check-exists");
 	}

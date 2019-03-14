@@ -15,9 +15,6 @@ spring:
   data:
     elasticsearch:
       cluster-nodes: localhost:9300
-  security:
-    ignore:
-      paths: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**
   session:
     store-type: redis
   mail:
@@ -46,6 +43,8 @@ rentx:
   web:
     service:
       version: 1.0.0
+  security:
+    static-asset-path: /plugins/**, /css/**, /js/**, /favicon.ico, /fonts/**, /img/**
 
 dubbo:
   scan:

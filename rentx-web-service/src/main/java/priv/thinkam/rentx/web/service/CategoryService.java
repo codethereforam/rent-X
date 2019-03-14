@@ -10,19 +10,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.common.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.dao.entity.Category;
-import priv.thinkam.rentx.common.enums.CategoryLevelEnum;
 import priv.thinkam.rentx.web.dao.mapper.CategoryMapper;
 import priv.thinkam.rentx.web.service.param.CategoryParam;
 import priv.thinkam.rentx.web.service.validator.category.CategoryValidatorGroup;
+import priv.thinkam.rentx.web.service.vo.CategorySelectVO;
 import priv.thinkam.rentx.web.service.vo.CategoryVO;
 
 import javax.annotation.Resource;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -190,11 +189,34 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	}
 
 	public List<CategoryVO> listCategoryVO() {
+		return this.listAllCategory().stream()
+				.map(c -> BeanUtil.map(c, CategoryVO.class))
+				.collect(Collectors.toList());
+	}
+
+	public List<CategorySelectVO> listCategorySelectVO() {
 		return this.list(
 				new QueryWrapper<Category>().lambda()
 						.eq(Category::getMark, EnableEnum.YES.getValue())
 						.eq(Category::getStatus, EnableEnum.YES.getValue())
-		).stream().map(c -> BeanUtil.map(c, CategoryVO.class))
-				.collect(Collectors.toList());
+						.eq(Category::getLevel, CategoryLevelEnum.THREE.getCode())
+		).stream().map(c -> BeanUtil.map(c, CategorySelectVO.class)).collect(Collectors.toList());
+	}
+
+	public List<Category> listAllCategory() {
+		return this.list(
+				new QueryWrapper<Category>().lambda()
+						.eq(Category::getMark, EnableEnum.YES.getValue())
+						.eq(Category::getStatus, EnableEnum.YES.getValue())
+		);
+	}
+
+	public Map<Integer, String> getIdNameMap() {
+		List<Category> categoryList = this.listAllCategory();
+		Map<Integer, String> idNameMap = new HashMap<>(categoryList.size());
+		for (Category category : categoryList) {
+			idNameMap.put(category.getId(), category.getName());
+		}
+		return idNameMap;
 	}
 }

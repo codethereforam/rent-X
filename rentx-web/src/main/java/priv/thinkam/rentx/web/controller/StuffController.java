@@ -1,16 +1,23 @@
 package priv.thinkam.rentx.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.web.service.CategoryService;
 import priv.thinkam.rentx.web.service.ItemService;
 import priv.thinkam.rentx.web.service.StuffService;
 import priv.thinkam.rentx.web.service.param.StuffParam;
+import priv.thinkam.rentx.web.service.vo.StuffSearchVO;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /**
  * 物品 controller
@@ -26,6 +33,8 @@ public class StuffController extends BaseController {
 	private StuffService stuffService;
 	@Resource
 	private ItemService itemService;
+	@Resource
+	private CategoryService categoryService;
 
 	/**
 	 * 开始租用
@@ -114,5 +123,44 @@ public class StuffController extends BaseController {
 		// 获取当前用户ID
 		final int userId = 3;
 		return itemService.rent(id, userId, rentDay);
+	}
+
+	/**
+	 * 跳转到搜索页面
+	 *
+	 * @param model                model
+	 * @param stuffSearchVoListStr stuffSearchVoListStr
+	 * @return java.lang.String
+	 * @author yanganyu
+	 * @date 2019/3/14 21:40
+	 */
+	@GetMapping("/search")
+	public String searchPage(Model model, @ModelAttribute("stuffSearchVoListStr") String stuffSearchVoListStr) throws IOException {
+		model.addAttribute("categorySelectVoList", categoryService.listCategorySelectVO());
+		if (StringUtils.isNotBlank(stuffSearchVoListStr)) {
+			model.addAttribute("stuffSearchVoList",
+					new ObjectMapper().readValue(stuffSearchVoListStr, StuffSearchVO[].class));
+		}
+		return "search";
+	}
+
+	/**
+	 * 搜索
+	 *
+	 * @param categoryId         categoryId
+	 * @param name               name
+	 * @param desc               desc
+	 * @param redirectAttributes redirectAttributes
+	 * @return java.lang.String
+	 * @author yanganyu
+	 * @date 2019/3/14 21:40
+	 */
+	@PostMapping("/search")
+	public String search(Integer categoryId, String name, String desc, RedirectAttributes redirectAttributes) throws JsonProcessingException {
+		redirectAttributes.addFlashAttribute("stuffSearchVoListStr",
+				new ObjectMapper().writeValueAsString(stuffService.searchByCategoryAndNameAndDesc(categoryId, name, desc)));
+		redirectAttributes.addFlashAttribute("nameCondition", name);
+		redirectAttributes.addFlashAttribute("descCondition", desc);
+		return redirect("search");
 	}
 }

@@ -29,4 +29,14 @@ public interface StuffRepository extends ElasticsearchRepository<StuffDocument, 
 	 * @return StuffDocument list
 	 */
 	List<StuffDocument> findByNameAndCategoryId(String name, Integer categoryId);
+
+	/**
+	 * find by name and description and categoryId
+	 *
+	 * @param name        物品名称
+	 * @param description 物品描述
+	 * @param categoryId  类别ID
+	 * @return StuffDocument list
+	 */
+	List<StuffDocument> findByNameAndDescriptionAndCategoryId(String name, String description, Integer categoryId);
 }

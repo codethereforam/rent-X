@@ -327,3 +327,34 @@ INSERT INTO `user_role` VALUES (6,6,4,0,'2019-01-23 12:49:16',0,'2019-01-23 12:4
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-01-26 13:40:58
+
+CREATE TABLE `menu`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '菜单编号',
+  `pid`            int(10) unsigned    not null comment '父ID，根菜单pid为0',
+  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '菜单名称',
+  `url`            varchar(100)        NOT NULL DEFAULT '' COMMENT '菜单URL',
+  `add_user_id`    int(10)             NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10)             NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='菜单';
+
+CREATE TABLE `role_menu`
+(
+  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色菜单关系编号',
+  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
+  `menu_id`        int(10) unsigned    NOT NULL COMMENT '菜单ID',
+  `add_user_id`    int(10)             NOT NULL DEFAULT '0' COMMENT '添加人ID',
+  `add_time`       datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `update_user_id` int(10)             NOT NULL DEFAULT '0' COMMENT '更新人ID',
+  `update_time`    datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
+  PRIMARY KEY (`id`),
+  KEY `idx_role_id` (`role_id`),
+  KEY `idx_menu_id` (`menu_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4 COMMENT ='角色菜单关系';

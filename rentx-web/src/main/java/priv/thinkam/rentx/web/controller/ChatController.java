@@ -1,7 +1,6 @@
 package priv.thinkam.rentx.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ import java.net.UnknownHostException;
 public class ChatController {
 
 	/**
-	 * 聊天界面
+	 * 进入聊天界面
 	 */
 	@GetMapping("/index")
 	public String index(Authentication authentication, String username, HttpServletRequest request, Model model) throws UnknownHostException {

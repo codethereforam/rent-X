@@ -1,360 +1,238 @@
-# 用户租赁系统库表
+-- 用户租赁系统库表
 
 create database rentx;
 use rentx;
 
-######################################################
+-- ####################################################
 
--- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
---
--- Host: 127.0.0.1    Database: rentx
--- ------------------------------------------------------
--- Server version	5.7.22
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `category`
---
-
-DROP TABLE IF EXISTS `category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
-                          `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '类别编号',
-                          `name` varchar(32) NOT NULL DEFAULT '' COMMENT '类别名称',
-                          `description` varchar(255) NOT NULL DEFAULT '' COMMENT '类别描述',
-                          `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父类别编号（0代表是根类别）',
-                          `level` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT ' 类别层次（只能为1或2或3）',
-                          `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '状态(1:启用, 0:禁用)',
-                          `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                          `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                          `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                          `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                          `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                          PRIMARY KEY (`id`),
-                          KEY `idx_parent_id` (`parent_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='类别';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` VALUES (1,'服装','涵盖所有服装',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (2,'男装','涵盖所有男装',1,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (3,'女装','涵盖所有女装',1,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (4,'T恤','涵盖所有女士T恤',3,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (5,'毛衣','涵盖所有男士毛衣',2,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (6,'短裙','涵盖所有女士短裙',3,3,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (7,'家用电器','涵盖所有家用电器',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (8,'电脑办公','涵盖所有电脑办公',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (9,'大家电','涵盖所有大家电',7,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (10,'厨房电器','涵盖所有厨房电器',7,2,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (11,'音乐','涵盖所有音乐相关',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (12,'aaa','aaa',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (13,'bbb','bbb',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-INSERT INTO `category` VALUES (14,'ccc','ccc',0,1,1,0,'2019-01-26 05:39:15',0,'2019-01-26 05:39:15',1);
-
---
--- Table structure for table `item`
---
-
-DROP TABLE IF EXISTS `item`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `item` (
-                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '出租项编号',
-                      `user_id` int(10) unsigned NOT NULL COMMENT '租用者ID',
-                      `stuff_id` int(10) unsigned NOT NULL COMMENT '物品编号',
-                      `create_time` timestamp NULL DEFAULT NULL COMMENT '租用日期',
-                      `rent_day` int(10) unsigned NOT NULL COMMENT '租用天数',
-                      `end_time` timestamp NULL DEFAULT NULL COMMENT '归还日期',
-                      `apply_time` timestamp NULL DEFAULT NULL COMMENT '申请时间',
-                      `status` tinyint(3) unsigned NOT NULL COMMENT '状态（0：申请中；1：不通过；2：租用中；3： 已归还）',
-                      `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                      `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                      `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                      `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                      PRIMARY KEY (`id`),
-                      KEY `idx_user_id` (`user_id`),
-                      KEY `idx_stuff_id` (`stuff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='出租项';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `item`
---
-
-
---
--- Table structure for table `resource`
---
-
-DROP TABLE IF EXISTS `resource`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resource` (
-                          `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '资源编号',
-                          `name` varchar(32) NOT NULL DEFAULT '' COMMENT '资源名称',
-                          `description` varchar(50) NOT NULL DEFAULT '' COMMENT '资源描述',
-                          `url` varchar(100) NOT NULL DEFAULT '' COMMENT '资源URL',
-                          `method` varchar(50) NOT NULL DEFAULT '' COMMENT 'HTTP方法',
-                          `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                          `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                          `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                          `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                          `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                          PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='资源';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `resource`
---
-
-INSERT INTO `resource` VALUES (6,'','','/tusers','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
-INSERT INTO `resource` VALUES (7,'','','/tusers/index','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
-INSERT INTO `resource` VALUES (8,'','','/tusers/count','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 13:04:21',1);
-INSERT INTO `resource` VALUES (9,'','','/tusers/(\\d+)','GET',0,'2019-01-23 13:04:11',0,'2019-01-23 15:06:56',1);
-
---
--- Table structure for table `role`
---
-
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色编号',
-                      `identifier` varchar(32) NOT NULL DEFAULT '' COMMENT '角色标识符',
-                      `name` varchar(32) NOT NULL DEFAULT '' COMMENT '角色名称',
-                      `description` varchar(100) NOT NULL DEFAULT '' COMMENT '角色描述',
-                      `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                      `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                      `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                      `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                      PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='角色';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `role`
---
-
-INSERT INTO `role` VALUES (1,'ROOT','ROOT用户','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
-INSERT INTO `role` VALUES (2,'LESSOR','出租人','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
-INSERT INTO `role` VALUES (3,'LESSEE','承租人','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
-INSERT INTO `role` VALUES (4,'GUEST','游客用户','',0,'2019-01-23 12:46:01',0,'2019-01-23 12:46:01',1);
-
---
--- Table structure for table `role_resource`
---
-
-DROP TABLE IF EXISTS `role_resource`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role_resource` (
-                               `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色资源关系编号',
-                               `role_id` int(10) unsigned NOT NULL COMMENT '角色ID',
-                               `resource_id` int(10) unsigned NOT NULL COMMENT '资源ID',
-                               `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                               `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                               `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                               `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                               `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                               PRIMARY KEY (`id`),
-                               KEY `idx_role_id` (`role_id`),
-                               KEY `idx_resource_id` (`resource_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='角色资源关系';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `role_resource`
---
-
-INSERT INTO `role_resource` VALUES (6,2,6,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
-INSERT INTO `role_resource` VALUES (7,2,7,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
-INSERT INTO `role_resource` VALUES (8,3,8,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
-INSERT INTO `role_resource` VALUES (9,3,9,0,'2019-01-23 13:05:46',0,'2019-01-23 13:05:46',1);
-INSERT INTO `role_resource` VALUES (10,3,6,0,'2019-01-23 05:05:46',0,'2019-01-23 05:05:46',1);
-
---
--- Table structure for table `stuff`
---
-
-DROP TABLE IF EXISTS `stuff`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `stuff` (
-                       `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '物品编号',
-                       `category_id` int(10) unsigned NOT NULL COMMENT '类别编号',
-                       `name` varchar(32) NOT NULL DEFAULT '' COMMENT '物品名称',
-                       `description` varchar(255) default '' not null comment '物品描述',
-                       `deposit` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '押金(rmb)',
-                       `rental` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '租金（rmb/day）',
-                       `status` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '物品状态（0:未租；1:申请租用；2:已租;3:不出租）',
-                       `picture_id` char(32) NOT NULL DEFAULT '' COMMENT '图片id',
-                       `user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '物品所有者ID',
-                       `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                       `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                       `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                       `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                       `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                       PRIMARY KEY (`id`),
-                       KEY `idx_category_id` (`category_id`),
-                       KEY `inx_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='物品';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `stuff`
---
-
-
---
--- Table structure for table `tuser`
---
-
-DROP TABLE IF EXISTS `tuser`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tuser` (
-                       `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-                       `name` varchar(16) NOT NULL DEFAULT '' COMMENT '名称',
-                       `age` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '年龄',
-                       `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                       `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                       `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                       `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                       `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                       PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='用户表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tuser`
---
-
-INSERT INTO `tuser` VALUES (1,'u1',11,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
-INSERT INTO `tuser` VALUES (2,'u2',21,0,'2019-01-10 03:00:57',0,'2019-01-10 03:00:57',0);
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user` (
-                      `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-                      `username` varchar(20) NOT NULL COMMENT '用户名',
-                      `password` char(60) NOT NULL COMMENT '密码',
-                      `email` varchar(50) NOT NULL COMMENT '邮箱',
-                      `sex` tinyint(2) unsigned DEFAULT '2' COMMENT '性别(0:女，1:男，2:不愿透露)',
-                      `status` tinyint(1) unsigned DEFAULT '1' COMMENT '状态(1:正常,0:锁定)',
-                      `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                      `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                      `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                      `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                      `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                      PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` VALUES (1,'u1','{noop}p1','','',2,0,0,'2019-01-23 12:42:08',0,'2019-01-23 12:42:08',1);
-INSERT INTO `user` VALUES (2,'u2','{noop}p2','','',2,0,0,'2019-01-23 12:42:29',0,'2019-01-23 12:48:00',1);
-INSERT INTO `user` VALUES (3,'u3','{noop}p3','','',2,0,0,'2019-01-23 12:43:09',0,'2019-01-23 12:48:04',1);
-INSERT INTO `user` VALUES (4,'u4','{noop}p4','','',2,0,0,'2019-01-23 12:43:09',0,'2019-01-23 12:48:07',1);
-INSERT INTO `user` VALUES (5,'root','{noop}root','','',2,0,0,'2019-01-23 12:46:41',0,'2019-01-23 12:48:10',1);
-INSERT INTO `user` VALUES (6,'guest','{noop}guest','','',2,0,0,'2019-01-23 12:46:41',0,'2019-01-23 12:48:13',1);
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_role` (
-                           `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户角色关系编号',
-                           `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
-                           `role_id` int(10) unsigned NOT NULL COMMENT '角色ID',
-                           `add_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '添加人ID',
-                           `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-                           `update_user_id` int(10) NOT NULL DEFAULT '0' COMMENT '更新人ID',
-                           `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-                           `mark` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-                           PRIMARY KEY (`id`),
-                           KEY `idx_user_id` (`user_id`),
-                           KEY `idx_role_id` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='用户角色关系';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_role`
---
-
-INSERT INTO `user_role` VALUES (1,1,2,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-INSERT INTO `user_role` VALUES (2,2,2,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-INSERT INTO `user_role` VALUES (3,3,3,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-INSERT INTO `user_role` VALUES (4,4,3,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-INSERT INTO `user_role` VALUES (5,5,1,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-INSERT INTO `user_role` VALUES (6,6,4,0,'2019-01-23 12:49:16',0,'2019-01-23 12:49:16',1);
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2019-01-26 13:40:58
-
-CREATE TABLE `menu`
+create table category
 (
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '菜单编号',
-  `pid`            int(10) unsigned    not null comment '父ID，根菜单pid为0',
-  `name`           varchar(32)         NOT NULL DEFAULT '' COMMENT '菜单名称',
-  `url`            varchar(100)        NOT NULL DEFAULT '' COMMENT '菜单URL',
-  `add_user_id`    int(10)             NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10)             NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='菜单';
+  id             int unsigned auto_increment comment '类别编号'
+    primary key,
+  name           varchar(32)         default ''                not null comment '类别名称',
+  description    varchar(255)        default ''                not null comment '类别描述',
+  parent_id      int unsigned        default 0                 not null comment '父类别编号（0代表是根类别）',
+  level          tinyint(2) unsigned default 1                 not null comment ' 类别层次（只能为1或2或3）',
+  status         tinyint(1) unsigned default 1                 not null comment '状态(1:启用, 0:禁用)',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '类别' charset = utf8mb4;
 
-CREATE TABLE `role_menu`
+create index idx_parent_id
+  on category (parent_id);
+
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, '服装', '涵盖所有服装', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, '男装', '涵盖所有男装', 1, 2, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, '女装', '涵盖所有女装', 1, 2, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 'T恤', '涵盖所有女士T恤', 3, 3, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, '毛衣', '涵盖所有男士毛衣', 2, 3, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, '短裙', '涵盖所有女士短裙', 3, 3, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, '家用电器', '涵盖所有家用电器', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, '电脑办公', '涵盖所有电脑办公', 0, 1, 0, 0, '2019-01-26 13:39:15', 0, '2019-01-26 16:31:48', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, '大家电', '涵盖所有大家电', 7, 2, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, '厨房电器', '涵盖所有厨房电器', 7, 2, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, '音乐', '涵盖所有音乐相关', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 'aaa', 'aaa', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, 'bbb', 'bbb', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-01-26 13:39:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, 'ccc', 'ccc', 0, 1, 1, 0, '2019-01-26 13:39:15', 0, '2019-03-07 00:09:15', 1);
+INSERT INTO rentx.category (id, name, description, parent_id, level, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (32, '衬衫不开心', '衬衫desc', 2, 3, 1, 0, '2019-01-27 18:34:38', 0, '2019-03-10 16:12:52', 1);
+create table item
 (
-  `id`             int(10) unsigned    NOT NULL AUTO_INCREMENT COMMENT '角色菜单关系编号',
-  `role_id`        int(10) unsigned    NOT NULL COMMENT '角色ID',
-  `menu_id`        int(10) unsigned    NOT NULL COMMENT '菜单ID',
-  `add_user_id`    int(10)             NOT NULL DEFAULT '0' COMMENT '添加人ID',
-  `add_time`       datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `update_user_id` int(10)             NOT NULL DEFAULT '0' COMMENT '更新人ID',
-  `update_time`    datetime            NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  `mark`           tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '删除标识(是否有效 1有效,0无效)',
-  PRIMARY KEY (`id`),
-  KEY `idx_role_id` (`role_id`),
-  KEY `idx_menu_id` (`menu_id`)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8mb4 COMMENT ='角色菜单关系';
+  id             int unsigned auto_increment comment '出租项编号'
+    primary key,
+  user_id        int unsigned                                  not null comment '租用者ID',
+  stuff_id       int unsigned                                  not null comment '物品编号',
+  create_time    date                                          null comment '租用日期',
+  rent_day       int unsigned                                  not null comment '租用天数',
+  end_time       datetime                                      null comment '归还时间',
+  apply_time     datetime                                      null comment '申请时间',
+  status         tinyint unsigned                              not null comment '状态（0：申请中；1：不通过；2：租用中；3： 已归还）',
+  add_date       date                default '1970-01-01'      not null comment '添加日期',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '出租项' charset = utf8mb4;
+
+create index idx_stuff_id
+  on item (stuff_id);
+
+create index idx_user_id
+  on item (user_id);
+
+INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 3, 2, '2019-02-10', 10, null, '2019-02-10 06:59:50', 2, '2019-02-10', 0, '2019-02-10 15:00:12', 0, '2019-03-15 21:32:33', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 3, 4, '2019-02-16', 12, '2019-02-16 15:33:00', '2019-02-15 22:31:28', 3, '2019-02-15', 3, '2019-02-15 22:31:27', 3, '2019-03-15 21:32:33', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 3, null, 11, null, '2019-02-16 15:33:31', 1, '2019-02-16', 3, '2019-02-16 15:33:30', 3, '2019-03-15 21:32:33', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 3, null, 20, null, '2019-02-16 15:54:53', 0, '2019-02-16', 3, '2019-02-16 15:54:52', 3, '2019-03-15 21:32:33', 1);
+create table resource
+(
+  id             int unsigned auto_increment comment '资源编号'
+    primary key,
+  name           varchar(32)         default ''                not null comment '资源名称',
+  description    varchar(50)         default ''                not null comment '资源描述',
+  url            varchar(100)        default ''                not null comment '资源URL',
+  method         varchar(50)         default ''                not null comment 'HTTP方法',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '资源' charset = utf8mb4;
+
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, '获取所有category VO', '', '/categories', 'GET', 0, '2019-03-16 14:16:08', 0, '2019-03-16 14:16:08', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, '进入聊天界面', '', '/chat/index', 'GET', 0, '2019-03-16 14:19:57', 0, '2019-03-16 14:19:57', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, '首页', '', '/', 'GET', 0, '2019-03-16 14:21:21', 0, '2019-03-16 14:21:21', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, '我的租用', '', '/items/in', 'GET', 0, '2019-03-16 14:24:36', 0, '2019-03-16 14:24:36', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, '取消申请租用', '', '/items/(\\d+)/cancel-apply', 'POST', 0, '2019-03-16 14:25:52', 0, '2019-03-16 14:25:52', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, '开始租用页面', '', '/stuffs/in', 'GET', 0, '2019-03-16 14:29:19', 0, '2019-03-16 14:29:19', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, '开始出租页面', '', '/stuffs/out/start', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, '我的出租页面', '', '/stuffs/out', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, '开始出租提交', '', '/stuffs/out', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, '取消出租', '', '/stuffs/(\\d+)/cancel-rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, '租用', '', '/stuffs/(\\d+)/rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, '跳转到搜索页面', '', '/stuffs/search', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, '搜索', '', '/stuffs/search', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+create table role
+(
+  id             int unsigned auto_increment comment '角色编号'
+    primary key,
+  identifier     varchar(32)         default ''                not null comment '角色标识符',
+  name           varchar(32)         default ''                not null comment '角色名称',
+  description    varchar(100)        default ''                not null comment '角色描述',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '角色' charset = utf8mb4;
+
+INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 'ROOT', 'ROOT用户', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
+INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'LESSOR', '出租人', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
+INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 'LESSEE', '承租人', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
+INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 'GUEST', '游客用户', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
+create table role_resource
+(
+  id             int unsigned auto_increment comment '角色资源关系编号'
+    primary key,
+  role_id        int unsigned                                  not null comment '角色ID',
+  resource_id    int unsigned                                  not null comment '资源ID',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '角色资源关系' charset = utf8mb4;
+
+create index idx_resource_id
+  on role_resource (resource_id);
+
+create index idx_role_id
+  on role_resource (role_id);
+
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 2, 1, 0, '2019-03-16 14:18:23', 0, '2019-03-16 14:18:23', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 2, 2, 0, '2019-03-16 14:20:45', 0, '2019-03-16 14:20:45', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 3, 2, 0, '2019-03-16 14:20:45', 0, '2019-03-16 14:20:45', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 2, 3, 0, '2019-03-16 14:21:50', 0, '2019-03-16 14:21:50', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 3, 3, 0, '2019-03-16 14:21:50', 0, '2019-03-16 14:21:50', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 4, 3, 0, '2019-03-16 14:21:50', 0, '2019-03-16 14:21:50', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 4, 0, '2019-03-16 14:24:43', 0, '2019-03-16 14:24:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 5, 0, '2019-03-16 14:26:44', 0, '2019-03-16 14:26:44', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, 6, 0, '2019-03-16 14:29:59', 0, '2019-03-16 14:29:59', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 4, 6, 0, '2019-03-16 14:30:46', 0, '2019-03-16 14:30:46', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, 2, 7, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 2, 8, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, 2, 9, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, 2, 10, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (15, 3, 11, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (16, 2, 12, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (17, 3, 12, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (18, 2, 13, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (19, 3, 13, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+create table stuff
+(
+  id             int unsigned auto_increment comment '物品编号'
+    primary key,
+  category_id    int unsigned                                  not null comment '类别编号',
+  name           varchar(32)         default ''                not null comment '物品名称',
+  description    varchar(255)        default ''                not null comment '物品描述',
+  deposit        decimal(8, 2)       default 0.00              not null comment '押金(rmb)',
+  rental         decimal(8, 2)       default 0.00              not null comment '租金（rmb/day）',
+  status         tinyint unsigned    default 0                 not null comment '物品状态（0:未租；1:申请租用；2:已租;3:不出租）',
+  picture_id     char(32)            default ''                not null comment '图片id',
+  user_id        int unsigned        default 0                 not null comment '物品所有者ID',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '物品' charset = utf8mb4;
+
+create index idx_category_id
+  on stuff (category_id);
+
+create index inx_user_id
+  on stuff (user_id);
+
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 5, '男式毛衣001<script>alert6()</script>', '男式毛衣001 暖和', 300.00, 20.00, 2, '', 1, 0, '2019-02-09 22:26:02', 0, '2019-03-14 22:10:52', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 32, '男士衬衫001不开心', '男士衬衫001 帅气 哈哈哈', 500.00, 50.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-12 00:31:43', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, '女士T恤001', '女士T恤001 描述bb 哈哈', 200.00, 30.00, 0, '', 1, 1, '2019-02-13 19:57:57', 3, '2019-03-12 00:34:07', 1);
+create table user
+(
+  id             int unsigned auto_increment comment 'ID'
+    primary key,
+  username       varchar(20)                                   not null comment '用户名',
+  password       char(60)                                      not null comment '密码',
+  email          varchar(50)                                   not null comment '邮箱',
+  sex            tinyint(2) unsigned default 2                 null comment '性别(0:女，1:男，2:不愿透露)',
+  status         tinyint(1) unsigned default 1                 null comment '状态(1:正常,0:锁定)',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '用户表' charset = utf8mb4;
+
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 'u1', '$2a$10$Mm59cQzWYgYcS7ym95W5qOXehcIZ4siNiLqkwQUqWEmI/s1gK7/f.', '', 2, 1, 0, '2019-01-23 20:42:08', 0, '2019-03-16 11:16:02', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'u2', '$2a$10$lWj2m62Dcbt/yfltRHGvf.Z0vhslZ4HewF9px7UoNl1i86YCGyz5m', '', 2, 1, 0, '2019-01-23 20:42:29', 0, '2019-03-03 21:10:19', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 'u3', '$2a$10$AtIpCLurCusuN/VmaZNrPOdfNC4z69F0B8sldvLnuJhKG1GwTIVuu', '', 2, 1, 0, '2019-01-23 20:43:09', 0, '2019-03-03 21:10:19', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 'u4', '$2a$10$0Exak1pgYcxvJuacCKqteO8uRsfHBXdyC9Lkep8VlDyvYKhLibdzK', '', 2, 1, 0, '2019-01-23 20:43:09', 0, '2019-03-03 21:10:19', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 'root', '$2a$10$fUctrKyPpyU5Mrj72MJLR.D2sUZBeOiuCCOaegvoziUjs8xyyZ//O', '', 2, 1, 0, '2019-01-23 20:46:41', 0, '2019-03-03 21:10:19', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 'guest', '$2a$10$dyGpMt8tBxDPTTOZxVxnU.REjI.VPK1fkfNMigpAkhoqxbzHMK/2C', '', 2, 1, 0, '2019-01-23 20:46:41', 0, '2019-03-03 21:10:19', 1);
+create table user_role
+(
+  id             int unsigned auto_increment comment '用户角色关系编号'
+    primary key,
+  user_id        int unsigned                                  not null comment '用户ID',
+  role_id        int unsigned                                  not null comment '角色ID',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       timestamp           default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    timestamp           default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '用户角色关系' charset = utf8mb4;
+
+create index idx_role_id
+  on user_role (role_id);
+
+create index idx_user_id
+  on user_role (user_id);
+
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 1, 2, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 2, 2, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 3, 3, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, 3, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 5, 1, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 6, 4, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 7, 1, 0, '2019-03-03 21:20:21', 0, '2019-03-03 21:20:21', 1);

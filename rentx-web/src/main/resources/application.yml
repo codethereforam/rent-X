@@ -17,6 +17,7 @@ spring:
       cluster-nodes: localhost:9300
   session:
     store-type: redis
+    timeout: 1800
   mail:
     host: smtp.163.com
     username: xxx@163.com

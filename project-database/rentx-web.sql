@@ -236,3 +236,39 @@ INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 5, 1, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 6, 4, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 7, 1, 0, '2019-03-03 21:20:21', 0, '2019-03-03 21:20:21', 1);
+
+create table menu
+(
+  id             int unsigned auto_increment comment '菜单编号'
+    primary key,
+  pid            int unsigned                                  not null comment '父ID，根菜单pid为0',
+  name           varchar(32)         default ''                not null comment '菜单名称',
+  url            varchar(100)        default ''                not null comment '菜单URL',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '菜单' charset = utf8mb4;
+
+
+create table role_menu
+(
+  id             int unsigned auto_increment comment '角色菜单关系编号'
+    primary key,
+  role_id        int unsigned                                  not null comment '角色ID',
+  menu_id        int unsigned                                  not null comment '菜单ID',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '角色菜单关系' charset = utf8mb4;
+
+create index idx_menu_id
+  on role_menu (menu_id);
+
+create index idx_role_id
+  on role_menu (role_id);

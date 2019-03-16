@@ -2,7 +2,6 @@
 
 ## technology
 ### primary
-- 保存登录用户session处理
 - 支付
 - 菜单
 - 权限配置
@@ -28,6 +27,7 @@
 - 集群部署
 - 图片上传
 ### secondary
+- spring security 用户信息存session
 - redirectattribute web和admin 序列化
 - websocket权限
 - mybatis-plus逻辑删除

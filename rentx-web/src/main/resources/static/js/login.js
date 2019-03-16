@@ -11,7 +11,7 @@ window.onload = function () {
     var passwordObject = document.getElementById("password");
     var captchaObject = document.getElementById("captcha");
 
-    functions.checkAccountName = function () {
+    functions.checkAccountNameListener = function () {
         accountNameObject.onfocus = function () {
             functions.focusInputBack(this, "0px -55px");
             functions.resetOutline(this);
@@ -20,19 +20,22 @@ window.onload = function () {
 
         accountNameObject.onblur = function () {
             functions.blurInputBack(this, "0px 0px");
-            var thisValue = this.value;
-            if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "请填写账户名");
-                usernameValid = false;
-            } else {
+            if (isAccountNameValid(this.value)) {
                 functions.showRightSpanAndHideMessage(this);
                 usernameValid = true;
+            } else {
+                functions.showWrongSpanAndMessage(this, "请填写账户名");
+                usernameValid = false;
             }
             checkLoginButton();
         }
     };
 
-    functions.checkPassword = function () {
+    function isAccountNameValid(accountName) {
+        return accountName != null && accountName.replace(/\s/g, "").length !== 0;
+    }
+
+    functions.checkPasswordListener = function () {
         passwordObject.onfocus = function () {
             functions.focusInputBack(this, "-325px -55px");
             functions.resetOutline(this);
@@ -41,18 +44,21 @@ window.onload = function () {
 
         passwordObject.onblur = function () {
             functions.focusInputBack(this, "-325px 0px");
-            var thisValue = this.value;
-            if (thisValue == null || thisValue.replace(/\s/g, "").length === 0) {
-                functions.showWrongSpanAndMessage(this, "请输入密码");
-                passwordValid = false;
-            } else {
+            if (isPasswordValid(this.value)) {
                 functions.showRightSpanAndHideMessage(this);
                 functions.showRightSpanAndHideMessage(functions.aInputs[2]);
                 passwordValid = true;
+            } else {
+                functions.showWrongSpanAndMessage(this, "请输入密码");
+                passwordValid = false;
             }
             checkLoginButton();
         }
     };
+
+    function isPasswordValid(password) {
+        return password != null && password.replace(/\s/g, "").length !== 0;
+    }
 
     functions.checkCaptcha = function () {
         captchaObject.onfocus = function () {
@@ -91,8 +97,17 @@ window.onload = function () {
         window.location.href = "/forget";
     };
 
-    functions.checkAccountName();
-    functions.checkPassword();
+    if(isAccountNameValid(accountNameObject.value)) {
+        functions.showRightSpan(accountNameObject);
+        usernameValid = true;
+    }
+    if(isPasswordValid(passwordObject.value)) {
+        functions.showRightSpan(passwordObject);
+        passwordValid = true;
+    }
+
+    functions.checkAccountNameListener();
+    functions.checkPasswordListener();
     functions.checkCaptcha();
 
     retrieveCaptcha();

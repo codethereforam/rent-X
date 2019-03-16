@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			userDetailsList.add(
 					User.withUsername(dto.getUsername())
 					.password(dto.getPassword())
-					.roles(dto.getRoleIdentifier()).build()
+					.roles(dto.getRoleIdentifierConcat().split(Constant.Separator.COMMA)).build()
 			);
 		}
 		return new InMemoryUserDetailsManager(userDetailsList);

@@ -70,6 +70,30 @@ INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, 
 INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 3, 4, '2019-02-16', 12, '2019-02-16 15:33:00', '2019-02-15 22:31:28', 3, '2019-02-15', 3, '2019-02-15 22:31:27', 3, '2019-03-15 21:32:33', 1);
 INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 3, null, 11, null, '2019-02-16 15:33:31', 1, '2019-02-16', 3, '2019-02-16 15:33:30', 3, '2019-03-15 21:32:33', 1);
 INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 3, null, 20, null, '2019-02-16 15:54:53', 0, '2019-02-16', 3, '2019-02-16 15:54:52', 3, '2019-03-15 21:32:33', 1);
+create table menu
+(
+  id             int unsigned auto_increment comment '菜单编号'
+    primary key,
+  pid            int unsigned                                  not null comment '父ID，根菜单pid为0',
+  name           varchar(32)         default ''                not null comment '菜单名称',
+  url            varchar(100)        default ''                not null comment '菜单URL',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '菜单' charset = utf8mb4;
+
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 0, '租用', 'rent-in-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 0, '出租', 'rent-out-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 0, '公共', 'common-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 1, '开始租用', '/stuffs/in', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 1, '我的租用', '/items/in', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 2, '开始出租', '/stuffs/out/start', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 2, '我的出租', '/stuffs/out', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, '聊天', '/chat/index', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
+INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, '搜索', '/stuffs/search', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
 create table resource
 (
   id             int unsigned auto_increment comment '资源编号'
@@ -118,6 +142,40 @@ INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time
 INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 'LESSOR', '出租人', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
 INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 'LESSEE', '承租人', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
 INSERT INTO rentx.role (id, identifier, name, description, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 'GUEST', '游客用户', '', 0, '2019-01-23 20:46:01', 0, '2019-01-23 20:46:01', 1);
+create table role_menu
+(
+  id             int unsigned auto_increment comment '角色菜单关系编号'
+    primary key,
+  role_id        int unsigned                                  not null comment '角色ID',
+  menu_id        int unsigned                                  not null comment '菜单ID',
+  add_user_id    int(10)             default 0                 not null comment '添加人ID',
+  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
+  update_user_id int(10)             default 0                 not null comment '更新人ID',
+  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
+  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
+)
+  comment '角色菜单关系' charset = utf8mb4;
+
+create index idx_menu_id
+  on role_menu (menu_id);
+
+create index idx_role_id
+  on role_menu (role_id);
+
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 2, 2, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 2, 3, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 2, 7, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 2, 8, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 2, 9, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 2, 10, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 1, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 3, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, 4, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, 5, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, 3, 9, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 10, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, 4, 1, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, 4, 4, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
 create table role_resource
 (
   id             int unsigned auto_increment comment '角色资源关系编号'
@@ -209,6 +267,7 @@ INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id,
 INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 'u4', '$2a$10$0Exak1pgYcxvJuacCKqteO8uRsfHBXdyC9Lkep8VlDyvYKhLibdzK', '', 2, 1, 0, '2019-01-23 20:43:09', 0, '2019-03-03 21:10:19', 1);
 INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 'root', '$2a$10$fUctrKyPpyU5Mrj72MJLR.D2sUZBeOiuCCOaegvoziUjs8xyyZ//O', '', 2, 1, 0, '2019-01-23 20:46:41', 0, '2019-03-03 21:10:19', 1);
 INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 'guest', '$2a$10$dyGpMt8tBxDPTTOZxVxnU.REjI.VPK1fkfNMigpAkhoqxbzHMK/2C', '', 2, 1, 0, '2019-01-23 20:46:41', 0, '2019-03-03 21:10:19', 1);
+INSERT INTO rentx.user (id, username, password, email, sex, status, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 'admin', '$2a$10$iqCe6BmasY86kl1bhVh13.N1vf6VTb4y2et4q5jvC2cIrmI4A4bua', '', 2, 1, 0, '2019-03-16 20:23:42', 0, '2019-03-16 20:24:15', 1);
 create table user_role
 (
   id             int unsigned auto_increment comment '用户角色关系编号'
@@ -235,62 +294,5 @@ INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, 3, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 5, 1, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 6, 4, 0, '2019-01-23 20:49:16', 0, '2019-01-23 20:49:16', 1);
-INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 7, 1, 0, '2019-03-03 21:20:21', 0, '2019-03-03 21:20:21', 1);
-create table menu
-(
-  id             int unsigned auto_increment comment '菜单编号'
-    primary key,
-  pid            int unsigned                                  not null comment '父ID，根菜单pid为0',
-  name           varchar(32)         default ''                not null comment '菜单名称',
-  url            varchar(100)        default ''                not null comment '菜单URL',
-  add_user_id    int(10)             default 0                 not null comment '添加人ID',
-  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
-  update_user_id int(10)             default 0                 not null comment '更新人ID',
-  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
-  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
-)
-  comment '菜单' charset = utf8mb4;
-
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 0, '租用', 'rent-in-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 0, '出租', 'rent-out-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 0, '公共', 'common-group', 0, '2019-03-16 17:38:57', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 1, '开始租用', '/stuffs/in', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 1, '我的租用', '/items/in', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 2, '开始出租', '/stuffs/out/start', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 2, '我的出租', '/stuffs/out', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, '聊天', '/chat/index', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-INSERT INTO rentx.menu (id, pid, name, url, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, '搜索', '/stuffs/search', 0, '2019-03-16 17:41:38', 0, '2019-03-16 17:41:38', 1);
-create table role_menu
-(
-  id             int unsigned auto_increment comment '角色菜单关系编号'
-    primary key,
-  role_id        int unsigned                                  not null comment '角色ID',
-  menu_id        int unsigned                                  not null comment '菜单ID',
-  add_user_id    int(10)             default 0                 not null comment '添加人ID',
-  add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
-  update_user_id int(10)             default 0                 not null comment '更新人ID',
-  update_time    datetime            default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间',
-  mark           tinyint(1) unsigned default 1                 not null comment '删除标识(是否有效 1有效,0无效)'
-)
-  comment '角色菜单关系' charset = utf8mb4;
-
-create index idx_menu_id
-  on role_menu (menu_id);
-
-create index idx_role_id
-  on role_menu (role_id);
-
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 2, 2, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 2, 3, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 2, 7, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 2, 8, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 2, 9, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 2, 10, 0, '2019-03-16 17:43:30', 0, '2019-03-16 17:43:30', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 1, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 3, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, 4, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, 5, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, 3, 9, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 10, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, 4, 1, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
-INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, 4, 4, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 7, 2, 0, '2019-03-03 21:20:21', 0, '2019-03-16 20:26:54', 1);
+INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 7, 3, 0, '2019-03-16 20:24:27', 0, '2019-03-16 20:26:54', 1);

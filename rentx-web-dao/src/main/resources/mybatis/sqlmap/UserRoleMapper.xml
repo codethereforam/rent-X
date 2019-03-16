@@ -3,13 +3,15 @@
 <mapper namespace="priv.thinkam.rentx.web.dao.mapper.UserRoleMapper">
 
     <select id="listUserRoleDTO" resultType="priv.thinkam.rentx.web.dao.dto.UserRoleDTO">
-        select u.username,
+        select u.id,
+               u.username,
                u.password,
-               r.identifier roleIdentifier
+               group_concat(r.identifier) roleIdentifierConcat
         from user_role ur
                  inner join user u on ur.user_id = u.id and u.mark = 1
                  inner join role r on ur.role_id = r.id and r.mark = 1
         where ur.mark = 1
+        group by u.id
     </select>
 
 </mapper>

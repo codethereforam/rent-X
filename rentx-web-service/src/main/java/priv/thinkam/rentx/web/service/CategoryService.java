@@ -195,12 +195,18 @@ public class CategoryService extends ServiceImpl<CategoryMapper, Category> imple
 	}
 
 	public List<CategorySelectVO> listCategorySelectVO() {
+		return this.listThreeLevelCategory().stream()
+				.map(c -> BeanUtil.map(c, CategorySelectVO.class))
+				.collect(Collectors.toList());
+	}
+
+	public List<Category> listThreeLevelCategory() {
 		return this.list(
 				new QueryWrapper<Category>().lambda()
 						.eq(Category::getMark, EnableEnum.YES.getValue())
 						.eq(Category::getStatus, EnableEnum.YES.getValue())
 						.eq(Category::getLevel, CategoryLevelEnum.THREE.getCode())
-		).stream().map(c -> BeanUtil.map(c, CategorySelectVO.class)).collect(Collectors.toList());
+		);
 	}
 
 	public List<Category> listAllCategory() {

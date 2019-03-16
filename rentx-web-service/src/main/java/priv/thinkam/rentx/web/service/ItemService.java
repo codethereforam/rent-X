@@ -4,17 +4,24 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 import priv.thinkam.rentx.common.enums.StuffStatusEnum;
+import priv.thinkam.rentx.common.util.BeanUtil;
+import priv.thinkam.rentx.common.util.StringUtil;
+import priv.thinkam.rentx.web.dao.dto.ItemDailyStatsDTO;
 import priv.thinkam.rentx.web.dao.entity.Item;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
 import priv.thinkam.rentx.web.dao.mapper.ItemMapper;
+import priv.thinkam.rentx.web.dao.query.ItemDailyStatsQuery;
+import priv.thinkam.rentx.web.service.param.ItemDailyStatsParam;
 import priv.thinkam.rentx.web.service.vo.PersonalItemVO;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,7 +79,8 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		item.setStuffId(stuffId);
 		item.setRentDay(rentDay);
 		item.setApplyTime(LocalDateTime.now());
-		item.setStatus(ItemStatusEnum.APPLYING.getCode());
+		item.setStatus(ItemStatusEnum.APPLYING.getValue());
+		item.setAddDate(LocalDate.now());
 		item.setAddUserId(userId);
 		item.setUpdateUserId(userId);
 		boolean success = this.save(item);
@@ -115,7 +123,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 	}
 
 	public Response patchStatus(Integer itemId, Integer status, int userId) {
-		if (status == ItemStatusEnum.APPLYING.getCode()) {
+		if (ItemStatusEnum.APPLYING.getValue().equals(status)) {
 			return Response.fail("更新租用项状态，状态错误");
 		}
 		Item item = this.getOne(
@@ -164,5 +172,9 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		}
 		log.info("a stuff updated: {}", updateStuff);
 		return Response.SUCCESS;
+	}
+
+	public List<ItemDailyStatsDTO> listItemDailyStatsDTO(ItemDailyStatsParam itemDailyStatsParam) {
+		return itemMapper.listItemDailyStatsDTO(BeanUtil.map(itemDailyStatsParam, ItemDailyStatsQuery.class));
 	}
 }

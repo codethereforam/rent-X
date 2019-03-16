@@ -62,6 +62,7 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+  typeEnumsPackage: priv.thinkam.rentx.common.enums
 
 kaptcha:
   border: "yes"

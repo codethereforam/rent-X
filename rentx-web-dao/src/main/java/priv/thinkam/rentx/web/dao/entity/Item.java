@@ -53,5 +53,8 @@ public class Item extends BaseEntity {
      */
     private Integer status;
 
-
+    /**
+     * 添加日期
+     */
+    private LocalDate addDate;
 }

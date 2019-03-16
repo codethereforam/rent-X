@@ -17,6 +17,7 @@
         <result column="end_time" property="endTime" />
         <result column="apply_time" property="applyTime" />
         <result column="status" property="status" />
+        <result column="add_date" property="addDate" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -27,7 +28,7 @@
         update_user_id,
         update_time,
         mark,
-        user_id, stuff_id, create_time, rent_day, end_time, apply_time, status
+        user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date
     </sql>
 
 </mapper>

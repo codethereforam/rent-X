@@ -8,6 +8,7 @@ import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
 import priv.thinkam.rentx.web.api.CategoryServiceApi;
 import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
+import priv.thinkam.rentx.web.api.dto.CategorySelectApiDTO;
 import priv.thinkam.rentx.web.api.param.CategoryApiParam;
 import priv.thinkam.rentx.web.dao.entity.Category;
 import priv.thinkam.rentx.web.service.CategoryService;
@@ -73,5 +74,12 @@ public class CategoryServiceImpl implements CategoryServiceApi {
 	@Override
 	public Response delete(Integer id) {
 		return categoryService.delete(id);
+	}
+
+	@Override
+	public List<CategorySelectApiDTO> listCategorySelectApiDTO() {
+		return categoryService.listThreeLevelCategory().stream()
+				.map(c -> BeanUtil.map(c, CategorySelectApiDTO.class))
+				.collect(Collectors.toList());
 	}
 }

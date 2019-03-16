@@ -1,5 +1,7 @@
 package priv.thinkam.rentx.common.enums;
 
+import com.baomidou.mybatisplus.core.enums.IEnum;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +10,7 @@ import java.util.Map;
  * @author thinkam
  * @date 2019/02/10
  */
-public enum ItemStatusEnum {
+public enum ItemStatusEnum implements IEnum<Integer> {
 	/**
 	 * 申请中
 	 */
@@ -26,16 +28,17 @@ public enum ItemStatusEnum {
 	 */
 	RETURNED(3, "已归还");
 
-	private int code;
+	private int value;
 	private String name;
 
-	ItemStatusEnum(int code, String name) {
-		this.code = code;
+	ItemStatusEnum(int value, String name) {
+		this.value = value;
 		this.name = name;
 	}
 
-	public int getCode() {
-		return code;
+	@Override
+	public Integer getValue() {
+		return value;
 	}
 
 	public String getName() {
@@ -50,7 +53,7 @@ public enum ItemStatusEnum {
 	static {
 		ItemStatusEnum[] enums = ItemStatusEnum.values();
 		MAP = new HashMap<>(enums.length);
-		Arrays.stream(enums).forEach(type -> MAP.put(type.code, type));
+		Arrays.stream(enums).forEach(type -> MAP.put(type.value, type));
 	}
 
 	public static ItemStatusEnum getByValue(int value) {

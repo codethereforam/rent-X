@@ -56,7 +56,7 @@
                 <td th:utext="${vo.rentDay}"></td>
                 <td th:utext="${vo.endTime}"></td>
                 <td th:utext="${vo.status.getName()}"></td>
-                <td th:if="${vo.status.getCode() == 0}">
+                <td th:if="${vo.status.getValue() == 0}">
                     <a href="javascript:void(0)" class="btn btn-primary cancelApplyBtn">取消申请</a>
                 </td>
             </tr>

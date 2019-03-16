@@ -2,6 +2,7 @@ package priv.thinkam.rentx.web.api;
 
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.web.api.dto.CategoryApiDTO;
+import priv.thinkam.rentx.web.api.dto.CategorySelectApiDTO;
 import priv.thinkam.rentx.web.api.param.CategoryApiParam;
 
 import java.util.List;
@@ -49,4 +50,6 @@ public interface CategoryServiceApi {
 	 * @return Response
 	 */
 	Response delete(Integer id);
+
+	List<CategorySelectApiDTO> listCategorySelectApiDTO();
 }

@@ -2,8 +2,10 @@
 
 ## technology
 ### primary
-- 统计报表
+- 保存登录用户session处理
 - 支付
+- 菜单
+- 权限配置
 - 基础业务
     - 后台管理系统
         - 类别
@@ -13,6 +15,8 @@
             - 存到redis
         - 角色权限资源管理
             - 菜单显示
+        - 用户管理
+        - 物品管理
     - 用户租赁系统
         - 我的出租 - 编辑、租用历史
 - 登录
@@ -24,6 +28,7 @@
 - 集群部署
 - 图片上传
 ### secondary
+- redirectattribute web和admin 序列化
 - websocket权限
 - mybatis-plus逻辑删除
 - 统一异常处理

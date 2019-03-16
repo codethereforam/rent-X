@@ -51,16 +51,16 @@
                     <span class="detail glyphicon glyphicon-plus" title="详情"></span>
                 </td>
                 <td><input type="checkbox" class="single-checkbox" title="select"></td>
-                <td th:utext="${stat.index + 1}"></td>
-                <td th:utext="${dto.stuffName}"></td>
-                <td th:utext="${dto.applyTime}"></td>
-                <td th:utext="${dto.createTime}"></td>
-                <td th:utext="${dto.rentDay}"></td>
-                <td th:utext="${dto.endTime}"></td>
-                <td th:utext="${dto.status.getName()}"></td>
-                <td th:utext="${dto.ownerName}"></td>
-                <td th:utext="${dto.renterName}"></td>
-                <td th:switch="${dto.status.getCode()}">
+                <td th:text="${stat.index + 1}"></td>
+                <td th:text="${dto.stuffName}"></td>
+                <td th:text="${dto.applyTime}"></td>
+                <td th:text="${dto.createTime}"></td>
+                <td th:text="${dto.rentDay}"></td>
+                <td th:text="${dto.endTime}"></td>
+                <td th:text="${dto.status.getName()}"></td>
+                <td th:text="${dto.ownerName}"></td>
+                <td th:text="${dto.renterName}"></td>
+                <td th:switch="${dto.status.getValue()}">
                     <div th:case="0">
                         <a href="javascript:void(0)" class="btn btn-primary approveBtn">批准</a>
                         <a href="javascript:void(0)" class="btn btn-primary disApproveBtn">否定</a>

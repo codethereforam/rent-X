@@ -32,4 +32,23 @@
                  inner join user u2 on s.user_id = u2.id and u2.mark = 1
         where i.mark = 1
     </select>
+
+    <select id="listItemDailyStatsDTO" parameterType="priv.thinkam.rentx.web.dao.query.ItemDailyStatsQuery"
+            resultType="priv.thinkam.rentx.web.dao.dto.ItemDailyStatsDTO">
+        select
+        s.category_id categoryId,
+        i.status,
+        i.add_date addDate,
+        count(*) totalCount,
+        sum(s.deposit) totalDeposit,
+        sum(s.rental) totalRental
+        from item i
+        inner join stuff s on i.stuff_id = s.id and s.mark = 1
+        where i.mark = 1
+        <if test="beginAddDate != null">and i.add_date <![CDATA[ >= ]]> #{beginAddDate}</if>
+        <if test="endAddDate != null">and i.add_date <![CDATA[ <= ]]> #{endAddDate}</if>
+        <if test="categoryId != null">and s.category_id = #{categoryId}</if>
+        <if test="status != null">and i.status = ${status}</if>
+        group by s.category_id, i.add_date, i.status
+    </select>
 </mapper>

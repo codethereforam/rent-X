@@ -27,6 +27,11 @@ window.onload = function () {
                 functions.showWrongSpanAndMessage(this, "请填写账户名");
                 usernameValid = false;
             }
+            // 记住密码时
+            if(isPasswordValid(passwordObject.value)) {
+                functions.showRightSpanAndHideMessage(passwordObject);
+                passwordValid = true;
+            }
             checkLoginButton();
         }
     };

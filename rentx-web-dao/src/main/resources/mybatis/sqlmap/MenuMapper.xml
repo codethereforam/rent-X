@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="priv.thinkam.rentx.web.dao.mapper.MenuMapper">
 
-
+    <select id="listMenuDTOByRoleIdSet" parameterType="java.util.Set" resultType="priv.thinkam.rentx.web.dao.dto.MenuDTO">
+        select
+        id, pid, name, url
+        from menu
+        where mark = 1 and id in (
+        select menu_id
+        from role_menu
+        where mark = 1 and role_id in
+        <foreach item="id" collection="roleIdSet" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        )
+    </select>
 
 </mapper>

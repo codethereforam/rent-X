@@ -2,8 +2,12 @@ package priv.thinkam.rentx.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import priv.thinkam.rentx.web.common.base.WebConstant;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 基础控制器
@@ -24,7 +28,9 @@ public class IndexController {
 	 * @date 2018/10/11 9:24
 	 */
 	@GetMapping
-	public String index() {
+	public String index(Model model, HttpSession session) {
+		// 获取菜单
+		model.addAttribute("menuVOList", session.getAttribute(WebConstant.Session.MENU_VO_LIST_SESSION_KEY));
 		return "index";
 	}
 

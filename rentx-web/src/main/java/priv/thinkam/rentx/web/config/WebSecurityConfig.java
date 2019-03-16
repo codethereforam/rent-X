@@ -1,6 +1,7 @@
 package priv.thinkam.rentx.web.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import priv.thinkam.rentx.common.base.Constant;
 import priv.thinkam.rentx.web.common.base.WebConstant;
@@ -47,6 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private String[] staticAssetPath;
 	@Resource
 	private CaptchaValidationFilter captchaValidationFilter;
+	@Autowired
+	private AuthenticationSuccessHandler authenticationSuccessHandler;
 
 	@Override
 	public void configure(WebSecurity web) {
@@ -70,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.hasAnyRole(dto.getRoleIdentifierConcat().split(Constant.Separator.COMMA));
 		}
 		registry.anyRequest().hasRole(WebConstant.RoleIdentifier.ROOT)
-				.and().formLogin().loginPage("/login").permitAll()
+				.and().formLogin().successHandler(authenticationSuccessHandler).loginPage("/login").permitAll()
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true).permitAll();
 	}

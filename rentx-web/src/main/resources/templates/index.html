@@ -46,54 +46,21 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <div class="nav-sidebar">
+            <div class="nav-sidebar" th:each="vo: ${menuVOList}">
                 <div class="nav-sidebar-head">
                     <ul class="nav">
                         <li>
-                    <!---->        <a href="#group1" data-toggle="collapse">
-                                <span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;&nbsp;租用
+                            <a th:href="${'#' +vo.url}" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;
+                                [[${vo.name}]]</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div id="group1" class="nav-sidebar-body collapse in">
-                    <ul class="nav">
-                        <li class="active"><a href="#_stuffs_in" data-toggle="tab">开始租用</a></li>
-                        <li><a href="#_items_in" data-toggle="tab">我的租用</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="nav-sidebar">
-                <div class="nav-sidebar-head">
-                    <ul class="nav">
-                        <li>
-                            <a href="#group2" data-toggle="collapse">
-                                <span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;&nbsp;出租
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="group2" class="nav-sidebar-body collapse in">
-                    <ul class="nav">
-                        <li><a href="#_stuffs_out_start" data-toggle="tab">开始出租</a></li>
-                        <li><a href="#_stuffs_out" data-toggle="tab">我的出租</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="nav-sidebar">
-                <div class="nav-sidebar-head">
-                    <ul class="nav">
-                        <li>
-                            <a href="#group3" data-toggle="collapse">
-                                <span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;&nbsp;公共
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div id="group3" class="nav-sidebar-body collapse in">
-                    <ul class="nav">
-                        <li><a href="#_chat_index" data-toggle="tab">聊天</a></li>
-                        <li><a href="#_stuffs_search" data-toggle="tab">搜索</a></li>
+                <div th:id="${vo.url}" class="nav-sidebar-body collapse">
+                    <ul class="nav" th:each="child: ${vo.children}">
+                        <li><a th:href="${'#' + #strings.replace(child.url, '/', '_')}" data-toggle="tab"
+                               th:utext="${child.name}"></a></li>
                     </ul>
                 </div>
             </div>

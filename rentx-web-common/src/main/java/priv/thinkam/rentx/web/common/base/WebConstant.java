@@ -21,4 +21,10 @@ public interface WebConstant {
 		String ROOT = "ROOT";
 	}
 
+	interface Session {
+		/**
+		 * 登录成功保存的菜单session key
+		 */
+		String MENU_VO_LIST_SESSION_KEY = "session-menu-vo-list";
+	}
 }

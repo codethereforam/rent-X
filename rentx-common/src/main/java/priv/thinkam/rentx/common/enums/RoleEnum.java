@@ -14,41 +14,61 @@ public enum RoleEnum {
 	/**
 	 * ROOT用户
 	 */
-	ROOT(1),
+	ROOT(1, "ROOT"),
 	/**
 	 * 出租人
 	 */
-	LESSOR(2),
+	LESSOR(2, "LESSOR"),
 	/**
 	 * 承租人
 	 */
-	LESSEE(3),
+	LESSEE(3, "LESSEE"),
 	/**
 	 * 游客用户
 	 */
-	GUEST(4);
+	GUEST(4, "GUEST");
 
 	/**
 	 * 角色ID
 	 */
 	private int id;
+	/**
+	 * 角色名称
+	 */
+	private String name;
 
-	RoleEnum(int id) {
+	RoleEnum(int id, String name) {
 		this.id = id;
+		this.name = name;
 	}
 
 	/**
 	 * {'key': 'value', 'value': 'RoleEnum'}
 	 */
-	private static final Map<Integer, RoleEnum> MAP;
+	private static final Map<Integer, RoleEnum> ID_ENUM_MAP;
+	private static final Map<String, RoleEnum> NAME_ENUM_MAP;
 
 	static {
 		RoleEnum[] enums = RoleEnum.values();
-		MAP = new HashMap<>(enums.length);
-		Arrays.stream(enums).forEach(type -> MAP.put(type.id, type));
+		ID_ENUM_MAP = new HashMap<>(enums.length);
+		Arrays.stream(enums).forEach(role -> ID_ENUM_MAP.put(role.id, role));
+		NAME_ENUM_MAP = new HashMap<>(enums.length);
+		Arrays.stream(enums).forEach(role -> NAME_ENUM_MAP.put(role.name, role));
 	}
 
 	public static RoleEnum getById(int id) {
-		return MAP.get(id);
+		return ID_ENUM_MAP.get(id);
+	}
+
+	public static RoleEnum getByName(String name) {
+		return NAME_ENUM_MAP.get(name);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

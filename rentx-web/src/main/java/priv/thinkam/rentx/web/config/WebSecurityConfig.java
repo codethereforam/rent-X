@@ -71,7 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 		registry.anyRequest().hasRole(WebConstant.RoleIdentifier.ROOT)
 				.and().formLogin().loginPage("/login").permitAll()
-				.and().logout().permitAll();
+				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+				.deleteCookies("JSESSIONID").invalidateHttpSession(true).permitAll();
 	}
 
 	@Override

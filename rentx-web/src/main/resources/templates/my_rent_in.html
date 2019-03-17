@@ -35,7 +35,8 @@
                 <th>编号</th>
                 <th>物品名称</th>
                 <th>申请时间</th>
-                <th>租用日期</th>
+                <th>审批时间</th>
+                <th>支付时间</th>
                 <th>租用天数</th>
                 <th>归还时间</th>
                 <th>状态</th>
@@ -52,12 +53,18 @@
                 <td th:utext="${stat.index + 1}"></td>
                 <td th:utext="${vo.stuffName}"></td>
                 <td th:utext="${vo.applyTime}"></td>
-                <td th:utext="${vo.createTime}"></td>
+                <td th:utext="${vo.approvalTime}"></td>
+                <td th:utext="${vo.payTime}"></td>
                 <td th:utext="${vo.rentDay}"></td>
                 <td th:utext="${vo.endTime}"></td>
                 <td th:utext="${vo.status.getName()}"></td>
-                <td th:if="${vo.status.getValue() == 0}">
-                    <a href="javascript:void(0)" class="btn btn-primary cancelApplyBtn">取消申请</a>
+                <td th:switch="${vo.status.getValue()}">
+                    <div th:case="0">
+                        <a href="javascript:void(0)" class="btn btn-primary cancelApplyBtn">取消申请</a>
+                    </div>
+                    <div th:case="2">
+                        <a href="javascript:void(0)" class="btn btn-primary payBtn">支付</a>
+                    </div>
                 </td>
             </tr>
             </tbody>

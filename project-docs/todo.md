@@ -2,8 +2,9 @@
 
 ## technology
 ### primary
-- 支付
+- add user update user id
 - 权限
+    - 出租人有查看开始租用的权限
     - 无权限报错
     - 按钮显示
     - 用户、角色、资源、菜单管理页面

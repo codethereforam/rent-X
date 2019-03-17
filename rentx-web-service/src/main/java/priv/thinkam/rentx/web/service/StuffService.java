@@ -133,4 +133,12 @@ public class StuffService extends ServiceImpl<StuffMapper, Stuff> implements ISe
 		}
 		return stuffSearchVOList;
 	}
+
+	public Stuff getById(Integer id) {
+		return this.getOne(
+				new QueryWrapper<Stuff>().lambda()
+						.eq(Stuff::getId, id)
+						.eq(Stuff::getMark, EnableEnum.YES.getValue())
+		);
+	}
 }

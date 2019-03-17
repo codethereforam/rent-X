@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  * 出租项
  *
  * @author yanganyu
- * @date 2019-01-19
+ * @date 2019-03-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,9 +29,14 @@ public class Item extends BaseEntity {
     private Integer stuffId;
 
     /**
-     * 租用日期
+     * 审批时间
      */
-    private LocalDate createTime;
+    private LocalDateTime approvalTime;
+
+    /**
+     * 支付时间
+     */
+    private LocalDateTime payTime;
 
     /**
      * 租用天数
@@ -49,7 +54,7 @@ public class Item extends BaseEntity {
     private LocalDateTime applyTime;
 
     /**
-     * 状态（0：申请中；1：不通过；2：租用中；3： 已归还）
+     * 状态（0：申请中；1：不通过；2:待支付；3：租用中；4： 已归还）
      */
     private Integer status;
 
@@ -57,4 +62,6 @@ public class Item extends BaseEntity {
      * 添加日期
      */
     private LocalDate addDate;
+
+
 }

@@ -4,14 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.common.base.Response;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.enums.ItemStatusEnum;
 import priv.thinkam.rentx.common.enums.StuffStatusEnum;
 import priv.thinkam.rentx.common.util.BeanUtil;
-import priv.thinkam.rentx.common.util.StringUtil;
 import priv.thinkam.rentx.web.dao.dto.ItemDailyStatsDTO;
 import priv.thinkam.rentx.web.dao.entity.Item;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
@@ -21,6 +19,7 @@ import priv.thinkam.rentx.web.service.param.ItemDailyStatsParam;
 import priv.thinkam.rentx.web.service.vo.PersonalItemVO;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,7 +46,8 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 								.setItemId(i.getItemId())
 								.setStuffName(i.getStuffName())
 								.setApplyTime(i.getApplyTime())
-								.setCreateTime(i.getCreateTime())
+								.setApprovalTime(i.getApprovalTime())
+								.setPayTime(i.getPayTime())
 								.setRentDay(i.getRentDay())
 								.setEndTime(i.getEndTime())
 								.setStatus(ItemStatusEnum.getByValue(i.getStatus()))
@@ -122,15 +122,19 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		return Response.SUCCESS;
 	}
 
+	private Item getById(Integer id) {
+		return this.getOne(
+				new QueryWrapper<Item>().lambda()
+						.eq(Item::getId, id)
+						.eq(Item::getMark, EnableEnum.YES.getValue())
+		);
+	}
+
 	public Response patchStatus(Integer itemId, Integer status, int userId) {
 		if (ItemStatusEnum.APPLYING.getValue().equals(status)) {
 			return Response.fail("更新租用项状态，状态错误");
 		}
-		Item item = this.getOne(
-				new QueryWrapper<Item>().lambda()
-						.eq(Item::getId, itemId)
-						.eq(Item::getMark, EnableEnum.YES.getValue())
-		);
+		Item item = this.getById(itemId);
 		if (item == null) {
 			return Response.fail("租用项不存在");
 		}
@@ -140,10 +144,11 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 		updateItem.setUpdateUserId(userId);
 		updateItem.setStatus(status);
 		switch (status) {
+			case 1:
 			case 2:
-				updateItem.setCreateTime(now.toLocalDate());
+				updateItem.setApprovalTime(now);
 				break;
-			case 3:
+			case 4:
 				updateItem.setEndTime(now);
 				break;
 			default:
@@ -160,7 +165,7 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 				updateStuff.setStatus(StuffStatusEnum.ALREADY.getCode());
 				break;
 			case 1:
-			case 3:
+			case 4:
 				updateStuff.setStatus(StuffStatusEnum.HAVE_NOT.getCode());
 				break;
 			default:
@@ -176,5 +181,21 @@ public class ItemService extends ServiceImpl<ItemMapper, Item> implements IServi
 
 	public List<ItemDailyStatsDTO> listItemDailyStatsDTO(ItemDailyStatsParam itemDailyStatsParam) {
 		return itemMapper.listItemDailyStatsDTO(BeanUtil.map(itemDailyStatsParam, ItemDailyStatsQuery.class));
+	}
+
+	public void finishPay(Integer itemId, Integer userId) {
+		Item updateItem = new Item();
+		updateItem.setId(itemId);
+		updateItem.setUpdateUserId(userId);
+		updateItem.setStatus(ItemStatusEnum.RENTING.getValue());
+		updateItem.setPayTime(LocalDateTime.now());
+		this.updateById(updateItem);
+	}
+
+	public BigDecimal getTotalDepositAndRental(Integer id) {
+		Item item = this.getById(id);
+		Stuff stuff = stuffService.getById(item.getStuffId());
+		BigDecimal totalRental = stuff.getRental().multiply(new BigDecimal(item.getRentDay()));
+		return totalRental.add(stuff.getDeposit());
 	}
 }

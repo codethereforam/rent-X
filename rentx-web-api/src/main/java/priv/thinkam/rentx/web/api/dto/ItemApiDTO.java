@@ -30,9 +30,13 @@ public class ItemApiDTO implements Serializable {
 	 */
 	private LocalDateTime applyTime;
 	/**
-	 * 租用日期
+	 * 审批时间
 	 */
-	private LocalDate createTime;
+	private LocalDateTime approvalTime;
+	/**
+	 * 支付时间
+	 */
+	private LocalDateTime payTime;
 
 	/**
 	 * 租用天数

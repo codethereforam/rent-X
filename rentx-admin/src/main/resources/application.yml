@@ -11,6 +11,7 @@ spring:
     password: ${MYSQL_PASSWD}
   redis:
     timeout: 3000
+    database: 1
   session:
     store-type: redis
 

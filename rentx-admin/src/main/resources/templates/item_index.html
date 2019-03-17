@@ -35,7 +35,8 @@
                 <th>编号</th>
                 <th>物品名称</th>
                 <th>申请时间</th>
-                <th>租用日期</th>
+                <th>审批时间</th>
+                <th>支付时间</th>
                 <th>租用天数</th>
                 <th>归还时间</th>
                 <th>状态</th>
@@ -54,7 +55,8 @@
                 <td th:text="${stat.index + 1}"></td>
                 <td th:text="${dto.stuffName}"></td>
                 <td th:text="${dto.applyTime}"></td>
-                <td th:text="${dto.createTime}"></td>
+                <td th:text="${dto.approvalTime}"></td>
+                <td th:text="${dto.payTime}"></td>
                 <td th:text="${dto.rentDay}"></td>
                 <td th:text="${dto.endTime}"></td>
                 <td th:text="${dto.status.getName()}"></td>
@@ -65,7 +67,7 @@
                         <a href="javascript:void(0)" class="btn btn-primary approveBtn">批准</a>
                         <a href="javascript:void(0)" class="btn btn-primary disApproveBtn">否定</a>
                     </div>
-                    <div th:case="2">
+                    <div th:case="3">
                         <a href="javascript:void(0)" class="btn btn-primary returnBtn">归还</a>
                     </div>
                 </td>

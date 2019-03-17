@@ -12,7 +12,8 @@
     <result column="mark" property="mark" />
         <result column="user_id" property="userId" />
         <result column="stuff_id" property="stuffId" />
-        <result column="create_time" property="createTime" />
+        <result column="approval_time" property="approvalTime" />
+        <result column="pay_time" property="payTime" />
         <result column="rent_day" property="rentDay" />
         <result column="end_time" property="endTime" />
         <result column="apply_time" property="applyTime" />
@@ -28,7 +29,7 @@
         update_user_id,
         update_time,
         mark,
-        user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date
+        user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date
     </sql>
 
 </mapper>

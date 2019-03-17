@@ -74,3 +74,11 @@ kaptcha:
   textproducerFontSize: 35
   textproducerFontColor: blue
   textproducerFontNames: 宋体,楷体,微软雅黑
+
+alipay:
+  appId: "APPID"
+  privateKey: "私钥"
+  publicKey: "公钥"
+  returnUrl: http://localhost:9999/items/pay/return
+  gatewayUrL: https://openapi.alipaydev.com/gateway.do
+  signType: RSA2

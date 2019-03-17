@@ -197,4 +197,25 @@ $(document).ready(function () {
             }
         });
     });
+
+    function replaceContent(content) {
+        document.open();
+        document.write(content);
+        document.close();
+    }
+
+    $('.payBtn').click(function () {
+        let itemId = $(this).parents('tr').find('input[name="inputItemId"]').val();
+        $.ajax(`/items/${itemId}/pay`, {
+            type: 'POST',
+            dataType: DATA_TYPE.JSON,
+            success: function (data) {
+                if (data.code === RESPONSE_CODE.SUCCESS) {
+                    replaceContent(data.data);
+                } else {
+                    showHintModal(data.message + ', 支付失败', false);
+                }
+            }
+        });
+    });
 });

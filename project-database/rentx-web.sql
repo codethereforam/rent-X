@@ -46,11 +46,12 @@ create table item
     primary key,
   user_id        int unsigned                                  not null comment '租用者ID',
   stuff_id       int unsigned                                  not null comment '物品编号',
-  create_time    date                                          null comment '租用日期',
+  approval_time  datetime                                      null comment '审批时间',
+  pay_time       datetime                                      null comment '支付时间',
   rent_day       int unsigned                                  not null comment '租用天数',
   end_time       datetime                                      null comment '归还时间',
   apply_time     datetime                                      null comment '申请时间',
-  status         tinyint unsigned                              not null comment '状态（0：申请中；1：不通过；2：租用中；3： 已归还）',
+  status         tinyint unsigned                              not null comment '状态（0：申请中；1：不通过；2:待支付；3：租用中；4： 已归还）',
   add_date       date                default '1970-01-01'      not null comment '添加日期',
   add_user_id    int(10)             default 0                 not null comment '添加人ID',
   add_time       datetime            default CURRENT_TIMESTAMP not null comment '添加时间',
@@ -66,10 +67,10 @@ create index idx_stuff_id
 create index idx_user_id
   on item (user_id);
 
-INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, 3, 2, '2019-02-10', 10, null, '2019-02-10 06:59:50', 2, '2019-02-10', 0, '2019-02-10 15:00:12', 0, '2019-03-15 21:32:33', 1);
-INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 3, 4, '2019-02-16', 12, '2019-02-16 15:33:00', '2019-02-15 22:31:28', 3, '2019-02-15', 3, '2019-02-15 22:31:27', 3, '2019-03-15 21:32:33', 1);
-INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 3, 3, null, 11, null, '2019-02-16 15:33:31', 1, '2019-02-16', 3, '2019-02-16 15:33:30', 3, '2019-03-15 21:32:33', 1);
-INSERT INTO rentx.item (id, user_id, stuff_id, create_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 3, 3, null, 20, null, '2019-02-16 15:54:53', 0, '2019-02-16', 3, '2019-02-16 15:54:52', 3, '2019-03-15 21:32:33', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, 2, '2019-03-17 13:04:53', '2019-03-17 13:07:30', 5, '2019-03-17 13:08:05', '2019-03-17 13:04:29', 4, '2019-03-17', 3, '2019-03-17 13:04:29', -1, '2019-03-17 13:08:05', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, 2, null, null, 2, null, '2019-03-17 13:23:46', 0, '2019-03-17', 3, '2019-03-17 13:23:46', 3, '2019-03-17 13:23:46', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, 3, 4, '2019-03-17 13:28:44', '2019-03-17 13:57:26', 2, null, '2019-03-17 13:28:25', 3, '2019-03-17', 3, '2019-03-17 13:28:25', 0, '2019-03-17 13:57:26', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 3, null, null, 6, null, '2019-03-17 13:54:22', 0, '2019-03-17', 3, '2019-03-17 13:54:22', 3, '2019-03-17 13:54:22', 1);
 create table menu
 (
   id             int unsigned auto_increment comment '菜单编号'
@@ -241,9 +242,10 @@ create index idx_category_id
 create index inx_user_id
   on stuff (user_id);
 
-INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 5, '男式毛衣001<script>alert6()</script>', '男式毛衣001 暖和', 300.00, 20.00, 2, '', 1, 0, '2019-02-09 22:26:02', 0, '2019-03-14 22:10:52', 1);
-INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 32, '男士衬衫001不开心', '男士衬衫001 帅气 哈哈哈', 500.00, 50.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-12 00:31:43', 1);
-INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, '女士T恤001', '女士T恤001 描述bb 哈哈', 200.00, 30.00, 0, '', 1, 1, '2019-02-13 19:57:57', 3, '2019-03-12 00:34:07', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 5, '男式毛衣001<script>alert6()</script>', '男式毛衣001 暖和', 300.00, 20.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-17 13:23:46', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 32, '男士衬衫001不开心', '男士衬衫001 帅气 哈哈哈', 500.00, 50.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-17 13:54:22', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, '女士T恤001', '女士T恤001 描述bb 哈哈', 200.00, 30.00, 2, '', 1, 0, '2019-02-13 19:57:57', -1, '2019-03-17 13:28:45', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 5, '男士毛衣aaa', 'aaaaaa 男士毛衣aaa', 1000.00, 30.00, 0, '', 1, 1, '2019-03-17 12:54:51', 1, '2019-03-17 12:54:51', 1);
 create table user
 (
   id             int unsigned auto_increment comment 'ID'

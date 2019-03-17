@@ -6,10 +6,11 @@
         select i.id          itemId,
                s.name        stuffName,
                i.apply_time  applyTime,
-               i.create_time createTime,
+               i.approval_time approvalTime,
                i.rent_day    rentDay,
                i.end_time    endTime,
-               i.status
+               i.status,
+               i.pay_time payTime
         from item i
                  inner join stuff s on i.stuff_id = s.id and s.mark = 1
         where i.mark = 1
@@ -20,7 +21,8 @@
         select i.id          itemId,
                s.name        stuffName,
                i.apply_time  applyTime,
-               i.create_time createTime,
+               i.approval_time approvalTime,
+               i.pay_time payTime,
                i.rent_day    rentDay,
                i.end_time    endTime,
                i.status,

@@ -20,13 +20,17 @@ public enum ItemStatusEnum implements IEnum<Integer> {
 	 */
 	DISAPPROVED(1, "不通过"),
 	/**
+	 * 待支付
+	 */
+	UNPAID(2, "待支付"),
+	/**
 	 * 租用中
 	 */
-	RENTING(2, "租用中"),
+	RENTING(3, "租用中"),
 	/**
 	 * 已归还
 	 */
-	RETURNED(3, "已归还");
+	RETURNED(4, "已归还");
 
 	private int value;
 	private String name;

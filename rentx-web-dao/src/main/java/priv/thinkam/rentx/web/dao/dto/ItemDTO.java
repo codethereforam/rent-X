@@ -26,9 +26,9 @@ public class ItemDTO {
 	 */
 	private LocalDateTime applyTime;
 	/**
-	 * 租用日期
+	 * 审批时间
 	 */
-	private LocalDate createTime;
+	private LocalDateTime approvalTime;
 
 	/**
 	 * 租用天数
@@ -39,7 +39,7 @@ public class ItemDTO {
 	 */
 	private LocalDateTime endTime;
 	/**
-	 * 状态（0：申请中；1：不通过；2：租用中；3： 已归还）
+	 * 状态（0：申请中；1：不通过；2:待支付；3：租用中；4： 已归还）
 	 */
 	private Integer status;
 	/**
@@ -50,4 +50,8 @@ public class ItemDTO {
 	 * 租用者
 	 */
 	private String renterName;
+	/**
+	 * 支付时间
+	 */
+	private LocalDateTime payTime;
 }

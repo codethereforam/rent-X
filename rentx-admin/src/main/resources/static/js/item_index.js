@@ -193,7 +193,7 @@ $(document).ready(function () {
             status = 1;
         }
         if($(this).hasClass('returnBtn')) {
-            status = 3;
+            status = 4;
         }
         $.ajax(`/items/${itemId}/status/${status}`, {
             type: 'PATCH',

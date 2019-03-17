@@ -70,7 +70,7 @@ create index idx_user_id
 INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 3, 2, '2019-03-17 13:04:53', '2019-03-17 13:07:30', 5, '2019-03-17 13:08:05', '2019-03-17 13:04:29', 4, '2019-03-17', 3, '2019-03-17 13:04:29', -1, '2019-03-17 13:08:05', 1);
 INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, 3, 2, null, null, 2, null, '2019-03-17 13:23:46', 0, '2019-03-17', 3, '2019-03-17 13:23:46', 3, '2019-03-17 13:23:46', 1);
 INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, 3, 4, '2019-03-17 13:28:44', '2019-03-17 13:57:26', 2, null, '2019-03-17 13:28:25', 3, '2019-03-17', 3, '2019-03-17 13:28:25', 0, '2019-03-17 13:57:26', 1);
-INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 3, null, null, 6, null, '2019-03-17 13:54:22', 0, '2019-03-17', 3, '2019-03-17 13:54:22', 3, '2019-03-17 13:54:22', 1);
+INSERT INTO rentx.item (id, user_id, stuff_id, approval_time, pay_time, rent_day, end_time, apply_time, status, add_date, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 3, '2019-03-17 14:06:23', null, 6, null, '2019-03-17 13:54:22', 2, '2019-03-17', 3, '2019-03-17 13:54:22', -1, '2019-03-17 14:06:23', 1);
 create table menu
 (
   id             int unsigned auto_increment comment '菜单编号'
@@ -111,19 +111,20 @@ create table resource
 )
   comment '资源' charset = utf8mb4;
 
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, '获取所有category VO', '', '/categories', 'GET', 0, '2019-03-16 14:16:08', 0, '2019-03-16 14:16:08', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, '进入聊天界面', '', '/chat/index', 'GET', 0, '2019-03-16 14:19:57', 0, '2019-03-16 14:19:57', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, '首页', '', '/', 'GET', 0, '2019-03-16 14:21:21', 0, '2019-03-16 14:21:21', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, '我的租用', '', '/items/in', 'GET', 0, '2019-03-16 14:24:36', 0, '2019-03-16 14:24:36', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, '取消申请租用', '', '/items/(\\d+)/cancel-apply', 'POST', 0, '2019-03-16 14:25:52', 0, '2019-03-16 14:25:52', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, '开始租用页面', '', '/stuffs/in', 'GET', 0, '2019-03-16 14:29:19', 0, '2019-03-16 14:29:19', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, '开始出租页面', '', '/stuffs/out/start', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, '我的出租页面', '', '/stuffs/out', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, '开始出租提交', '', '/stuffs/out', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, '取消出租', '', '/stuffs/(\\d+)/cancel-rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, '租用', '', '/stuffs/(\\d+)/rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, '跳转到搜索页面', '', '/stuffs/search', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
-INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, '搜索', '', '/stuffs/search', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-16 14:37:39', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (1, '获取所有category VO', '获取所有category VO', '/categories', 'GET', 0, '2019-03-16 14:16:08', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, '进入聊天界面', '进入聊天界面', '/chat/index', 'GET', 0, '2019-03-16 14:19:57', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, '首页', '首页', '/', 'GET', 0, '2019-03-16 14:21:21', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, '我的租用', '我的租用', '/items/in', 'GET', 0, '2019-03-16 14:24:36', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, '取消申请租用', '取消申请租用', '/items/(\\d+)/cancel-apply', 'POST', 0, '2019-03-16 14:25:52', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, '开始租用页面', '开始租用页面', '/stuffs/in', 'GET', 0, '2019-03-16 14:29:19', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, '开始出租页面', '开始出租页面', '/stuffs/out/start', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, '我的出租页面', '我的出租页面', '/stuffs/out', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, '开始出租提交', '开始出租提交', '/stuffs/out', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (10, '取消出租', '取消出租', '/stuffs/(\\d+)/cancel-rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (11, '租用', '租用', '/stuffs/(\\d+)/rent', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, '跳转到搜索页面', '跳转到搜索页面', '/stuffs/search', 'GET', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, '搜索', '搜索', '/stuffs/search', 'POST', 0, '2019-03-16 14:37:39', 0, '2019-03-17 15:47:05', 1);
+INSERT INTO rentx.resource (id, name, description, url, method, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, '支付', '支付', '/items/(\\d+)/pay', 'POST', 0, '2019-03-17 15:45:38', 0, '2019-03-17 15:47:05', 1);
 create table role
 (
   id             int unsigned auto_increment comment '角色编号'
@@ -177,6 +178,8 @@ INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update
 INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (12, 3, 10, 0, '2019-03-16 17:44:12', 0, '2019-03-16 17:44:12', 1);
 INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (13, 4, 1, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
 INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (14, 4, 4, 0, '2019-03-16 17:44:58', 0, '2019-03-16 17:44:58', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (15, 2, 1, 0, '2019-03-17 15:50:41', 0, '2019-03-17 15:50:41', 1);
+INSERT INTO rentx.role_menu (id, role_id, menu_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (16, 2, 4, 0, '2019-03-17 15:50:41', 0, '2019-03-17 15:50:41', 1);
 create table role_resource
 (
   id             int unsigned auto_increment comment '角色资源关系编号'
@@ -216,6 +219,8 @@ INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time
 INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (17, 3, 12, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
 INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (18, 2, 13, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
 INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (19, 3, 13, 0, '2019-03-16 14:37:43', 0, '2019-03-16 14:37:43', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (20, 3, 14, 0, '2019-03-17 15:45:56', 0, '2019-03-17 15:45:56', 1);
+INSERT INTO rentx.role_resource (id, role_id, resource_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (21, 2, 6, 0, '2019-03-17 15:49:58', 0, '2019-03-17 15:49:58', 1);
 create table stuff
 (
   id             int unsigned auto_increment comment '物品编号'
@@ -243,9 +248,10 @@ create index inx_user_id
   on stuff (user_id);
 
 INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (2, 5, '男式毛衣001<script>alert6()</script>', '男式毛衣001 暖和', 300.00, 20.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-17 13:23:46', 1);
-INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 32, '男士衬衫001不开心', '男士衬衫001 帅气 哈哈哈', 500.00, 50.00, 1, '', 1, 0, '2019-02-09 22:26:02', 3, '2019-03-17 13:54:22', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (3, 32, '男士衬衫001不开心', '男士衬衫001 帅气 哈哈哈', 500.00, 50.00, 2, '', 1, 0, '2019-02-09 22:26:02', -1, '2019-03-17 14:06:23', 1);
 INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (4, 4, '女士T恤001', '女士T恤001 描述bb 哈哈', 200.00, 30.00, 2, '', 1, 0, '2019-02-13 19:57:57', -1, '2019-03-17 13:28:45', 1);
 INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (5, 5, '男士毛衣aaa', 'aaaaaa 男士毛衣aaa', 1000.00, 30.00, 0, '', 1, 1, '2019-03-17 12:54:51', 1, '2019-03-17 12:54:51', 1);
+INSERT INTO rentx.stuff (id, category_id, name, description, deposit, rental, status, picture_id, user_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (6, 4, '女士T恤 tttt', '女士T恤 ttttttttt', 200.00, 20.00, 0, '', 2, 2, '2019-03-17 15:38:28', 2, '2019-03-17 15:38:28', 1);
 create table user
 (
   id             int unsigned auto_increment comment 'ID'

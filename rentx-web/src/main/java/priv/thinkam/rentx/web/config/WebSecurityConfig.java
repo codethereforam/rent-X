@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers(staticAssetPath)
 				.antMatchers("/chatServer/**")
-				.regexMatchers(HttpMethod.GET, "/register", "/forget", "/captcha", "/captcha/error")
+				.regexMatchers(HttpMethod.GET, "/register", "/forget", "/captcha", "/captcha/error", "/items/pay/return")
 				.regexMatchers(HttpMethod.POST, "/users", "/emails/(.+)/send-captcha", "/users/(.+)/check-exists");
 	}
 

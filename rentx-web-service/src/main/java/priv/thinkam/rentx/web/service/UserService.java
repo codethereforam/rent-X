@@ -1,18 +1,18 @@
 package priv.thinkam.rentx.web.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import priv.thinkam.rentx.common.enums.EnableEnum;
 import priv.thinkam.rentx.common.enums.RoleEnum;
 import priv.thinkam.rentx.web.dao.entity.User;
 import priv.thinkam.rentx.web.dao.entity.UserRole;
 import priv.thinkam.rentx.web.dao.mapper.UserMapper;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 import priv.thinkam.rentx.web.dao.mapper.UserRoleMapper;
 
 import javax.annotation.Resource;
@@ -80,5 +80,13 @@ public class UserService extends ServiceImpl<UserMapper, User> implements IServi
 						.roles(RoleEnum.getById(roleId).toString())
 						.build()
 		);
+	}
+
+	public Integer getUserIdByName(String username) {
+		return this.getOne(
+				new QueryWrapper<User>().lambda()
+						.eq(User::getUsername, username)
+						.eq(User::getMark, EnableEnum.YES.getValue())
+		).getId();
 	}
 }

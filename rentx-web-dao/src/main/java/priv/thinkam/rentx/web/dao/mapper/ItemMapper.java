@@ -1,5 +1,6 @@
 package priv.thinkam.rentx.web.dao.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import priv.thinkam.rentx.web.dao.dto.ItemDTO;
 import priv.thinkam.rentx.web.dao.dto.ItemDailyStatsDTO;
 import priv.thinkam.rentx.web.dao.entity.Item;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public interface ItemMapper extends BaseMapper<Item> {
 
-	List<ItemDTO> listItemDTO(Integer userId);
+	List<ItemDTO> listItemDTO(@Param("userId") Integer userId);
 
 	List<ItemDTO> listCompleteItemDTO();
 

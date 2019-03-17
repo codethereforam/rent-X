@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.web.base.WebBaseController;
 import priv.thinkam.rentx.web.service.CategoryService;
 import priv.thinkam.rentx.web.service.ItemService;
 import priv.thinkam.rentx.web.service.StuffService;
@@ -17,6 +18,7 @@ import priv.thinkam.rentx.web.service.param.StuffParam;
 import priv.thinkam.rentx.web.service.vo.StuffSearchVO;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -28,7 +30,7 @@ import java.io.IOException;
 @Slf4j
 @Controller
 @RequestMapping("/stuffs")
-public class StuffController extends BaseController {
+public class StuffController extends WebBaseController {
 	@Resource
 	private StuffService stuffService;
 	@Resource
@@ -73,10 +75,8 @@ public class StuffController extends BaseController {
 	 * @return page
 	 */
 	@GetMapping("/out")
-	public String myRentOut(Model model) {
-		// 获取当前用户ID
-		final int userId = 1;
-		model.addAttribute("stuffOutVOList", stuffService.listStuffOutVO(userId));
+	public String myRentOut(Model model, Authentication authentication, HttpSession session) {
+		model.addAttribute("stuffOutVOList", stuffService.listStuffOutVO(currentNonRootUserId(authentication, session)));
 		return "my_rent_out";
 	}
 
@@ -88,10 +88,8 @@ public class StuffController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/out")
-	public Response addRentOut(@RequestBody StuffParam stuffParam) {
-		// 获取当前用户ID
-		final int userId = 1;
-		stuffParam.setUserId(userId);
+	public Response addRentOut(@RequestBody StuffParam stuffParam, HttpSession session) {
+		stuffParam.setUserId(currentUserId(session));
 		log.info("开始出租提交stuffParam: {}", stuffParam);
 		return stuffService.add(stuffParam);
 	}
@@ -104,10 +102,8 @@ public class StuffController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/{id}/cancel-rent")
-	public Response cancelRent(@PathVariable Integer id) {
-		// 获取当前用户ID
-		final int userId = 1;
-		return stuffService.cancelRent(id, userId);
+	public Response cancelRent(@PathVariable Integer id, HttpSession session) {
+		return stuffService.cancelRent(id, currentUserId(session));
 	}
 
 	/**
@@ -119,10 +115,8 @@ public class StuffController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/{id}/rent")
-	public Response rent(@PathVariable Integer id, Integer rentDay) {
-		// 获取当前用户ID
-		final int userId = 3;
-		return itemService.rent(id, userId, rentDay);
+	public Response rent(@PathVariable Integer id, Integer rentDay , HttpSession session) {
+		return itemService.rent(id, currentUserId(session), rentDay);
 	}
 
 	/**

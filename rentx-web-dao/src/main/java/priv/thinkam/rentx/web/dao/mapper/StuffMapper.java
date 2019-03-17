@@ -1,8 +1,9 @@
 package priv.thinkam.rentx.web.dao.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import priv.thinkam.rentx.web.dao.dto.StuffDTO;
 import priv.thinkam.rentx.web.dao.entity.Stuff;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface StuffMapper extends BaseMapper<Stuff> {
 
 	List<StuffDTO> listStuffDTO();
 
-	List<StuffDTO> listOutStuffDTO(Integer userId);
+	List<StuffDTO> listOutStuffDTO(@Param("userId") Integer userId);
 }

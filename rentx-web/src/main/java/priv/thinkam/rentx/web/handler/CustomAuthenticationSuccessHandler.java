@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import priv.thinkam.rentx.common.enums.RoleEnum;
 import priv.thinkam.rentx.web.common.base.WebConstant;
 import priv.thinkam.rentx.web.service.MenuService;
+import priv.thinkam.rentx.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,8 @@ import java.util.Set;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
@@ -36,6 +39,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		}
 		// 将用户菜单保存到session
 		request.getSession().setAttribute(WebConstant.Session.MENU_VO_LIST_SESSION_KEY, menuService.listMenuVO(roleIdSet));
+		request.getSession().setAttribute(WebConstant.Session.CURRENT_USER_ID_SESSION_KEY,
+				userService.getUserIdByName(authentication.getName()));
 		response.sendRedirect("/");
 	}
 

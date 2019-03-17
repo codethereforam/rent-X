@@ -14,7 +14,7 @@
         from item i
                  inner join stuff s on i.stuff_id = s.id and s.mark = 1
         where i.mark = 1
-          and i.user_id = #{userId}
+        <if test="userId != null">and i.user_id = #{userId}</if>
     </select>
 
     <select id="listCompleteItemDTO" resultType="priv.thinkam.rentx.web.dao.dto.ItemDTO">

@@ -26,7 +26,7 @@ public class ChatController {
 	 * 进入聊天界面
 	 */
 	@GetMapping("/index")
-	public String index(Authentication authentication, String username, HttpServletRequest request, Model model) throws UnknownHostException {
+	public String index(Authentication authentication, HttpServletRequest request, Model model) throws UnknownHostException {
 		model.addAttribute("username", authentication.getName());
 		model.addAttribute("webSocketUrl",
 				"ws://" + InetAddress.getLocalHost().getHostAddress() + ":" + request.getServerPort() + request.getContextPath() + "/chatServer");

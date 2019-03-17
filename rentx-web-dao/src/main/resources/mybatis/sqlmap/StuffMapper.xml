@@ -35,6 +35,6 @@
                  left join item i on s.id = i.stuff_id and i.mark = 1 and i.status = 3
                  left join user u on i.user_id = u.id and u.mark = 1
         where s.mark = 1
-          and s.user_id = #{userId}
+        <if test="userId != null">and s.user_id = #{userId}</if>
     </select>
 </mapper>

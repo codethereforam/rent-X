@@ -26,5 +26,6 @@ public interface WebConstant {
 		 * 登录成功保存的菜单session key
 		 */
 		String MENU_VO_LIST_SESSION_KEY = "session-menu-vo-list";
+		String CURRENT_USER_ID_SESSION_KEY = "session-current-user-id";
 	}
 }

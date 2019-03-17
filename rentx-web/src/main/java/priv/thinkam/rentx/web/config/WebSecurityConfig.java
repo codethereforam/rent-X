@@ -26,6 +26,7 @@ import priv.thinkam.rentx.web.dao.dto.UserRoleDTO;
 import priv.thinkam.rentx.web.dao.mapper.UserRoleMapper;
 import priv.thinkam.rentx.web.filter.CaptchaValidationFilter;
 import priv.thinkam.rentx.web.service.RoleResourceService;
+import priv.thinkam.rentx.web.service.util.AuthUtil;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 		registry.anyRequest().hasRole(WebConstant.RoleIdentifier.ROOT)
 				.and().formLogin().successHandler(authenticationSuccessHandler).loginPage("/login").permitAll()
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+				.and().logout().logoutUrl(AuthUtil.LOGOUT_URL).logoutSuccessUrl("/login")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true).permitAll();
 	}
 

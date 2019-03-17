@@ -8,15 +8,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import priv.thinkam.rentx.common.base.BaseController;
 import priv.thinkam.rentx.common.base.Response;
+import priv.thinkam.rentx.web.base.WebBaseController;
 import priv.thinkam.rentx.web.service.ItemService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +32,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @Controller
 @RequestMapping("/items")
-public class ItemController extends BaseController {
+public class ItemController extends WebBaseController {
 	@Resource
 	private ItemService itemService;
 
@@ -69,11 +71,10 @@ public class ItemController extends BaseController {
 	}
 
 	@GetMapping("/pay/return")
-	public String payReturn(HttpServletRequest request) {
+	public String payReturn(HttpServletRequest request, HttpSession session) {
 		String itemIdStr = request.getParameter("out_trade_no").substring(OUT_TRADE_NO_PREFIX.length());
 		int itemId = Integer.parseInt(itemIdStr);
-		final int userId = 0;
-		itemService.finishPay(itemId, userId);
+		itemService.finishPay(itemId, currentUserId(session));
 		return redirect("/");
 	}
 
@@ -87,10 +88,8 @@ public class ItemController extends BaseController {
 	 * @return page
 	 */
 	@GetMapping("/in")
-	public String startRentIn(Model model) {
-		// 获取当前用户ID
-		int userId = 3;
-		model.addAttribute("personalItemVOList", itemService.listPersonItemVO(userId));
+	public String startRentIn(Model model, Authentication authentication, HttpSession session) {
+		model.addAttribute("personalItemVOList", itemService.listPersonItemVO(currentNonRootUserId(authentication, session)));
 		return "my_rent_in";
 	}
 
@@ -102,10 +101,8 @@ public class ItemController extends BaseController {
 	 */
 	@ResponseBody
 	@PostMapping("/{id}/cancel-apply")
-	public Response cancelApply(@PathVariable Integer id) {
-		// 获取当前用户ID
-		final int userId = 3;
-		return itemService.cancelApply(id, userId);
+	public Response cancelApply(@PathVariable Integer id, HttpSession session) {
+		return itemService.cancelApply(id, currentUserId(session));
 	}
 
 	@Data

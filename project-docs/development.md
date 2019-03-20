@@ -3,6 +3,7 @@
 1. 项目运行
     1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
     2. 生产环境配置dubbo注册中心
+    3. cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
 2. rentx库中add_user_id和update_user_id若是负数，则代表用户是rentx_admin库中的用户id
 3. 使用AOP防御XSS攻击
     - 所有接口必须返回BaseVO的子类或者包装的BaseVO子类
@@ -27,7 +28,7 @@
         - 游客用户：guest/guest
     - 角色 - 资源
         - ROOT用户：任何请求，比如查看url + .json，方便快速开发，供开发人员使用
-        - 出租人：开始出租，我的出租，聊天，搜索
+        - 出租人：开始出租，我的出租，聊天，搜索，开始租用
         - 承租人：开始租用，我的租用，聊天，搜索
         - 游客用户：首页, 开始租用页面
 6. RoleEnum需要和role表保持一致

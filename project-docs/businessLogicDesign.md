@@ -14,5 +14,7 @@
 - 资源(resource)
 - 用户角色关系(user_role)
 - 角色资源关系(role_resource)
+- 菜单(menu)
+- 角色菜单关系(role_menu)
 ### 后台管理系统(rentx_admin)
 - 用户(user)

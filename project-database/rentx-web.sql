@@ -320,4 +320,3 @@ INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (7, 7, 2, 0, '2019-03-03 21:20:21', 0, '2019-03-16 20:26:54', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (8, 7, 3, 0, '2019-03-16 20:24:27', 0, '2019-03-16 20:26:54', 1);
 INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 8, 2, 0, '2019-03-21 20:25:31', 0, '2019-03-22 23:04:38', 0);
-INSERT INTO rentx.user_role (id, user_id, role_id, add_user_id, add_time, update_user_id, update_time, mark) VALUES (9, 8, 2, 0, '2019-03-21 20:25:31', 0, '2019-03-22 23:04:38', 0);

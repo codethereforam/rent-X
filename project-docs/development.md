@@ -1,9 +1,11 @@
 # 开发文档
 
 1. 项目运行
+    1. 安装Jdk1.8, redis, Elasticsearch
     1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
-    2. 生产环境配置dubbo注册中心
-    3. cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
+    1. 运行"project-database"目录下rentx-web.sql和rentx-admin.sql文件
+    1. 生产环境配置dubbo注册中心
+    1. cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
 2. rentx库中add_user_id和update_user_id若是负数，则代表用户是rentx_admin库中的用户id
 3. 使用AOP防御XSS攻击
     - 所有接口必须返回BaseVO的子类或者包装的BaseVO子类

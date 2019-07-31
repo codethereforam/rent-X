@@ -76,7 +76,7 @@ Bootstrap、jQuery
 ```
 ├── project-database -- 数据库脚本
 ├── project-docs -- 项目文档
-│   ├── application-private.yml.template
+│   ├── application-private.yml.template -- 配置文件模板
 │   ├── businessLogicAnalysis.md -- 业务逻辑分析文档
 │   ├── businessLogicDesign.md -- 业务逻辑设计文档
 │   ├── convention.md -- 项目约定文档

@@ -3,6 +3,7 @@
 1. 项目运行
     1. 安装Jdk1.8, redis, Elasticsearch
     1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
+    1. 将"project-docs"目录下"application-private.yml.template"文件复制到"rentx-web/src/main/resources"目录下，重命名"application-private.yml"，并修改其配置
     1. 运行"project-database"目录下rentx-web.sql和rentx-admin.sql文件
     1. 生产环境配置dubbo注册中心
     1. cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run

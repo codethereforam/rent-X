@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: pc
+    active: private
   application:
     name: rentx-web
   datasource:

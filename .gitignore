@@ -11,3 +11,4 @@ target
 *.cache
 *.lock
 rebel.xml
+application-private.yml

@@ -1,0 +1,9 @@
+spring:
+  mail:
+    username: xxx@163.com
+    password: xxxxxx
+
+alipay:
+  appId: "APPID"
+  privateKey: "私钥"
+  publicKey: "公钥"

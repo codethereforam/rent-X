@@ -1,6 +1,41 @@
 # rent-X
-分布式校园租赁系统
+基于SpringBoot+Mybatis开发的分布式校园租赁系统 
 
+> 其他项目文档在[project-docs](/project-docs)目录下
+
+## 项目结构
+```
+├── project-database -- 数据库脚本
+├── project-docs -- 项目文档
+│   ├── application-private.yml.template -- 配置文件模板
+│   ├── businessLogicAnalysis.md -- 业务逻辑分析文档
+│   ├── businessLogicDesign.md -- 业务逻辑设计文档
+│   ├── convention.md -- 项目约定文档
+│   ├── development.md -- 开发文档
+├── project-tools
+│   └── mysql-es-sync -- mysql和elasticsearch数据同步工具
+├── rentx-admin* -- 后台管理系统代码
+├── rentx-common -- 后台管理系统和用户租赁系统公共代码
+├── rentx-generator -- 代码生成器
+├── rentx-web* -- 用户租赁系统代码
+```
+
+## 技术选型
+### 后端技术
+Spring Framework、SpringMVC、SpringBoot、MyBatis、Dubbo、Redis、Elasticsearch、Spring Security、Thymeleaf、Mysql、Websocket
+### 前端技术    
+Bootstrap、jQuery
+    
+## 项目运行
+1. 安装Jdk1.8、redis、Elasticsearch、Logstash，并使用默认端口
+1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
+1. 将"project-docs"目录下"application-private.yml.template"文件复制到"rentx-web/src/main/resources"目录下，重命名"application-private.yml"，并修改其配置
+1. 运行"project-database"目录下rentx-web.sql和rentx-admin.sql文件
+1. 生产环境配置dubbo注册中心
+1. 启动项目 
+    - 开发：注释掉根pom文件中的"<goal>compile</goal>"一行，然后可以以任何方式启动
+    - 非开发：只能用maven方式启动，cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
+1. 用户租赁系统登录页面: http://localhost:9999/login/ （用户名/密码见[development.md](/project-docs/development.md)文件）, 后台管理系统首页: http://localhost:9988/
 
 ## 项目概览
 
@@ -65,39 +100,6 @@
 2. 用户、角色、资源、菜单ER图
 
 ![用户、角色、资源、菜单ER图](/project-docs/images/用户、角色、资源、菜单ER图.png)
-    
-## 技术选型
-### 后端技术
-Spring Framework、SpringMVC、SpringBoot、MyBatis、Dubbo、Redis、Elasticsearch、Spring Security、Thymeleaf、Mysql、Websocket
-### 前端技术    
-Bootstrap、jQuery
-
-## 项目结构
-```
-├── project-database -- 数据库脚本
-├── project-docs -- 项目文档
-│   ├── application-private.yml.template -- 配置文件模板
-│   ├── businessLogicAnalysis.md -- 业务逻辑分析文档
-│   ├── businessLogicDesign.md -- 业务逻辑设计文档
-│   ├── convention.md -- 项目约定文档
-│   ├── development.md -- 开发文档
-├── project-tools
-│   └── mysql-es-sync -- mysql和elasticsearch数据同步工具
-├── rentx-admin* -- 后台管理系统代码
-├── rentx-common -- 后台管理系统和用户租赁系统公共代码
-├── rentx-generator -- 代码生成器
-├── rentx-web* -- 用户租赁系统代码
-```
-    
-## 项目运行
-1. 安装Jdk1.8、redis、Elasticsearch、Logstash，并使用默认端口
-1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
-1. 将"project-docs"目录下"application-private.yml.template"文件复制到"rentx-web/src/main/resources"目录下，重命名"application-private.yml"，并修改其配置
-1. 运行"project-database"目录下rentx-web.sql和rentx-admin.sql文件
-1. 生产环境配置dubbo注册中心
-1. 启动项目 
-    - 开发：注释掉根pom文件中的"<goal>compile</goal>"一行，然后可以以任何方式启动
-    - 非开发：只能用maven方式启动，cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
     
 ## 使用说明
 ### 注册

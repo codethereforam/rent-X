@@ -12,3 +12,4 @@ target
 *.lock
 rebel.xml
 application-private.yml
+/project-docs/todo.md

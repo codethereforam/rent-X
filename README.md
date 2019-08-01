@@ -3,7 +3,7 @@
 
 > 其他项目文档在[project-docs](/project-docs)目录下
 
-## 项目结构
+## 一、项目结构
 ```
 ├── project-database -- 数据库脚本
 ├── project-docs -- 项目文档
@@ -20,13 +20,13 @@
 ├── rentx-web* -- 用户租赁系统代码
 ```
 
-## 技术选型
+## 二、技术选型
 ### 后端技术
 Spring Framework、SpringMVC、SpringBoot、MyBatis、Dubbo、Redis、Elasticsearch、Spring Security、Thymeleaf、Mysql、Websocket
 ### 前端技术    
 Bootstrap、jQuery
     
-## 项目运行
+## 三、项目运行
 1. 安装Jdk1.8、redis、Elasticsearch、Logstash，并使用默认端口
 1. 配置系统环境变量，数据库密码(MYSQL_PASSWD)
 1. 将"project-docs"目录下"application-private.yml.template"文件复制到"rentx-web/src/main/resources"目录下，重命名"application-private.yml"，并修改其配置
@@ -37,7 +37,7 @@ Bootstrap、jQuery
     - 非开发：只能用maven方式启动，cd rentx-web & mvn spring-boot:run; cd rentx-admin & mvn spring-boot:run
 1. 用户租赁系统登录页面: http://localhost:9999/login/ （用户名/密码见[development.md](/project-docs/development.md)文件）, 后台管理系统首页: http://localhost:9988/
 
-## 项目概览
+## 四、项目概览
 
 ### 背景
 大学生刚进入学校，不免会尝试一些新的东西，但并不是每样都是适合自己，租一件物品尝试一下可能好多人都想过。因此，一个可靠的校园租赁系统可以解决很多同学这个问题。
@@ -49,7 +49,7 @@ Bootstrap、jQuery
 1. 分布式：为了解藕和提高扩展性，将系统拆分，普通用户租赁系统和后台管理系统分开部署，用户租赁系统封装出基础服务接口，使用Dubbo供后台管理系统远程方法调用，提高代码复用性。为保证可用性，普通用户租赁系统和后台管理系统都分别使用Docker集群部署（项目中暂无此内容）。
 2. 高安全性：考虑到系统可能遭到黑客攻击，从而导致系统宕机和用户隐私泄漏，系统对常见Web攻击做出防范。使用AOP技术进行XSS防御和敏感词过滤；使用验证码防暴力破解；使用预编译SQL防SQL注入；数据库存储经过bcrypt算法处理过的用户密码的哈希值防密码泄漏；使用SpringSecurity做角色权限控制。
 
-## 系统分析
+## 五、系统分析
 
 ### 用例图
 1. 用户租赁系统用例图
@@ -87,7 +87,7 @@ Bootstrap、jQuery
 7. 统计报表模块：管理员可查看按类别时间查看物品租用情况的统计报表。
 8. 实时通信模块：基于Websocket实现实时通讯，用户可以和客服沟通租赁、支付等操作中出现的问题，出租人和承租人之间可在线沟通。（简单实现）
 
-## 系统设计
+## 六、系统设计
 ### 架构图
 ![架构图](/project-docs/images/架构图.png)
 ### 功能模块图
@@ -101,7 +101,7 @@ Bootstrap、jQuery
 
 ![用户、角色、资源、菜单ER图](/project-docs/images/用户、角色、资源、菜单ER图.png)
     
-## 使用说明
+## 七、使用说明
 ### 注册
 
 ![注册](/project-docs/images/register.png)
@@ -149,5 +149,5 @@ Bootstrap、jQuery
 ### 游客使用
 游客用户输入用户名guset，密码guest即可登录，登录后可以查看可租用的物品列表，但不能执行租用操作
     
-## 许可证
+## 八、许可证
 [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)
